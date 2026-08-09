@@ -5,11 +5,14 @@ export default function PageHero({
   title,
   intro,
   cta = true,
+  children,
 }: {
   kicker: string;
   title: string;
   intro?: string;
   cta?: boolean;
+  /** Page specific action, used instead of the default Call to Order. */
+  children?: React.ReactNode;
 }) {
   return (
     <section className="grain grain-dark relative isolate overflow-hidden bg-ink text-cream">
@@ -35,6 +38,7 @@ export default function PageHero({
             Call to Order {site.phone}
           </a>
         )}
+        {children}
       </div>
     </section>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCart, formatUSD } from "@/lib/cart";
 import { findSku, shipping } from "@/data/shop";
 import { site } from "@/data/site";
@@ -9,14 +9,50 @@ export default function CartDrawer() {
   const cart = useCart();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const panelRef = useRef<HTMLElement | null>(null);
+  const closeRef = useRef<HTMLButtonElement | null>(null);
+  const returnTo = useRef<HTMLElement | null>(null);
 
+  // Escape closes, and Tab is kept inside the panel while it is open.
   useEffect(() => {
+    if (!cart.open) return;
+
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") cart.setOpen(false);
+      if (e.key === "Escape") {
+        cart.setOpen(false);
+        return;
+      }
+      if (e.key !== "Tab") return;
+
+      const focusables = panelRef.current?.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input, [tabindex]:not([tabindex="-1"])',
+      );
+      if (!focusables?.length) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
-    if (cart.open) window.addEventListener("keydown", onKey);
+
+    window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [cart]);
+
+  // Remember where focus was, move it into the panel, put it back on close.
+  useEffect(() => {
+    if (cart.open) {
+      returnTo.current = document.activeElement as HTMLElement | null;
+      closeRef.current?.focus();
+    } else {
+      returnTo.current?.focus?.();
+    }
+  }, [cart.open]);
 
   useEffect(() => {
     document.body.style.overflow = cart.open ? "hidden" : "";
@@ -61,6 +97,7 @@ export default function CartDrawer() {
       />
 
       <aside
+        ref={panelRef}
         role="dialog"
         aria-modal="true"
         aria-label="Your order"
@@ -69,10 +106,11 @@ export default function CartDrawer() {
         <header className="flex items-center justify-between border-b border-ink/10 px-6 py-5">
           <h2 className="font-display text-2xl font-bold tracking-tight">Your order</h2>
           <button
+            ref={closeRef}
             type="button"
             onClick={() => cart.setOpen(false)}
             aria-label="Close"
-            className="grid h-9 w-9 place-items-center rounded-full border border-ink/15 text-ink"
+            className="grid h-11 w-11 place-items-center rounded-full border border-ink/15 text-ink"
           >
             <span aria-hidden>&times;</span>
           </button>

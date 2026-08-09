@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
+import MenuSubnav from "@/components/MenuSubnav";
 import { menu, menus } from "@/data/menu";
 import { site } from "@/data/site";
 
@@ -31,30 +32,15 @@ export default function MenuPage() {
         </div>
       </section>
 
-      <nav
-        aria-label="Menu sections"
-        className="sticky top-[4.6rem] z-30 border-b border-ink/10 bg-cream/90 backdrop-blur-md md:top-[6.9rem]"
-      >
-        <ul className="mx-auto flex max-w-6xl gap-6 overflow-x-auto px-5 py-3.5 sm:px-8">
-          {menu.map((section) => (
-            <li key={section.id} className="shrink-0">
-              <a
-                href={`#${section.id}`}
-                className="text-sm font-medium text-ink/70 transition-colors hover:text-red"
-              >
-                {section.title}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <MenuSubnav sections={menu} />
+
 
       <div className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
         {menu.map((section, idx) => (
           <section
             key={section.id}
             id={section.id}
-            className={`scroll-mt-40 ${idx > 0 ? "mt-16" : ""}`}
+            className={`anchor-offset ${idx > 0 ? "mt-16" : ""}`}
           >
             <div className="flex items-baseline gap-5">
               <h2 className="font-display text-4xl font-semibold tracking-tight sm:text-5xl">

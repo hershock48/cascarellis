@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import OpenNow from "./OpenNow";
 import CartButton from "./CartButton";
 import { site } from "@/data/site";
@@ -21,6 +21,7 @@ export default function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [stuck, setStuck] = useState(false);
+  const ref = useRef<HTMLElement | null>(null);
 
   useEffect(() => setOpen(false), [pathname]);
 
@@ -32,6 +33,26 @@ export default function SiteHeader() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  /**
+   * Publish the real header height as --header-h. The header is 74px on
+   * mobile and 115px once the utility strip appears, so anything that has to
+   * sit below it (the menu sub nav, anchor scroll offsets) reads this instead
+   * of guessing. Measuring means it stays correct if the header ever changes.
+   */
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const apply = () =>
+      document.documentElement.style.setProperty(
+        "--header-h",
+        `${Math.round(el.getBoundingClientRect().height)}px`,
+      );
+    apply();
+    const ro = new ResizeObserver(apply);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => {
@@ -41,6 +62,7 @@ export default function SiteHeader() {
 
   return (
     <header
+      ref={ref}
       data-stuck={stuck ? "" : undefined}
       className="site-header sticky top-0 z-40 border-b border-ink/10 bg-cream/90 backdrop-blur-md"
     >
@@ -140,8 +162,14 @@ export default function SiteHeader() {
                 </li>
               ))}
             </ul>
-            <div className="py-5">
+            <div className="flex flex-col gap-4 py-5">
               <OpenNow />
+              <a
+                href={site.phoneHref}
+                className="rounded-full bg-red px-6 py-4 text-center font-semibold text-cream"
+              >
+                Call to Order {site.phone}
+              </a>
             </div>
           </nav>
         </div>

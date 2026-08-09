@@ -43,10 +43,22 @@
     border-radius: 4px;
   }
 
-  /* Room for the sticky mobile order bar. */
+  /*
+    Fallbacks. SiteHeader overwrites --header-h with its measured height as
+    soon as it mounts, and MenuSubnav does the same for --subnav-h.
+  */
+  :root {
+    --header-h: 74px;
+    --subnav-h: 53px;
+  }
+
+  /*
+    Room for the fixed mobile order bar, which measures 77px. This was 72px
+    and was clipping the last few pixels of the footer.
+  */
   @media (max-width: 767px) {
     body {
-      padding-bottom: 4.5rem;
+      padding-bottom: 5.25rem;
     }
   }
 }
@@ -103,6 +115,37 @@
   .btn-secondary:hover {
     border-color: var(--color-red);
     color: var(--color-red);
+  }
+
+  /*
+    Sits directly under the sticky header, whatever height that is at the
+    current breakpoint. Previously hardcoded, and wrong at both.
+  */
+  .sticky-subnav {
+    top: var(--header-h);
+  }
+
+  /*
+    Anchor targets have to clear the header AND the sub nav, or a jump link
+    parks the heading underneath both. Measured stack is 127px on mobile and
+    168px on desktop, plus breathing room.
+  */
+  .anchor-offset {
+    scroll-margin-top: calc(var(--header-h) + var(--subnav-h) + 1.5rem);
+  }
+
+  .anchor-offset-plain {
+    scroll-margin-top: calc(var(--header-h) + 1.5rem);
+  }
+
+  /*
+    Minimum comfortable touch target. Applied to small inline links that were
+    measuring around 20px tall on a phone.
+  */
+  .tap {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
   }
 }
 

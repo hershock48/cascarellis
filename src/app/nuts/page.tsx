@@ -24,7 +24,11 @@ export default function NutsPage() {
         title="World famous specialty nuts, now shipped."
         intro="People have been driving here for these for sixty years. You no longer have to."
         cta={false}
-      />
+      >
+        <a href="#shop" className="btn-primary mt-8">
+          Shop the nuts
+        </a>
+      </PageHero>
 
       {/* Shipping terms up front, where they reduce hesitation */}
       <section className="border-b border-ink/10 bg-cream-dim">
@@ -48,33 +52,8 @@ export default function NutsPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
-        <div className="grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:items-center lg:gap-16">
-          <Reveal>
-            <Photo name="nuts" ratio="feature" sizes="(min-width: 1024px) 45vw, 100vw" />
-          </Reveal>
-          <Reveal delay={110}>
-            <h2 className="font-display text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
-              The cashews and the red skins are the ones people come back for
-            </h2>
-            <p className="mt-5 text-[1.05rem] leading-relaxed text-ink/70">
-              Everything is roasted here and salted while it is still warm.
-              Nothing sits. Orders go out fresh, which is the entire reason
-              these are worth shipping.
-            </p>
-            <p className="mt-4 text-[1.05rem] leading-relaxed text-ink/70">
-              Holiday tins and larger orders are easiest over the phone. Call
-              in November rather than the third week of December.
-            </p>
-            <a href={site.phoneHref} className="btn-secondary mt-7 !px-7 !py-3.5">
-              Call about a large order
-            </a>
-          </Reveal>
-        </div>
-      </section>
-
       {/* Shop */}
-      <section id="shop" className="grain relative overflow-hidden bg-cream-dim scroll-mt-28">
+      <section id="shop" className="grain anchor-offset-plain relative overflow-hidden bg-cream-dim">
         <div className="relative mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
           <h2 className="font-display text-4xl font-semibold tracking-tight sm:text-5xl">
             Order nuts
@@ -108,6 +87,31 @@ export default function NutsPage() {
           </p>
         </div>
       </section>
+      <section className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
+        <div className="grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:items-center lg:gap-16">
+          <Reveal>
+            <Photo name="nuts" ratio="feature" sizes="(min-width: 1024px) 45vw, 100vw" />
+          </Reveal>
+          <Reveal delay={110}>
+            <h2 className="font-display text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
+              The cashews and the red skins are the ones people come back for
+            </h2>
+            <p className="mt-5 text-[1.05rem] leading-relaxed text-ink/70">
+              Everything is roasted here and salted while it is still warm.
+              Nothing sits. Orders go out fresh, which is the entire reason
+              these are worth shipping.
+            </p>
+            <p className="mt-4 text-[1.05rem] leading-relaxed text-ink/70">
+              Holiday tins and larger orders are easiest over the phone. Call
+              in November rather than the third week of December.
+            </p>
+            <a href={site.phoneHref} className="btn-secondary mt-7 !px-7 !py-3.5">
+              Call about a large order
+            </a>
+          </Reveal>
+        </div>
+      </section>
+
     </>
   );
 }

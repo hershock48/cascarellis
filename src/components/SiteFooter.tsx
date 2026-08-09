@@ -31,7 +31,7 @@ export default function SiteFooter() {
                 href={site.social.facebook}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-full border border-cream/20 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-cream/80 transition-colors hover:border-gold hover:text-gold"
+                className="tap rounded-full border border-cream/20 px-5 text-xs font-semibold uppercase tracking-wider text-cream/80 transition-colors hover:border-gold hover:text-gold"
               >
                 Facebook
               </a>
@@ -39,7 +39,7 @@ export default function SiteFooter() {
                 href={site.social.instagram}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-full border border-cream/20 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-cream/80 transition-colors hover:border-gold hover:text-gold"
+                className="tap rounded-full border border-cream/20 px-5 text-xs font-semibold uppercase tracking-wider text-cream/80 transition-colors hover:border-gold hover:text-gold"
               >
                 Instagram
               </a>
@@ -50,16 +50,21 @@ export default function SiteFooter() {
             <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
               Find us
             </h2>
-            <address className="mt-4 not-italic text-sm leading-relaxed text-cream/80">
-              <a href={mapsUrl} target="_blank" rel="noreferrer" className="hover:text-gold">
-                {site.address.street}
-                <br />
-                {site.address.city}, {site.address.state} {site.address.zip}
+            <address className="mt-4 flex flex-col items-start gap-1 not-italic text-sm leading-relaxed text-cream/80">
+              <a
+                href={mapsUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="flex min-h-11 flex-col justify-center hover:text-gold"
+              >
+                <span>{site.address.street}</span>
+                <span>
+                  {site.address.city}, {site.address.state} {site.address.zip}
+                </span>
               </a>
-              <br />
               <a
                 href={site.phoneHref}
-                className="mt-3 inline-block text-base font-semibold text-cream hover:text-gold"
+                className="flex min-h-11 items-center text-base font-semibold text-cream hover:text-gold"
               >
                 {site.phone}
               </a>
@@ -90,7 +95,7 @@ export default function SiteFooter() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-sm text-cream/70 transition-colors hover:text-gold"
+                className="tap text-sm text-cream/70 transition-colors hover:text-gold"
               >
                 {item.label}
               </Link>

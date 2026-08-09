@@ -112,7 +112,7 @@ export default function Home() {
               href={mapsUrl}
               target="_blank"
               rel="noreferrer"
-              className="mt-1 block text-[0.95rem] text-ink/75 underline decoration-ink/20 underline-offset-4 hover:text-red"
+              className="tap text-[0.95rem] text-ink/75 underline decoration-ink/20 underline-offset-4 hover:text-red"
             >
               {fullAddress}
             </a>
@@ -204,7 +204,7 @@ export default function Home() {
                 <p className="mt-3 text-[0.95rem] leading-relaxed text-ink/70">{c.body}</p>
                 <Link
                   href={c.href}
-                  className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-red hover:underline"
+                  className="tap mt-4 gap-2 text-sm font-semibold text-red hover:underline"
                 >
                   View now
                   <span aria-hidden>&rarr;</span>
@@ -256,8 +256,11 @@ export default function Home() {
               {nuts.heading}
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-ink/70">{nuts.blurb}</p>
-            <Link href="/nuts" className="btn-secondary mt-8 !px-7 !py-3.5">
-              All six flavors
+            <p className="mt-4 font-semibold text-red">
+              Now shipped anywhere in the US. Free over $50.
+            </p>
+            <Link href="/nuts#shop" className="btn-primary mt-7">
+              Order nuts online
               <span aria-hidden>&rarr;</span>
             </Link>
           </div>
@@ -320,7 +323,7 @@ export default function Home() {
                   Birthdays, rehearsal dinners, team parties and wakes. Call and
                   we will walk you through the options.
                 </p>
-                <a href={site.phoneHref} className="mt-6 inline-flex text-sm font-semibold text-red hover:underline">
+                <a href={site.phoneHref} className="tap mt-4 text-sm font-semibold text-red hover:underline">
                   Call {site.phone}
                 </a>
               </div>

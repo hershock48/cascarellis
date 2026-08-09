@@ -10,6 +10,7 @@ export default function Marquee() {
   const items = [
     `${site.music.what}, ${site.music.when.toLowerCase()}`,
     "20 beers on draft",
+    "Specialty nuts shipped nationwide",
     "Draft beer and wine to go",
     ...nuts.flavors.slice(0, 3).map((f) => f.name),
     `Groups of ${site.reservations.min} to ${site.reservations.max}`,
