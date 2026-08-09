@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import Photo from "@/components/Photo";
 
@@ -78,6 +79,14 @@ export default function AboutPage() {
             The nut roasting has run through all four generations. It is the
             oldest thing this family does.
           </p>
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+            <Link href="/nuts" className="btn-primary">
+              Order the nuts
+            </Link>
+            <Link href="/menu" className="btn-secondary">
+              See the menu
+            </Link>
+          </div>
         </div>
       </section>
     </>

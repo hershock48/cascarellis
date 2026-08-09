@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import Photo from "@/components/Photo";
+import PartyForm from "@/components/PartyForm";
 import { site } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -27,7 +28,11 @@ export default function EventsPage() {
         title="Live piano, and room for the whole group"
         intro="Music twice a week, a banquet room, and a patio when the weather cooperates."
         cta={false}
-      />
+      >
+        <a href="#inquire" className="btn-primary mt-8">
+          Ask about a party
+        </a>
+      </PageHero>
 
       <section className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
@@ -72,6 +77,10 @@ export default function EventsPage() {
               Call {site.phone}
             </a>
           </div>
+        </div>
+
+        <div id="inquire" className="anchor-offset-plain mt-16 sm:mt-20">
+          <PartyForm />
         </div>
       </section>
     </>

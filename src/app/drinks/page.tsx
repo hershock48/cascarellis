@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import Photo from "@/components/Photo";
 import { drinks } from "@/data/menu";
@@ -88,6 +89,24 @@ export default function DrinksPage() {
                 </li>
               ))}
             </ul>
+          </div>
+        </div>
+
+        <div className="mt-16 rounded-panel border border-ink/12 bg-cream-dim p-8 text-center sm:p-10">
+          <h2 className="font-display text-3xl font-semibold tracking-tight">
+            Something to go with it
+          </h2>
+          <p className="mx-auto mt-3 max-w-md text-[0.98rem] leading-relaxed text-ink/65">
+            The kitchen runs until close, and live piano is on Wednesday and
+            Saturday.
+          </p>
+          <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
+            <Link href="/menu" className="btn-primary">
+              See the menu
+            </Link>
+            <Link href="/events" className="btn-secondary">
+              Live music and parties
+            </Link>
           </div>
         </div>
       </section>

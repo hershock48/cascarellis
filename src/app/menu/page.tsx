@@ -29,6 +29,11 @@ export default function MenuPage() {
               <span className="text-ink/65">{m.note}</span>
             </p>
           ))}
+          <p className="text-[0.95rem] sm:ml-auto">
+            <a href={site.phoneHref} className="tap font-semibold text-red underline">
+              Call for prices
+            </a>
+          </p>
         </div>
       </section>
 

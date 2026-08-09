@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import MapCard from "@/components/MapCard";
 import OpenNow from "@/components/OpenNow";
@@ -76,7 +77,14 @@ export default function ContactPage() {
                   Reservations
                 </dt>
                 <dd className="mt-1.5 text-[0.98rem] leading-relaxed text-ink/70">
-                  {site.reservations.note}
+                  {site.reservations.note}{" "}
+                  <Link
+                    href="/events#inquire"
+                    className="font-semibold text-red underline underline-offset-4"
+                  >
+                    Send us the details
+                  </Link>{" "}
+                  and we will get back to you.
                 </dd>
               </div>
               <div>
