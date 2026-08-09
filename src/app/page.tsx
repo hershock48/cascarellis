@@ -4,6 +4,7 @@ import MapCard from "@/components/MapCard";
 import Photo from "@/components/Photo";
 import Reveal from "@/components/Reveal";
 import Marquee from "@/components/Marquee";
+import CheeseDrip from "@/components/CheeseDrip";
 import { site, fullAddress, hoursSummary, mapsUrl } from "@/data/site";
 import { bestSellers, nuts, drinks, merch } from "@/data/menu";
 
@@ -35,10 +36,10 @@ export default function Home() {
   return (
     <>
       {/* Hero: food above the fold, ordering above the fold */}
-      <section className="grain grain-dark relative isolate overflow-hidden bg-ink text-cream">
+      <section className="grain grain-dark relative isolate bg-ink text-cream">
         <div
           aria-hidden
-          className="pointer-events-none absolute -right-32 -top-40 h-[34rem] w-[34rem] rounded-full bg-red/30 blur-3xl"
+          className="pointer-events-none absolute -right-32 -top-40 h-[34rem] w-[34rem] overflow-hidden rounded-full bg-red/30 blur-3xl"
         />
         <div className="relative mx-auto grid max-w-6xl gap-12 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-16">
           <div className="hero-in">
@@ -91,11 +92,14 @@ export default function Home() {
             sizes="(min-width: 1024px) 45vw, 100vw"
           />
         </div>
+
+        {/* Signature: cheese oozing off the hero into the strip below. */}
+        <CheeseDrip />
       </section>
 
       {/* Info strip */}
       <section className="border-b border-ink/10 bg-cream-dim">
-        <div className="mx-auto grid max-w-6xl gap-4 px-5 py-6 sm:px-8 md:grid-cols-3 md:gap-8">
+        <div className="mx-auto grid max-w-6xl gap-4 px-5 pb-6 pt-14 sm:px-8 md:grid-cols-3 md:gap-8">
           <div>
             <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-red">
               Hours
