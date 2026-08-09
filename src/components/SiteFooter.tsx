@@ -1,0 +1,99 @@
+import Link from "next/link";
+import { site, fullAddress, hoursSummary, mapsUrl } from "@/data/site";
+
+const nav = [
+  { href: "/menu", label: "Menu" },
+  { href: "/beer-and-wine", label: "Beer & Wine" },
+  { href: "/peanuts", label: "Peanuts" },
+  { href: "/history", label: "History" },
+  { href: "/visit", label: "Visit" },
+];
+
+export default function SiteFooter() {
+  return (
+    <footer className="grain grain-dark relative overflow-hidden bg-ink text-cream">
+      <div className="relative mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+        <div className="grid gap-12 md:grid-cols-[1.2fr_1fr_1fr]">
+          <div>
+            <p className="font-display text-3xl font-semibold tracking-tight">
+              Cascarelli&rsquo;s
+            </p>
+            <p className="mt-1 text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-brass">
+              Homer, Mich. &middot; Est. 1935
+            </p>
+            <p className="mt-5 max-w-xs text-sm leading-relaxed text-cream/70">
+              Four generations of one family on one corner of Main Street.
+              Pizza, twenty taps and nuts roasted out back.
+            </p>
+            <div className="mt-6 flex gap-3">
+              <a
+                href={site.social.facebook}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-full border border-cream/20 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-cream/80 transition-colors hover:border-brass hover:text-brass"
+              >
+                Facebook
+              </a>
+              <a
+                href={site.social.instagram}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-full border border-cream/20 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-cream/80 transition-colors hover:border-brass hover:text-brass"
+              >
+                Instagram
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-brass">
+              Find us
+            </h2>
+            <address className="mt-4 not-italic text-sm leading-relaxed text-cream/80">
+              <a href={mapsUrl} target="_blank" rel="noreferrer" className="hover:text-brass">
+                {site.address.street}
+                <br />
+                {site.address.city}, {site.address.state} {site.address.zip}
+              </a>
+              <br />
+              <a href={site.phoneHref} className="mt-3 inline-block font-semibold text-cream hover:text-brass">
+                {site.phone}
+              </a>
+            </address>
+          </div>
+
+          <div>
+            <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-brass">
+              Hours
+            </h2>
+            <dl className="mt-4 space-y-2 text-sm text-cream/80">
+              {hoursSummary.map((row) => (
+                <div key={row.label}>
+                  <dt className="text-cream/60">{row.label}</dt>
+                  <dd className="font-medium text-cream">{row.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+
+        <div className="mt-14 flex flex-col gap-6 border-t border-cream/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
+          <nav aria-label="Footer" className="flex flex-wrap gap-x-6 gap-y-2">
+            {nav.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-sm text-cream/70 transition-colors hover:text-brass"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+          <p className="text-xs text-cream/45">
+            &copy; {new Date().getFullYear()} {site.name}. Serving Homer since 1935.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}
