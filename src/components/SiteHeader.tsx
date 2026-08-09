@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import OpenNow from "./OpenNow";
+import CartButton from "./CartButton";
 import { site } from "@/data/site";
 
 /** Mirrors the nav on their current site, consolidated where it was redundant. */
@@ -85,6 +86,7 @@ export default function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-3">
+          <CartButton />
           <a
             href={site.phoneHref}
             className="hidden rounded-full bg-red px-6 py-3 text-sm font-semibold text-cream shadow-md shadow-red/25 transition-colors hover:bg-red-bright md:inline-block"
