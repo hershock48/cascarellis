@@ -19,8 +19,17 @@ const nav = [
 export default function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [stuck, setStuck] = useState(false);
 
   useEffect(() => setOpen(false), [pathname]);
+
+  // Shadow appears once the header is no longer at the top of the page.
+  useEffect(() => {
+    const onScroll = () => setStuck(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -30,7 +39,10 @@ export default function SiteHeader() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-ink/10 bg-cream/90 backdrop-blur-md">
+    <header
+      data-stuck={stuck ? "" : undefined}
+      className="site-header sticky top-0 z-40 border-b border-ink/10 bg-cream/90 backdrop-blur-md"
+    >
       {/* Utility strip: hours and phone on every page, per current best practice. */}
       <div className="hidden bg-ink text-cream md:block">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-8 py-2 text-[0.8rem]">
@@ -62,14 +74,11 @@ export default function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className={`relative text-[0.95rem] font-medium transition-colors hover:text-red ${
+                className={`nav-link relative text-[0.95rem] font-medium transition-colors hover:text-red ${
                   active ? "text-red" : "text-ink/80"
                 }`}
               >
                 {item.label}
-                {active && (
-                  <span className="absolute -bottom-1.5 left-0 h-[2px] w-full rounded-full bg-red" />
-                )}
               </Link>
             );
           })}

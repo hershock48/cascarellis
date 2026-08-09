@@ -65,7 +65,7 @@ export default function ContactPage() {
                     href={mapsUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="font-display text-xl font-semibold tracking-tight underline decoration-red/40 underline-offset-4 hover:text-red"
+                    className="font-display text-xl font-bold tracking-tight underline decoration-red/40 underline-offset-4 hover:text-red"
                   >
                     {fullAddress}
                   </a>

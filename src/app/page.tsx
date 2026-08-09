@@ -2,6 +2,8 @@ import Link from "next/link";
 import OpenNow from "@/components/OpenNow";
 import MapCard from "@/components/MapCard";
 import Photo from "@/components/Photo";
+import Reveal from "@/components/Reveal";
+import Marquee from "@/components/Marquee";
 import { site, fullAddress, hoursSummary, mapsUrl } from "@/data/site";
 import { bestSellers, nuts, drinks, merch } from "@/data/menu";
 
@@ -39,7 +41,7 @@ export default function Home() {
           className="pointer-events-none absolute -right-32 -top-40 h-[34rem] w-[34rem] rounded-full bg-red/30 blur-3xl"
         />
         <div className="relative mx-auto grid max-w-6xl gap-12 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-16">
-          <div>
+          <div className="hero-in">
             <p className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-gold">
               <span>Homer, Michigan</span>
               <span aria-hidden className="text-cream/25">
@@ -48,10 +50,10 @@ export default function Home() {
               <span>Est. 1935</span>
             </p>
 
-            <h1 className="mt-6 font-display text-[clamp(2.6rem,7vw,4.75rem)] font-semibold leading-[0.98] tracking-tight">
-              A one&#8209;of&#8209;a&#8209;kind
+            <h1 className="mt-6 font-display text-[clamp(2.15rem,5.4vw,4rem)] font-semibold leading-[1.04] tracking-[-0.015em]">
+              A <span className="whitespace-nowrap">one-of-a-kind</span>
               <br />
-              <span className="text-gold">pizza restaurant.</span>
+              <span className="italic text-gold">pizza restaurant.</span>
             </h1>
 
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-cream/80">
@@ -126,6 +128,8 @@ export default function Home() {
         </div>
       </section>
 
+      <Marquee />
+
       {/* What's good here */}
       <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
         <div className="flex flex-wrap items-end justify-between gap-6">
@@ -144,10 +148,12 @@ export default function Home() {
         </div>
 
         <ul className="mt-10 grid gap-8 md:grid-cols-3">
-          {bestSellers.map((item) => (
-            <li
+          {bestSellers.map((item, i) => (
+            <Reveal
+              as="li"
               key={item.name}
-              className="group overflow-hidden rounded-panel border border-ink/10 bg-cream shadow-sm transition-shadow hover:shadow-md"
+              delay={i * 90}
+              className="lift group overflow-hidden rounded-panel border border-ink/10 bg-cream shadow-sm"
             >
               <Photo
                 name={photoOf[item.name]}
@@ -170,7 +176,7 @@ export default function Home() {
                   {item.description}
                 </p>
               </div>
-            </li>
+            </Reveal>
           ))}
         </ul>
       </section>
@@ -185,10 +191,12 @@ export default function Home() {
             Everything is made in house with fresh, locally sourced ingredients.
           </p>
           <ul className="mt-10 grid gap-6 md:grid-cols-3">
-            {categories.map((c) => (
-              <li
+            {categories.map((c, i) => (
+              <Reveal
+                as="li"
                 key={c.title}
-                className="rounded-panel border border-ink/10 bg-cream p-8 transition-colors hover:border-red/30"
+                delay={i * 90}
+                className="lift rounded-panel border border-ink/10 bg-cream p-8 hover:border-red/30"
               >
                 <h3 className="font-display text-2xl font-semibold tracking-tight">
                   {c.title}
@@ -201,7 +209,7 @@ export default function Home() {
                   View now
                   <span aria-hidden>&rarr;</span>
                 </Link>
-              </li>
+              </Reveal>
             ))}
           </ul>
         </div>
@@ -210,8 +218,10 @@ export default function Home() {
       {/* Drinks */}
       <section className="grain grain-dark relative overflow-hidden bg-basil text-cream">
         <div className="relative mx-auto grid max-w-6xl gap-12 px-5 py-16 sm:px-8 sm:py-24 lg:grid-cols-2 lg:items-center lg:gap-16">
-          <Photo name="taps" ratio="feature" tone="dark" sizes="(min-width: 1024px) 45vw, 100vw" />
-          <div>
+          <Reveal>
+            <Photo name="taps" ratio="feature" tone="dark" sizes="(min-width: 1024px) 45vw, 100vw" />
+          </Reveal>
+          <Reveal delay={120}>
             <p className="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-gold">
               At the bar
             </p>
@@ -221,7 +231,7 @@ export default function Home() {
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-cream/80">
               {drinks.drafts.blurb}
             </p>
-            <p className="mt-4 font-display text-xl font-semibold tracking-tight text-gold">
+            <p className="mt-4 font-display text-xl font-bold tracking-tight text-gold">
               {drinks.toGo}
             </p>
             <Link
@@ -231,7 +241,7 @@ export default function Home() {
               Beer, wine and cocktails
               <span aria-hidden>&rarr;</span>
             </Link>
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -252,14 +262,16 @@ export default function Home() {
             </Link>
           </div>
           <ul className="grid gap-3 sm:grid-cols-2">
-            {nuts.flavors.map((f) => (
-              <li
+            {nuts.flavors.map((f, i) => (
+              <Reveal
+                as="li"
                 key={f.name}
-                className="rounded-card border border-ink/10 bg-cream-dim px-5 py-4"
+                delay={i * 70}
+                className="lift rounded-card border border-ink/10 bg-cream-dim px-5 py-4"
               >
-                <p className="font-display text-lg font-semibold tracking-tight">{f.name}</p>
+                <p className="font-display text-lg font-bold tracking-tight">{f.name}</p>
                 <p className="mt-0.5 text-sm text-ink/60">{f.note}</p>
-              </li>
+              </Reveal>
             ))}
           </ul>
         </div>
@@ -269,7 +281,7 @@ export default function Home() {
       <section className="grain relative overflow-hidden bg-cream-dim">
         <div className="relative mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
           <div className="grid gap-8 md:grid-cols-2">
-            <div className="overflow-hidden rounded-panel border border-ink/10 bg-cream">
+            <Reveal className="lift overflow-hidden rounded-panel border border-ink/10 bg-cream">
               <Photo
                 name="piano"
                 ratio="wide"
@@ -288,9 +300,9 @@ export default function Home() {
                   needed, though the room does fill up.
                 </p>
               </div>
-            </div>
+            </Reveal>
 
-            <div className="overflow-hidden rounded-panel border border-ink/10 bg-cream">
+            <Reveal delay={110} className="lift overflow-hidden rounded-panel border border-ink/10 bg-cream">
               <Photo
                 name="banquet"
                 ratio="wide"
@@ -312,7 +324,7 @@ export default function Home() {
                   Call {site.phone}
                 </a>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>

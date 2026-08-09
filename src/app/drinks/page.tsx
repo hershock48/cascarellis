@@ -23,7 +23,7 @@ export default function DrinksPage() {
 
       <section className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
         <div className="rounded-panel border border-red/20 bg-red/5 px-6 py-5 text-center">
-          <p className="font-display text-xl font-semibold tracking-tight text-red sm:text-2xl">
+          <p className="font-display text-xl font-bold tracking-tight text-red sm:text-2xl">
             {drinks.toGo}
           </p>
         </div>

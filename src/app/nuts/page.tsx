@@ -43,7 +43,7 @@ export default function NutsPage() {
                 key={f.name}
                 className="rounded-panel border border-ink/10 bg-cream-dim p-6 transition-colors hover:border-red/30"
               >
-                <h2 className="font-display text-xl font-semibold leading-snug tracking-tight">
+                <h2 className="font-display text-xl font-bold leading-snug tracking-tight">
                   {f.name}
                 </h2>
                 <p className="mt-2 text-[0.95rem] leading-relaxed text-ink/65">{f.note}</p>

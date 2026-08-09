@@ -76,7 +76,7 @@ export default function MenuPage() {
               {section.items.map((item) => (
                 <li key={item.name} className="grid content-start gap-1.5">
                   <div className="flex items-baseline gap-3">
-                    <h3 className="font-display text-xl font-semibold tracking-tight">
+                    <h3 className="font-display text-xl font-bold tracking-tight">
                       {item.name}
                     </h3>
                     {item.popular && (
@@ -90,7 +90,7 @@ export default function MenuPage() {
                           aria-hidden
                           className="min-w-8 flex-1 translate-y-[-0.2rem] border-b border-dotted border-ink/25"
                         />
-                        <span className="font-display text-lg font-semibold text-red">
+                        <span className="font-display text-lg font-bold text-red">
                           {item.price}
                         </span>
                       </>

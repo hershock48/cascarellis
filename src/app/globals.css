@@ -106,9 +106,160 @@
   }
 }
 
+/* ---------------------------------------------------------------------------
+   Motion
+   Everything here is CSS. No animation library, so the JS bundle stays empty
+   and none of it blocks paint.
+   --------------------------------------------------------------------------- */
+
+@layer components {
+  /* Scroll reveal. Visible by default, hidden only once JS marks the document,
+     so no-JS visitors and crawlers always get the content. */
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+
+  .js [data-reveal][data-shown] {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Cards lift, and any photo inside eases in slightly. */
+  .lift {
+    transition:
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.35s ease,
+      border-color 0.35s ease;
+  }
+
+  .lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px -24px color-mix(in srgb, var(--color-ink) 55%, transparent);
+  }
+
+  .lift img {
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .lift:hover img {
+    transform: scale(1.04);
+  }
+
+  /* Nav underline grows from the left on hover. */
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -0.35rem;
+    height: 2px;
+    width: 100%;
+    border-radius: 9999px;
+    background-color: var(--color-red);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .nav-link:hover::after,
+  .nav-link[aria-current="page"]::after {
+    transform: scaleX(1);
+  }
+
+  /* Marquee */
+  .marquee {
+    overflow: hidden;
+  }
+
+  .marquee-inner {
+    display: flex;
+    width: max-content;
+    animation: marquee-scroll 46s linear infinite;
+  }
+
+  .marquee:hover .marquee-inner {
+    animation-play-state: paused;
+  }
+
+  .marquee-track {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding-right: 2rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  @keyframes marquee-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Hero entrance, staggered by nth-child rather than per-element delays. */
+  .js .hero-in > * {
+    animation: hero-rise 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .js .hero-in > *:nth-child(1) { animation-delay: 0.05s; }
+  .js .hero-in > *:nth-child(2) { animation-delay: 0.14s; }
+  .js .hero-in > *:nth-child(3) { animation-delay: 0.23s; }
+  .js .hero-in > *:nth-child(4) { animation-delay: 0.32s; }
+  .js .hero-in > *:nth-child(5) { animation-delay: 0.41s; }
+
+  @keyframes hero-rise {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Header compacts and gains a hairline once you scroll off the top. */
+  .site-header {
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  }
+
+  .site-header[data-stuck] {
+    box-shadow: 0 6px 24px -18px color-mix(in srgb, var(--color-ink) 70%, transparent);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .js [data-reveal],
+  .js .hero-in > * {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .marquee-inner {
+    animation: none !important;
+  }
+
+  .lift:hover {
+    transform: none;
+  }
+
+  .lift:hover img {
+    transform: none;
   }
 
   *,

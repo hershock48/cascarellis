@@ -1,19 +1,29 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Bodoni_Moda, Figtree } from "next/font/google";
 import "./globals.css";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import OrderBar from "@/components/OrderBar";
 import { site } from "@/data/site";
 
-const display = Fraunces({
+/**
+ * Bodoni was cut in Parma in the 1790s, so the display face is literally
+ * Italian. It is only used at large sizes, where the hairlines survive.
+ * Figtree carries every small size and all body copy.
+ */
+const display = Bodoni_Moda({
   subsets: ["latin"],
   variable: "--font-display",
-  axes: ["SOFT", "WONK", "opsz"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
-const body = Inter({ subsets: ["latin"], variable: "--font-body", display: "swap" });
+const body = Figtree({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -97,6 +107,19 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${display.variable} ${body.variable}`}>
+      <head>
+        {/*
+          Flags that JS is available, before first paint. The reveal animations
+          only engage on .js, so without this everything renders visible and
+          nothing ever flashes.
+        */}
+        <script
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: `document.documentElement.classList.add('js')`,
+          }}
+        />
+      </head>
       <body className="min-h-screen antialiased">
         <script
           type="application/ld+json"
