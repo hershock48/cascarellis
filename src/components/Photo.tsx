@@ -81,7 +81,7 @@ export default function Photo({
             aria-hidden
             viewBox="0 0 24 24"
             fill="none"
-            className={`mx-auto h-7 w-7 ${dark ? "text-brass" : "text-brick"}`}
+            className={`mx-auto h-7 w-7 ${dark ? "text-gold" : "text-red"}`}
           >
             <rect
               x="2.5"

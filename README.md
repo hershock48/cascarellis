@@ -1,132 +1,91 @@
 # Cascarelli's of Homer
 
-A new website for Cascarelli's of Homer, 103 E Main St, Homer, Michigan.
-Built by [glazedweb](https://github.com/hershock48).
+A rebuild of cascarellis.com for Cascarelli's of Homer, 103 E Main Street,
+Homer, Michigan. Built by [Glazed Web](https://glazedweb.com).
 
-## Why this exists
+## Approach
 
-The current site at cascarellis.com has some concrete problems:
+Keep their brand, fix the execution. Every heading, claim and category comes
+from Cascarelli's own site. Nothing about the business was reinvented.
 
-- **No working HTTPS.** Requesting `https://cascarellis.com` redirects back to
-  plain `http`, and the certificate presented fails hostname verification.
-  Browsers show "Not Secure" and Google has demoted non-HTTPS sites for years.
-- **A holiday notice from 2023** is still live on the contact page ("closed on
-  Sunday, May 28th and Monday, May 29th for Memorial Day").
-- **No menu with prices** on their own domain, so Sirved, MenuPix, Zmenu,
-  Restaurantji and Wheree fill the gap with guesses.
-- **No online ordering** of any kind.
-- **No links to their Facebook or Instagram**, both of which are active.
+Their words, used as written or lightly tightened:
 
-This rebuild fixes all of those and puts the family's actual story, which is
-excellent, somewhere people will read it.
+- "A one-of-a-kind pizza restaurant"
+- "A far reaching reputation for terrific food and superb service"
+- "20 beers on draft, and 19 of them are from Michigan"
+- "World famous specialty nuts"
+- "Pick up draft beer or wine to go"
+- Live piano every Wednesday and Saturday
+- Reservations for groups of 8 to 45, banquet room and patio
+
+## What the current site is losing them
+
+- **No working HTTPS.** The certificate fails hostname verification, so
+  browsers flag the site as Not Secure and link previews do not render when
+  someone shares it. It is severe enough that automated clients cannot fetch
+  robots.txt.
+- **A Memorial Day notice from 2023** still live on the contact page.
+- **No ordering call to action.** Phone number is in the header, but nothing
+  drives to it.
+- **Menu not on their own domain**, so Sirved, MenuPix, Zmenu and Restaurantji
+  rank for their food instead of them.
+- **Live piano, the banquet room and the patio are buried.** These are booking
+  drivers and they are barely mentioned.
+
+## Conversion patterns applied
+
+Based on current restaurant web practice, where 70%+ of traffic is mobile:
+
+- Call to Order above the fold on every page, plus a persistent sticky bar on
+  mobile that never scrolls away
+- Food photography above the fold, the single highest impact asset
+- A "What's good here" block answering the first question every new visitor has
+- HTML menu, not a PDF, so it can be indexed and read on a phone
+- Hours, address and a tappable phone number on every page
+- Live open/closed status computed in America/Detroit
+- Restaurant JSON-LD with hours, rating, reservations and menu URL
 
 ## Stack
 
-- Next.js 16 (App Router, all routes statically prerendered)
-- TypeScript
-- Tailwind CSS v4
-- `next/font` for Fraunces and Inter, self hosted at build time
-- No external JS dependencies
+Next.js 16 App Router, TypeScript, Tailwind v4. Every route statically
+prerendered. No external JS dependencies.
 
 ## Pages
 
-| Route | Purpose |
-| --- | --- |
-| `/` | Hero, the three things they are known for, signature pizzas, taps, history, visit |
-| `/menu` | Full menu with jump navigation |
-| `/beer-and-wine` | The twenty taps and the wine list |
-| `/peanuts` | The nut roasting business, running since 1897 |
-| `/history` | Four generations, 1856 to today |
-| `/visit` | Hours, address, phone, map |
-
-## Built in
-
-- `Restaurant` JSON-LD with address, hours, phone, rating and social profiles
-- Per page titles, descriptions, canonicals, Open Graph and Twitter cards
-- Generated `sitemap.xml` and `robots.txt`
-- Live open/closed indicator computed in `America/Detroit`, correct for
-  visitors in any timezone
-- Click to load map, so no Google cookies or map tiles on first paint
-- Skip link, focus rings, labelled landmarks, `prefers-reduced-motion` support
-- Click to call on every page, which is how most of their orders arrive
-
-## Where the voice came from
-
-The copy is not invented. It is built from things Cascarelli's and their
-customers actually say:
-
-- **"Home of our famous pizza.. and so much more!"** is their own Facebook
-  tagline, lightly tightened for the headline.
-- **The MacCarelli** is described by reviewers as a Big Mac pizza: Thousand
-  Island instead of red sauce, seasoned ground beef, onion, dill pickle relish,
-  mozzarella and cheddar, with shredded lettuce and a drizzle added after the
-  oven. Multiple people mention driving 25 or more miles for it.
-- **The wait** comes up constantly, 45 to 60 minutes on a Friday. Owning it
-  reads better than hiding it, and it sets expectations before somebody shows
-  up hungry at 7pm.
-- **"Old time saloon vibe," "stepped back in time," and the chandeliers** are
-  all lifted from how customers describe the room.
-- **Ryan** is the third generation owner and reviewers repeatedly mention him
-  telling them the history of the name.
-- Named items pulled from reviews: Porky's Meat Lovers Dream, Baby's Chicken
-  Pie, Annie's Bread, the Flat Iron Salad, the Autumn Harvest Salad, Ryan's
-  Nuts, and a Bloody Mary with a following.
-
-## What still needs the owner
-
-1. **Spellings.** MacCarelli, Baby's Chicken Pie and Annie's Bread came from
-   customer reviews, not from Cascarelli's. Confirm before launch.
-2. **Prices.** Not published anywhere public. Add a `price` field to any item
-   in `src/data/menu.ts` and it renders automatically.
-3. **The rest of the menu.** Only items with public evidence are listed.
-4. **Photos.** The design is typographic on purpose and holds without images,
-   but the room, the oven and the peanut roaster deserve to be seen.
-5. **Merch.** They already sell mugs, tumblers, hats and shirts at the counter.
-   That is a small store waiting to happen.
-
-## Adding photos
-
-Six slots are already placed and sized. Until a photo exists, each renders a
-styled placeholder that states what to shoot, so the layout is identical empty
-or full and nothing looks broken while you wait on the owner.
-
-1. Drop the file into `public/photos/`
-2. Open `src/data/photos.ts` and set that entry's `src`, e.g.
-   `src: "/photos/maccarelli.jpg"`
-3. Write real alt text while you are in there
-
-That is the whole process. `next/image` handles resizing, WebP conversion and
-lazy loading.
-
-| Slot | Where it appears | What it wants |
-| --- | --- | --- |
-| `macCarelli` | The red section, with the ticket over it | Overhead, whole pie, natural light |
-| `heroRoom` | The room | The dining room from the door, chandeliers in frame |
-| `taps` | Taps section, the big 20 sits over it | All twenty handles, straight on |
-| `nuts` | Nuts section | The roaster, or bags on the counter |
-| `archive` | Beside the timeline | One of the old framed photos on the wall |
-| `merch` | Merch strip | A few of the handcrafted mugs |
-
-A note on sourcing. Cascarelli's own photos, from their site gallery, Facebook
-and Instagram (`@cascarellisofhomer`), are theirs to license to you. The 65
-photos on Yelp and the shots on Untappd belong to the customers who took them
-and should not be used. Originals from Ryan's phone will beat anything
-currently published on the web.
+`/` `/menu` `/drinks` `/nuts` `/events` `/about` `/contact` `/employment`
 
 ## Editing content
 
-Nearly everything lives in two files:
+- `src/data/site.ts` — hours, address, phone, socials, reservations, live music
+- `src/data/menu.ts` — menu sections and items, best sellers, nuts, drinks
+- `src/data/photos.ts` — photo slots
 
-- `src/data/site.ts` — hours, address, phone, social links, review count
-- `src/data/menu.ts` — every menu section and item, the tap note, the wine note
+Change the hours in one place and the header badge, footer, contact table and
+JSON-LD all update together.
 
-Change the hours in `site.ts` and the header badge, the footer, the visit page
-table and the JSON-LD all update together.
+## Photos
+
+Nine slots are placed and sized. Empty ones render a styled placeholder naming
+the shot, so the layout never shifts. Drop a file in `public/photos/`, set
+`src` in `src/data/photos.ts`, done. `heroPizza` is the one to chase first.
+
+Cascarelli's own photos, from their gallery, Facebook and Instagram
+(`@cascarellisofhomer`), are theirs to license. Yelp and Untappd photos belong
+to the customers who took them.
+
+## Still needs the owner
+
+1. **Prices.** Not published anywhere public.
+2. **Menu accuracy.** MacCarelli, Baby's Chicken Pie and Annie's Bread came
+   from customer reviews, not from Cascarelli's. Confirm spellings.
+3. **The weekday and weekend menus.** Their site runs two and the split is
+   scaffolded, but the actual differences need filling in.
+4. **Photos.**
 
 ## Running it
 
 ```bash
 npm install
-npm run dev     # http://localhost:3000
-npm run build   # production build
+npm run dev
+npm run build
 ```

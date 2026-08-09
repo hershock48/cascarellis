@@ -1,12 +1,12 @@
 /**
  * MENU DATA
  *
- * Item names and descriptions were reconstructed from Cascarelli's own pages,
- * their Facebook, and what customers describe in reviews. Ryan needs to
- * confirm spellings and fill in prices before this goes live.
+ * Sourced from Cascarelli's current site (cascarellis.com), their Facebook,
+ * and customer reviews. Their site runs a Weekday menu and a Weekend menu,
+ * which is reflected in the `menus` structure below.
  *
- * Add a price string (e.g. price: "18") to any item and it renders in the
- * right hand column automatically.
+ * Prices are not published anywhere public. Add a `price` to any item and it
+ * renders in the right hand column automatically.
  */
 
 export type MenuItem = {
@@ -14,180 +14,183 @@ export type MenuItem = {
   description?: string;
   price?: string;
   tags?: string[];
+  /** Shows a "Popular" marker. Trend research: answers "what's good here?" fast. */
+  popular?: boolean;
 };
 
-export type MenuSection = {
-  id: string;
-  title: string;
-  blurb?: string;
-  items: MenuItem[];
-};
+export type MenuSection = { id: string; title: string; blurb?: string; items: MenuItem[] };
 
-/** The one that gets its own section on the homepage. */
-export const hero = {
-  name: "The MacCarelli",
-  line: "It is a Big Mac. On a pizza. We are not sorry.",
-  description:
-    "Thousand Island instead of red sauce. Seasoned ground beef, onion, dill pickle relish, mozzarella and cheddar. It comes out of the oven, then the shredded lettuce and the drizzle go on.",
-  proof: "People drive in from twenty five miles out for this. Some of them order two.",
-};
+/** The best sellers block on the homepage. */
+export const bestSellers: MenuItem[] = [
+  {
+    name: "The MacCarelli",
+    description:
+      "Our take on a classic burger, on a pizza. Thousand Island, seasoned beef, onion, dill pickle relish, mozzarella and cheddar, finished with shredded lettuce.",
+    popular: true,
+  },
+  {
+    name: "Porky's Meat Lovers Dream",
+    description:
+      "Pepperoni, sausage, bacon and ham. The one to order when nobody at the table wants to compromise.",
+    popular: true,
+  },
+  {
+    name: "Flat Iron Salad",
+    description:
+      "Flat iron steak, mushrooms, grilled asparagus and blue cheese vinaigrette over fresh greens.",
+    popular: true,
+  },
+];
+
+export const menus = {
+  weekday: {
+    id: "weekday",
+    label: "Weekday Menu",
+    note: "Served Monday through Thursday.",
+  },
+  weekend: {
+    id: "weekend",
+    label: "Weekend Menu",
+    note: "Friday and Saturday, with a few additions from the kitchen.",
+  },
+} as const;
 
 export const menu: MenuSection[] = [
   {
     id: "pizza",
     title: "Pizza",
     blurb:
-      "Bob Cascarelli put pizza on a tavern menu in February 1965. The tavern was already thirty years old. Nothing has been the same since.",
+      "Homemade and built to order, the way we have made them since 1965. Gluten free crust available.",
     items: [
       {
         name: "The MacCarelli",
         description:
-          "Thousand Island for sauce, seasoned ground beef, onion, dill pickle relish, mozzarella and cheddar. Shredded lettuce and a drizzle go on after it comes out.",
-        tags: ["The one you heard about"],
+          "Thousand Island, seasoned beef, onion, dill pickle relish, mozzarella and cheddar, finished with shredded lettuce.",
+        popular: true,
       },
       {
         name: "Porky's Meat Lovers Dream",
-        description:
-          "Every pig product we could justify putting on one crust, and then one more.",
+        description: "Pepperoni, sausage, bacon and ham.",
+        popular: true,
       },
       {
         name: "Baby's Chicken Pie",
-        description:
-          "Named after somebody's grandmother. Chicken, and it is better than it sounds.",
+        description: "Grilled chicken, cheese and our house sauce.",
       },
       {
-        name: "Pepperoni",
-        description:
-          "For the people who drove forty minutes and want exactly what they came for.",
+        name: "Chicken Alfredo Flatbread",
+        description: "Alfredo base, grilled chicken, thin and crisp.",
       },
+      { name: "Pepperoni", description: "The classic, done right." },
       {
         name: "Veggie",
-        description: "It exists, it is good, and nobody is going to give you a hard time.",
+        description: "Fresh vegetables over our house sauce and mozzarella.",
         tags: ["Vegetarian"],
       },
       {
         name: "Build Your Own",
-        description:
-          "Start with cheese and go from there. Ask about the gluten free crust. Ask for light cheese if you are one of those people.",
-        tags: ["GF crust available"],
+        description: "Start with cheese and add whatever you like.",
+        tags: ["Gluten free crust available"],
       },
     ],
   },
   {
     id: "starters",
-    title: "To Start",
-    blurb: "Order these first. You are going to be here a while.",
+    title: "Starters and Soups",
     items: [
-      {
-        name: "Annie's Bread",
-        description:
-          "Hard crust, cheese inside, gone in four minutes. Do not plan on sharing.",
-      },
-      {
-        name: "Artichoke Dip",
-        description: "Baked hot, served with warm pita. A table order, not a personal one.",
-      },
+      { name: "Annie's Bread", description: "Baked fresh, with cheese inside." },
+      { name: "Artichoke Dip", description: "Baked hot and served with warm pita." },
       {
         name: "Chicken Noodle Soup",
-        description: "Noodles made here. This is not a garnish, it is a real bowl of soup.",
+        description: "Homemade noodles, made in our kitchen.",
+        popular: true,
       },
+      { name: "Soup of the Day", description: "Ask your server what is on today." },
     ],
   },
   {
     id: "salads",
     title: "Salads",
-    blurb:
-      "Yes, really. Somebody in your group is going to want one and these are not an afterthought.",
+    blurb: "Fresh, locally sourced greens. Add grilled chicken to any salad.",
     items: [
       {
         name: "Flat Iron Salad",
         description:
-          "Flat iron steak, mushrooms, grilled asparagus, blue cheese vinaigrette. Orders as a meal.",
+          "Flat iron steak, mushrooms, grilled asparagus and blue cheese vinaigrette.",
+        popular: true,
       },
       {
         name: "Autumn Harvest Salad",
         description:
-          "Romaine and mixed greens, grilled chicken, Asiago, feta, dried cherries and apples. Balsamic or blueberry pomegranate.",
+          "Romaine and mixed greens, grilled chicken, Asiago, feta, dried cherries and apples, with balsamic or blueberry pomegranate.",
       },
       {
         name: "House Salad",
-        description: "The straightforward one. Add chicken and call it dinner.",
+        description: "Mixed greens with your choice of house dressing.",
         tags: ["Vegetarian"],
       },
     ],
   },
   {
     id: "sandwiches",
-    title: "Sandwiches and Pasta",
+    title: "Sandwiches and Burgers",
     items: [
-      {
-        name: "Meatball Sandwich",
-        description: "The reason some people never look at the pizza menu.",
-      },
-      {
-        name: "Turkey Club",
-        description: "Triple decker, bacon, cut into quarters like it should be.",
-      },
-      {
-        name: "Spaghetti and Meatballs",
-        description: "No reinvention. It has been on the menu longer than most of us.",
-      },
-      {
-        name: "Chicken Alfredo",
-        description: "Cream sauce, grilled chicken, bread on the side to finish the plate.",
-      },
-      {
-        name: "Lasagna",
-        description: "Layered and baked to order, which is part of why it takes a minute.",
-      },
-      {
-        name: "Burgers and Subs",
-        description: "Hand pattied on the flat top, subs built hot or cold.",
-      },
+      { name: "Meatball Sandwich", description: "House meatballs, sauce and melted cheese." },
+      { name: "Turkey Club", description: "Triple decker with bacon, lettuce and tomato." },
+      { name: "Burgers", description: "Hand pattied and cooked on the flat top." },
+      { name: "Subs", description: "Hot or cold, built on fresh rolls." },
     ],
   },
   {
-    id: "nuts",
-    title: "Ryan's Nuts",
-    blurb:
-      "Roasted here. The family has been doing this since 1897, which makes the nuts older than the restaurant by thirty eight years.",
+    id: "pasta",
+    title: "Pasta",
     items: [
-      { name: "Roasted Peanuts", description: "The original. Bags go out the door all day." },
-      { name: "Cashews", description: "Small batches, salted while they are still warm." },
-      {
-        name: "Macadamias",
-        description: "The expensive ones. They are usually gone by Saturday night.",
-      },
+      { name: "Spaghetti and Meatballs", description: "House sauce and meatballs, with bread." },
+      { name: "Chicken Alfredo", description: "Cream sauce and grilled chicken." },
+      { name: "Lasagna", description: "Layered and baked to order." },
     ],
   },
 ];
 
-export const drafts = {
-  count: 20,
-  michiganCount: 19,
-  note:
-    "Nineteen of the twenty pour Michigan and regional craft. The twentieth is Pabst, and that stays.",
+/** Straight from their Food page. */
+export const nuts = {
+  heading: "World famous specialty nuts",
+  blurb:
+    "We have been in the nut business since the 1960s, and the roasting goes back further than that. Sold at the counter, and they travel well.",
+  flavors: [
+    { name: "Red Skin Peanuts", note: "The original." },
+    { name: "Brazilian Cashews", note: "Roasted in small batches." },
+    { name: "Macadamia Nuts", note: "Rich and buttery." },
+    { name: "Sriracha and Honey Cashews", note: "Sweet first, heat after." },
+    { name: "Cinnamon and Sugar Cashews", note: "A holiday favorite." },
+    { name: "Maple Glazed Pecans", note: "Michigan maple." },
+  ],
 };
 
-export const wine = {
-  note:
-    "Red, white, rosé and sparkling. The list changes a few times a year, so ask what came in.",
-  categories: ["Red", "White", "Rosé", "Sparkling"],
-};
-
-export const cocktails = {
-  note:
-    "The Bloody Mary has a following. Seasonal drinks rotate, and they lean sweet on purpose. Caramel Apple and the Salted Caramel White Russian both show up when it gets cold.",
-  named: ["Bloody Mary", "Caramel Apple", "Salted Caramel White Russian"],
+export const drinks = {
+  drafts: {
+    count: 20,
+    michiganCount: 19,
+    heading: "20 beers on draft, and 19 of them are from Michigan",
+    blurb:
+      "The list rotates constantly, so ask what is pouring. Draft beer and wine are available to go.",
+  },
+  wine: {
+    heading: "Wine",
+    blurb:
+      "A curated selection of red, white, rosé and sparkling that changes a few times a year.",
+    categories: ["Red", "White", "Rosé", "Sparkling"],
+  },
+  cocktails: {
+    heading: "From the bar",
+    blurb:
+      "Our Bloody Mary has a following, and seasonal drinks rotate through the year.",
+    named: ["Bloody Mary", "Caramel Apple", "Salted Caramel White Russian"],
+  },
+  toGo: "Pick up draft beer or wine to go on your way out.",
 };
 
 export const merch = {
-  note:
-    "Handcrafted beer mugs, coffee mugs, insulated tumblers, hats and shirts. Sold at the counter.",
-  items: [
-    { name: "Handcrafted beer mug", price: "$45" },
-    { name: "Coffee mug", price: "$38" },
-    { name: "Insulated tumbler", price: "Ask" },
-    { name: "Hats and shirts", price: "Ask" },
-  ],
+  heading: "Take something home",
+  blurb: "Handcrafted beer mugs, coffee mugs, insulated tumblers, hats and shirts, at the counter.",
 };

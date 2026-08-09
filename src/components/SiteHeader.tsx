@@ -3,25 +3,24 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import Wordmark from "./Wordmark";
 import OpenNow from "./OpenNow";
 import { site } from "@/data/site";
 
+/** Mirrors the nav on their current site, consolidated where it was redundant. */
 const nav = [
   { href: "/menu", label: "Menu" },
-  { href: "/beer-and-wine", label: "Beer & Wine" },
-  { href: "/peanuts", label: "Peanuts" },
-  { href: "/history", label: "History" },
-  { href: "/visit", label: "Visit" },
+  { href: "/drinks", label: "Drinks" },
+  { href: "/nuts", label: "Nuts" },
+  { href: "/events", label: "Events" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
+  useEffect(() => setOpen(false), [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -31,9 +30,29 @@ export default function SiteHeader() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-ink/10 bg-cream/85 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-ink/10 bg-cream/90 backdrop-blur-md">
+      {/* Utility strip: hours and phone on every page, per current best practice. */}
+      <div className="hidden bg-ink text-cream md:block">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-8 py-2 text-[0.8rem]">
+          <OpenNow tone="light" />
+          <div className="flex items-center gap-6">
+            <span className="text-cream/70">{site.address.street}, Homer</span>
+            <a href={site.phoneHref} className="font-semibold hover:text-gold">
+              {site.phone}
+            </a>
+          </div>
+        </div>
+      </div>
+
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-3.5 sm:px-8">
-        <Wordmark />
+        <Link href="/" className="group block leading-none">
+          <span className="block font-display text-2xl font-semibold tracking-tight text-ink sm:text-[1.7rem]">
+            Cascarelli&rsquo;s
+          </span>
+          <span className="mt-1 block text-[0.58rem] font-semibold uppercase tracking-[0.26em] text-red">
+            Homer, Michigan &middot; Est. 1935
+          </span>
+        </Link>
 
         <nav aria-label="Main" className="hidden items-center gap-7 lg:flex">
           {nav.map((item) => {
@@ -43,13 +62,13 @@ export default function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className={`relative text-sm font-medium transition-colors hover:text-brick ${
-                  active ? "text-brick" : "text-ink/80"
+                className={`relative text-[0.95rem] font-medium transition-colors hover:text-red ${
+                  active ? "text-red" : "text-ink/80"
                 }`}
               >
                 {item.label}
                 {active && (
-                  <span className="absolute -bottom-1.5 left-0 h-[2px] w-full rounded-full bg-brick" />
+                  <span className="absolute -bottom-1.5 left-0 h-[2px] w-full rounded-full bg-red" />
                 )}
               </Link>
             );
@@ -57,14 +76,11 @@ export default function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <div className="hidden xl:block">
-            <OpenNow />
-          </div>
           <a
             href={site.phoneHref}
-            className="hidden rounded-full bg-brick px-5 py-2.5 text-sm font-semibold text-cream shadow-sm transition-colors hover:bg-brick-bright sm:inline-block"
+            className="hidden rounded-full bg-red px-6 py-3 text-sm font-semibold text-cream shadow-md shadow-red/25 transition-colors hover:bg-red-bright md:inline-block"
           >
-            Call to order
+            Call to Order
           </a>
           <button
             type="button"
@@ -96,11 +112,8 @@ export default function SiteHeader() {
       </div>
 
       {open && (
-        <div
-          id="mobile-nav"
-          className="border-t border-ink/10 bg-cream lg:hidden"
-        >
-          <nav aria-label="Mobile" className="mx-auto max-w-6xl px-5 py-4 sm:px-8">
+        <div id="mobile-nav" className="border-t border-ink/10 bg-cream lg:hidden">
+          <nav aria-label="Mobile" className="mx-auto max-w-6xl px-5 py-3 sm:px-8">
             <ul className="divide-y divide-ink/10">
               {nav.map((item) => (
                 <li key={item.href}>
@@ -109,21 +122,15 @@ export default function SiteHeader() {
                     className="flex items-center justify-between py-4 font-display text-2xl font-medium text-ink"
                   >
                     {item.label}
-                    <span aria-hidden className="text-brick">
+                    <span aria-hidden className="text-red">
                       &rarr;
                     </span>
                   </Link>
                 </li>
               ))}
             </ul>
-            <div className="mt-5 flex flex-col gap-3 pb-2">
+            <div className="py-5">
               <OpenNow />
-              <a
-                href={site.phoneHref}
-                className="rounded-full bg-brick px-5 py-3.5 text-center font-semibold text-cream"
-              >
-                Call {site.phone}
-              </a>
             </div>
           </nav>
         </div>

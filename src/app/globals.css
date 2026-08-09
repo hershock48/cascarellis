@@ -1,17 +1,23 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #16110f;
-  --color-ink-soft: #2a211d;
-  --color-cream: #f7f1e4;
-  --color-cream-dim: #e8dfcd;
-  --color-brick: #a83a26;
-  --color-brick-bright: #c8492f;
-  --color-brass: #c9974a;
-  --color-olive: #46503f;
+  /* Warm Italian American palette, kept close to what a 1935 pizzeria reads as. */
+  --color-ink: #1a1512;
+  --color-ink-soft: #2f2621;
+  --color-cream: #fdf8ef;
+  --color-cream-dim: #f4ead8;
+  --color-red: #c1272d;
+  --color-red-bright: #d63a2f;
+  --color-red-deep: #8f1a20;
+  --color-basil: #21402f;
+  --color-gold: #e0a526;
 
-  --font-display: var(--font-display), Georgia, "Times New Roman", serif;
+  --font-display: var(--font-display), Georgia, serif;
   --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+
+  /* Generous, friendly radii. */
+  --radius-card: 1.25rem;
+  --radius-panel: 1.75rem;
 }
 
 @layer base {
@@ -24,46 +30,79 @@
     color: var(--color-ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
   }
 
   ::selection {
-    background-color: var(--color-brass);
+    background-color: var(--color-gold);
     color: var(--color-ink);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-brick);
+    outline: 2px solid var(--color-red);
     outline-offset: 3px;
-    border-radius: 2px;
+    border-radius: 4px;
+  }
+
+  /* Room for the sticky mobile order bar. */
+  @media (max-width: 767px) {
+    body {
+      padding-bottom: 4.5rem;
+    }
   }
 }
 
 @layer components {
-  /* Paper grain, kept very subtle. Sits behind content on light panels. */
   .grain::before {
     content: "";
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.35;
+    opacity: 0.3;
     mix-blend-mode: multiply;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.16'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.14'/%3E%3C/svg%3E");
   }
 
   .grain-dark::before {
     mix-blend-mode: screen;
-    opacity: 0.22;
+    opacity: 0.2;
   }
 
-  .rule {
-    height: 1px;
-    background: linear-gradient(
-      to right,
-      transparent,
-      color-mix(in srgb, var(--color-ink) 22%, transparent),
-      transparent
-    );
+  /* Primary action. Used for every Call to Order. */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    background-color: var(--color-red);
+    padding: 1rem 2rem;
+    font-weight: 600;
+    color: var(--color-cream);
+    box-shadow: 0 10px 24px -12px color-mix(in srgb, var(--color-red) 70%, transparent);
+    transition: transform 0.15s ease, background-color 0.15s ease;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-red-bright);
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    border: 1.5px solid color-mix(in srgb, var(--color-ink) 20%, transparent);
+    padding: 1rem 2rem;
+    font-weight: 600;
+    color: var(--color-ink);
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--color-red);
+    color: var(--color-red);
   }
 }
 
@@ -76,7 +115,6 @@
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }

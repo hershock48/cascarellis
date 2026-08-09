@@ -3,34 +3,35 @@ import { site, fullAddress, hoursSummary, mapsUrl } from "@/data/site";
 
 const nav = [
   { href: "/menu", label: "Menu" },
-  { href: "/beer-and-wine", label: "Beer & Wine" },
-  { href: "/peanuts", label: "Peanuts" },
-  { href: "/history", label: "History" },
-  { href: "/visit", label: "Visit" },
+  { href: "/drinks", label: "Drinks" },
+  { href: "/nuts", label: "Nuts" },
+  { href: "/events", label: "Events" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
+  { href: "/employment", label: "Employment" },
 ];
 
 export default function SiteFooter() {
   return (
     <footer className="grain grain-dark relative overflow-hidden bg-ink text-cream">
       <div className="relative mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-        <div className="grid gap-12 md:grid-cols-[1.2fr_1fr_1fr]">
+        <div className="grid gap-12 md:grid-cols-[1.3fr_1fr_1fr]">
           <div>
             <p className="font-display text-3xl font-semibold tracking-tight">
               Cascarelli&rsquo;s
             </p>
-            <p className="mt-1 text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-brass">
-              Homer, Mich. &middot; Est. 1935
+            <p className="mt-1 text-[0.6rem] font-semibold uppercase tracking-[0.26em] text-gold">
+              Homer, Michigan &middot; Est. 1935
             </p>
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-cream/70">
-              Home of our famous pizza. And a lot of other stuff. Ninety years
-              on the same corner of Main Street.
+              {site.blurb}
             </p>
             <div className="mt-6 flex gap-3">
               <a
                 href={site.social.facebook}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-full border border-cream/20 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-cream/80 transition-colors hover:border-brass hover:text-brass"
+                className="rounded-full border border-cream/20 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-cream/80 transition-colors hover:border-gold hover:text-gold"
               >
                 Facebook
               </a>
@@ -38,7 +39,7 @@ export default function SiteFooter() {
                 href={site.social.instagram}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-full border border-cream/20 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-cream/80 transition-colors hover:border-brass hover:text-brass"
+                className="rounded-full border border-cream/20 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-cream/80 transition-colors hover:border-gold hover:text-gold"
               >
                 Instagram
               </a>
@@ -46,24 +47,30 @@ export default function SiteFooter() {
           </div>
 
           <div>
-            <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-brass">
+            <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
               Find us
             </h2>
             <address className="mt-4 not-italic text-sm leading-relaxed text-cream/80">
-              <a href={mapsUrl} target="_blank" rel="noreferrer" className="hover:text-brass">
+              <a href={mapsUrl} target="_blank" rel="noreferrer" className="hover:text-gold">
                 {site.address.street}
                 <br />
                 {site.address.city}, {site.address.state} {site.address.zip}
               </a>
               <br />
-              <a href={site.phoneHref} className="mt-3 inline-block font-semibold text-cream hover:text-brass">
+              <a
+                href={site.phoneHref}
+                className="mt-3 inline-block text-base font-semibold text-cream hover:text-gold"
+              >
                 {site.phone}
               </a>
             </address>
+            <p className="mt-4 text-sm text-cream/60">
+              {site.music.what}, {site.music.when.toLowerCase()}.
+            </p>
           </div>
 
           <div>
-            <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-brass">
+            <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
               Hours
             </h2>
             <dl className="mt-4 space-y-2 text-sm text-cream/80">
@@ -83,14 +90,14 @@ export default function SiteFooter() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-sm text-cream/70 transition-colors hover:text-brass"
+                className="text-sm text-cream/70 transition-colors hover:text-gold"
               >
                 {item.label}
               </Link>
             ))}
           </nav>
           <p className="text-xs text-cream/45">
-            &copy; {new Date().getFullYear()} {site.name}. Serving Homer since 1935.
+            &copy; {new Date().getFullYear()} {site.name}
           </p>
         </div>
       </div>

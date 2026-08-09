@@ -3,225 +3,232 @@ import OpenNow from "@/components/OpenNow";
 import MapCard from "@/components/MapCard";
 import Photo from "@/components/Photo";
 import { site, fullAddress, hoursSummary, mapsUrl } from "@/data/site";
-import { hero, drafts, merch } from "@/data/menu";
+import { bestSellers, nuts, drinks, merch } from "@/data/menu";
 
-const timeline = [
-  { year: "1897", text: "Robert gets off the boat and starts roasting peanuts on a pushcart." },
-  { year: "1935", text: "Frank comes to Homer and buys the building. Nobody has left since." },
-  { year: "1965", text: "Bob adds pizza in February. Whole thing changes." },
-  { year: "1994", text: "Ryan takes over. Ask him about the name, he will tell you." },
+const categories = [
+  {
+    title: "Pizza",
+    body: "Homemade and built to order, with a gluten free crust available.",
+    href: "/menu#pizza",
+  },
+  {
+    title: "Sandwiches and Burgers",
+    body: "Hand pattied burgers, hot and cold subs, and the meatball sandwich.",
+    href: "/menu#sandwiches",
+  },
+  {
+    title: "Soups and Salads",
+    body: "Homemade noodles in the chicken noodle, and fresh local greens.",
+    href: "/menu#salads",
+  },
 ];
+
+const photoOf: Record<string, "macCarelli" | "porkys" | "flatIron"> = {
+  "The MacCarelli": "macCarelli",
+  "Porky's Meat Lovers Dream": "porkys",
+  "Flat Iron Salad": "flatIron",
+};
 
 export default function Home() {
   return (
     <>
-      {/* Hero */}
+      {/* Hero: food above the fold, ordering above the fold */}
       <section className="grain grain-dark relative isolate overflow-hidden bg-ink text-cream">
         <div
           aria-hidden
-          className="pointer-events-none absolute -right-40 -top-40 h-[36rem] w-[36rem] rounded-full bg-brick/25 blur-3xl"
+          className="pointer-events-none absolute -right-32 -top-40 h-[34rem] w-[34rem] rounded-full bg-red/30 blur-3xl"
         />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -bottom-56 -left-32 h-[34rem] w-[34rem] rounded-full bg-brass/15 blur-3xl"
-        />
+        <div className="relative mx-auto grid max-w-6xl gap-12 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-16">
+          <div>
+            <p className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-gold">
+              <span>Homer, Michigan</span>
+              <span aria-hidden className="text-cream/25">
+                &middot;
+              </span>
+              <span>Est. 1935</span>
+            </p>
 
-        <div className="relative mx-auto max-w-6xl px-5 pb-20 pt-16 sm:px-8 sm:pb-24 sm:pt-24">
-          <p className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[0.7rem] font-semibold uppercase tracking-[0.3em] text-brass">
-            <span>Homer, Michigan</span>
-            <span aria-hidden className="text-cream/25">
-              /
-            </span>
-            <span>Population 1,700</span>
-            <span aria-hidden className="text-cream/25">
-              /
-            </span>
-            <span>Since 1935</span>
-          </p>
+            <h1 className="mt-6 font-display text-[clamp(2.6rem,7vw,4.75rem)] font-semibold leading-[0.98] tracking-tight">
+              A one&#8209;of&#8209;a&#8209;kind
+              <br />
+              <span className="text-gold">pizza restaurant.</span>
+            </h1>
 
-          <h1 className="mt-7 max-w-5xl font-display text-[clamp(2.5rem,8.5vw,6.25rem)] font-semibold leading-[0.94] tracking-tight">
-            Home of our famous pizza.
-            <br />
-            <span className="text-brass">And a lot of other stuff.</span>
-          </h1>
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-cream/80">
+              Homemade pizzas, sandwiches, burgers, soups and salads, made with
+              fresh, locally sourced ingredients. Plus twenty beers on draft and
+              our world famous specialty nuts.
+            </p>
 
-          <p className="mt-8 max-w-2xl text-lg leading-relaxed text-cream/75 sm:text-xl">
-            Ninety years on the same corner. Twenty taps. Nuts roasted out back
-            since before the building was ours. And one pizza with Thousand
-            Island on it that people drive in from Jackson for.
-          </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a href={site.phoneHref} className="btn-primary">
+                Call to Order {site.phone}
+              </a>
+              <Link
+                href="/menu"
+                className="inline-flex items-center justify-center gap-2 rounded-full border-[1.5px] border-cream/25 px-8 py-4 font-semibold text-cream transition-colors hover:border-gold hover:text-gold"
+              >
+                See the Menu
+              </Link>
+            </div>
 
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <a
-              href={site.phoneHref}
-              className="rounded-full bg-brick px-8 py-4 text-center font-semibold text-cream shadow-lg shadow-brick/20 transition-colors hover:bg-brick-bright"
-            >
-              Call to order {site.phone}
-            </a>
-            <Link
-              href="/menu"
-              className="rounded-full border border-cream/25 px-8 py-4 text-center font-semibold text-cream transition-colors hover:border-brass hover:text-brass"
-            >
-              See the menu
-            </Link>
+            <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3 border-t border-cream/10 pt-6">
+              <OpenNow tone="light" />
+              <p className="text-sm text-cream/65">
+                <span className="font-semibold text-cream">{site.reviews.rating}</span> stars,{" "}
+                {site.reviews.count} reviews
+              </p>
+            </div>
           </div>
 
-          <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-4 border-t border-cream/10 pt-8">
-            <OpenNow tone="light" />
-            <p className="text-sm text-cream/60">
-              <span className="font-semibold text-cream">{site.reviews.rating}</span>{" "}
-              across {site.reviews.count} reviews
+          <Photo
+            name="heroPizza"
+            ratio="feature"
+            tone="dark"
+            priority
+            sizes="(min-width: 1024px) 45vw, 100vw"
+          />
+        </div>
+      </section>
+
+      {/* Info strip */}
+      <section className="border-b border-ink/10 bg-cream-dim">
+        <div className="mx-auto grid max-w-6xl gap-4 px-5 py-6 sm:px-8 md:grid-cols-3 md:gap-8">
+          <div>
+            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-red">
+              Hours
+            </p>
+            <p className="mt-1 text-[0.95rem] text-ink/75">
+              Mon to Thu 11am to 9pm &middot; Fri and Sat until 10pm &middot; Sun from 12pm
+            </p>
+          </div>
+          <div>
+            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-red">
+              Find us
             </p>
             <a
               href={mapsUrl}
               target="_blank"
               rel="noreferrer"
-              className="text-sm text-cream/60 underline decoration-cream/25 underline-offset-4 transition-colors hover:text-brass"
+              className="mt-1 block text-[0.95rem] text-ink/75 underline decoration-ink/20 underline-offset-4 hover:text-red"
             >
               {fullAddress}
             </a>
           </div>
-        </div>
-      </section>
-
-      {/* The MacCarelli */}
-      <section className="grain relative overflow-hidden bg-brick text-cream">
-        <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
-          <div className="grid gap-12 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:gap-20">
-            <div>
-              <p className="text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-cream/60">
-                The one you heard about
-              </p>
-              <h2 className="mt-4 font-display text-[clamp(3rem,9vw,5.5rem)] font-semibold leading-[0.9] tracking-tight">
-                {hero.name}
-              </h2>
-              <p className="mt-6 font-display text-2xl font-semibold leading-snug tracking-tight sm:text-3xl">
-                {hero.line}
-              </p>
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-cream/85">
-                {hero.description}
-              </p>
-              <p className="mt-5 max-w-xl text-lg leading-relaxed text-cream/70">
-                {hero.proof}
-              </p>
-              <a
-                href={site.phoneHref}
-                className="mt-9 inline-block rounded-full bg-cream px-8 py-4 font-semibold text-brick transition-colors hover:bg-brass hover:text-ink"
-              >
-                Order one
-              </a>
-            </div>
-
-            {/* Photo with the ticket layered over it */}
-            <div className="relative mx-auto w-full max-w-md">
-              <Photo
-                name="macCarelli"
-                ratio="tall"
-                tone="dark"
-                sizes="(min-width: 1024px) 28rem, 90vw"
-                className="border-cream/20"
-              />
-              <div className="relative -mt-16 ml-auto w-[17rem] translate-x-2 rotate-[-3deg] sm:-mt-20 sm:w-[18rem] sm:translate-x-6">
-                <div className="rounded-lg bg-cream p-7 text-ink shadow-2xl shadow-ink/40">
-                <p className="text-center text-[0.6rem] font-semibold uppercase tracking-[0.3em] text-brick">
-                  Cascarelli&rsquo;s &middot; Homer
-                </p>
-                <p className="mt-5 text-center font-display text-3xl font-semibold leading-tight tracking-tight">
-                  The MacCarelli
-                </p>
-                <div aria-hidden className="my-6 border-t border-dashed border-ink/25" />
-                <ul className="space-y-2.5 text-[0.95rem] text-ink/75">
-                  {[
-                    "Thousand Island, not red sauce",
-                    "Seasoned ground beef",
-                    "Onion",
-                    "Dill pickle relish",
-                    "Mozzarella and cheddar",
-                    "Shredded lettuce, after the oven",
-                    "A drizzle on top",
-                  ].map((row) => (
-                    <li key={row} className="flex gap-3">
-                      <span aria-hidden className="text-brick">
-                        &bull;
-                      </span>
-                      {row}
-                    </li>
-                  ))}
-                </ul>
-                <div aria-hidden className="my-6 border-t border-dashed border-ink/25" />
-                  <p className="text-center text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-ink/45">
-                    No, we will not explain ourselves
-                  </p>
-                </div>
-              </div>
-            </div>
+          <div>
+            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-red">
+              Live piano
+            </p>
+            <p className="mt-1 text-[0.95rem] text-ink/75">
+              {site.music.when}
+            </p>
           </div>
         </div>
       </section>
 
-      {/* The wait */}
-      <section className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
-        <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-24">
+      {/* What's good here */}
+      <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
+        <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-brick">
-              Before you come in
+            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-red">
+              Most ordered
+            </p>
+            <h2 className="mt-3 font-display text-4xl font-semibold tracking-tight sm:text-5xl">
+              What&rsquo;s good here
+            </h2>
+          </div>
+          <Link href="/menu" className="btn-secondary !px-6 !py-3 text-sm">
+            Full menu
+            <span aria-hidden>&rarr;</span>
+          </Link>
+        </div>
+
+        <ul className="mt-10 grid gap-8 md:grid-cols-3">
+          {bestSellers.map((item) => (
+            <li
+              key={item.name}
+              className="group overflow-hidden rounded-panel border border-ink/10 bg-cream shadow-sm transition-shadow hover:shadow-md"
+            >
+              <Photo
+                name={photoOf[item.name]}
+                ratio="wide"
+                sizes="(min-width: 768px) 33vw, 100vw"
+                className="!rounded-none border-0"
+              />
+              <div className="p-6">
+                <div className="flex items-start justify-between gap-3">
+                  <h3 className="font-display text-2xl font-semibold leading-tight tracking-tight">
+                    {item.name}
+                  </h3>
+                  {item.popular && (
+                    <span className="shrink-0 rounded-full bg-red/10 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-wider text-red">
+                      Popular
+                    </span>
+                  )}
+                </div>
+                <p className="mt-3 text-[0.95rem] leading-relaxed text-ink/70">
+                  {item.description}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* Categories */}
+      <section className="grain relative overflow-hidden bg-cream-dim">
+        <div className="relative mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
+          <h2 className="font-display text-4xl font-semibold tracking-tight sm:text-5xl">
+            From the kitchen
+          </h2>
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink/70">
+            Everything is made in house with fresh, locally sourced ingredients.
+          </p>
+          <ul className="mt-10 grid gap-6 md:grid-cols-3">
+            {categories.map((c) => (
+              <li
+                key={c.title}
+                className="rounded-panel border border-ink/10 bg-cream p-8 transition-colors hover:border-red/30"
+              >
+                <h3 className="font-display text-2xl font-semibold tracking-tight">
+                  {c.title}
+                </h3>
+                <p className="mt-3 text-[0.95rem] leading-relaxed text-ink/70">{c.body}</p>
+                <Link
+                  href={c.href}
+                  className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-red hover:underline"
+                >
+                  View now
+                  <span aria-hidden>&rarr;</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* Drinks */}
+      <section className="grain grain-dark relative overflow-hidden bg-basil text-cream">
+        <div className="relative mx-auto grid max-w-6xl gap-12 px-5 py-16 sm:px-8 sm:py-24 lg:grid-cols-2 lg:items-center lg:gap-16">
+          <Photo name="taps" ratio="feature" tone="dark" sizes="(min-width: 1024px) 45vw, 100vw" />
+          <div>
+            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-gold">
+              At the bar
             </p>
             <h2 className="mt-3 font-display text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
-              On a Friday, it is going to be a while.
+              {drinks.drafts.heading}
             </h2>
-          </div>
-          <div className="space-y-5 text-lg leading-relaxed text-ink/75">
-            <p>
-              Everything gets made when you order it, in a kitchen that was
-              built for a smaller town than the one that shows up on weekends.
-              Forty five minutes is normal. An hour happens.
+            <p className="mt-5 max-w-xl text-lg leading-relaxed text-cream/80">
+              {drinks.drafts.blurb}
             </p>
-            <p>
-              We are not going to pretend otherwise, and we are not going to
-              speed it up by making it worse. Order the Annie&rsquo;s Bread
-              first, get a beer, and let somebody else do the driving home.
-            </p>
-            <p className="font-display text-2xl font-semibold tracking-tight text-ink">
-              Or call ahead and take it with you. That part is fast.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Taps */}
-      <section className="grain grain-dark relative overflow-hidden bg-olive text-cream">
-        <div className="relative mx-auto grid max-w-6xl gap-12 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-20">
-          <div className="relative">
-            <Photo
-              name="taps"
-              ratio="feature"
-              tone="dark"
-              sizes="(min-width: 1024px) 40vw, 100vw"
-            />
-            <p
-              aria-hidden
-              className="pointer-events-none absolute -bottom-8 -left-3 font-display text-[clamp(5.5rem,13vw,10rem)] font-semibold leading-none tracking-tighter text-brass drop-shadow-[0_4px_18px_rgba(0,0,0,0.45)] sm:-bottom-10 sm:-left-6"
-            >
-              {drafts.count}
-            </p>
-          </div>
-          <div>
-            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-brass">
-              On tap
-            </p>
-            <h2 className="mt-3 max-w-lg font-display text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
-              Nineteen are Michigan. One is Pabst.
-            </h2>
-            <p className="mt-5 max-w-xl text-lg leading-relaxed text-cream/75">
-              The Pabst is not an oversight. Everything else on the wall rotates,
-              so there is no point printing a list. Ask whoever is pouring and
-              they will walk you down it.
+            <p className="mt-4 font-display text-xl font-semibold tracking-tight text-gold">
+              {drinks.toGo}
             </p>
             <Link
-              href="/beer-and-wine"
-              className="mt-8 inline-flex items-center gap-2 rounded-full bg-cream px-7 py-3.5 font-semibold text-ink transition-colors hover:bg-brass"
+              href="/drinks"
+              className="mt-8 inline-flex items-center gap-2 rounded-full bg-cream px-7 py-3.5 font-semibold text-ink transition-colors hover:bg-gold"
             >
-              Beer, wine and the Bloody Mary
+              Beer, wine and cocktails
               <span aria-hidden>&rarr;</span>
             </Link>
           </div>
@@ -229,195 +236,191 @@ export default function Home() {
       </section>
 
       {/* Nuts */}
-      <section className="grain relative overflow-hidden bg-cream-dim">
-        <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
-          <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
-            <div>
-              <p className="text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-brick">
-                Since 1897
-              </p>
-              <h2 className="mt-3 font-display text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
-                The nuts are older than the restaurant.
-              </h2>
-              <Photo
-                name="nuts"
-                ratio="wide"
-                sizes="(min-width: 1024px) 45vw, 100vw"
-                className="mt-8"
-              />
-            </div>
-            <div className="space-y-5 text-lg leading-relaxed text-ink/75">
-              <p>
-                Robert Cascarelli was roasting peanuts on a pushcart in 1897,
-                thirty eight years before anybody in this family owned a
-                building in Homer. A flood took the first roaster in 1908. We
-                got another one.
-              </p>
-              <p>
-                Peanuts, cashews and macadamias, roasted here, sold at the
-                counter in bags that people carry out alongside a pizza box.
-                Call about holiday tins before December, not during.
-              </p>
-              <Link
-                href="/peanuts"
-                className="inline-flex items-center gap-2 font-semibold text-ink transition-colors hover:text-brick"
-              >
-                More about that
-                <span aria-hidden>&rarr;</span>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* The room */}
-      <section className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
-        <div className="grid gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-24">
+      <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
+        <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
           <div>
-            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-brick">
-              The room
+            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-red">
+              Since the 1960s
             </p>
             <h2 className="mt-3 font-display text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
-              Old saloon, strange chandeliers, four generations of clutter.
+              {nuts.heading}
             </h2>
-            <p className="mt-6 text-lg leading-relaxed text-ink/70">
-              People walk in and say it feels like stepping back. That is not a
-              design decision, it is just what happens when one family keeps a
-              building for ninety years and never has a reason to gut it. Ask
-              Ryan about the name. He will tell you the whole thing.
-            </p>
-            <Link
-              href="/history"
-              className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-ink transition-colors hover:text-brick"
-            >
-              Read the whole story
+            <p className="mt-5 text-lg leading-relaxed text-ink/70">{nuts.blurb}</p>
+            <Link href="/nuts" className="btn-secondary mt-8 !px-7 !py-3.5">
+              All six flavors
               <span aria-hidden>&rarr;</span>
             </Link>
-            <Photo
-              name="heroRoom"
-              ratio="wide"
-              sizes="(min-width: 1024px) 45vw, 100vw"
-              className="mt-10"
-            />
           </div>
-
-          <div>
-            <Photo
-              name="archive"
-              ratio="tall"
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              className="mb-10"
-            />
-            <ol className="relative space-y-8 border-l border-ink/15 pl-8">
-            {timeline.map((t) => (
-              <li key={t.year} className="relative">
-                <span
-                  aria-hidden
-                  className="absolute -left-[2.06rem] top-2 h-2.5 w-2.5 rounded-full bg-brick ring-4 ring-cream"
-                />
-                <p className="font-display text-2xl font-semibold tracking-tight text-brick">
-                  {t.year}
-                </p>
-                <p className="mt-1 text-[0.98rem] leading-relaxed text-ink/70">
-                  {t.text}
-                </p>
+          <ul className="grid gap-3 sm:grid-cols-2">
+            {nuts.flavors.map((f) => (
+              <li
+                key={f.name}
+                className="rounded-card border border-ink/10 bg-cream-dim px-5 py-4"
+              >
+                <p className="font-display text-lg font-semibold tracking-tight">{f.name}</p>
+                <p className="mt-0.5 text-sm text-ink/60">{f.note}</p>
               </li>
             ))}
-            </ol>
+          </ul>
+        </div>
+      </section>
+
+      {/* Events: piano + banquet */}
+      <section className="grain relative overflow-hidden bg-cream-dim">
+        <div className="relative mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
+          <div className="grid gap-8 md:grid-cols-2">
+            <div className="overflow-hidden rounded-panel border border-ink/10 bg-cream">
+              <Photo
+                name="piano"
+                ratio="wide"
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="!rounded-none border-0"
+              />
+              <div className="p-8">
+                <p className="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-red">
+                  {site.music.when}
+                </p>
+                <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight">
+                  {site.music.what}
+                </h2>
+                <p className="mt-3 text-[0.98rem] leading-relaxed text-ink/70">
+                  Come for dinner, stay for the music. No cover, no reservation
+                  needed, though the room does fill up.
+                </p>
+              </div>
+            </div>
+
+            <div className="overflow-hidden rounded-panel border border-ink/10 bg-cream">
+              <Photo
+                name="banquet"
+                ratio="wide"
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="!rounded-none border-0"
+              />
+              <div className="p-8">
+                <p className="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-red">
+                  Groups of {site.reservations.min} to {site.reservations.max}
+                </p>
+                <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight">
+                  Banquet room and patio
+                </h2>
+                <p className="mt-3 text-[0.98rem] leading-relaxed text-ink/70">
+                  Birthdays, rehearsal dinners, team parties and wakes. Call and
+                  we will walk you through the options.
+                </p>
+                <a href={site.phoneHref} className="mt-6 inline-flex text-sm font-semibold text-red hover:underline">
+                  Call {site.phone}
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Merch strip */}
-      <section className="border-y border-ink/10 bg-cream-dim">
-        <div className="mx-auto flex max-w-6xl flex-col gap-6 px-5 py-10 sm:px-8 md:flex-row md:items-center md:justify-between">
-          <Photo
-            name="merch"
-            ratio="square"
-            sizes="7rem"
-            className="w-28 shrink-0"
-          />
-          <div className="md:flex-1">
-            <h2 className="font-display text-2xl font-semibold tracking-tight">
-              There are mugs
+      {/* About */}
+      <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+          <Photo name="room" ratio="feature" sizes="(min-width: 1024px) 50vw, 100vw" />
+          <div>
+            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-red">
+              Since 1935
+            </p>
+            <h2 className="mt-3 font-display text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
+              A far reaching reputation for terrific food and superb service
             </h2>
-            <p className="mt-1.5 text-[0.98rem] text-ink/65">{merch.note}</p>
+            <p className="mt-5 text-lg leading-relaxed text-ink/70">
+              Four generations of the Cascarelli family have run this room.
+              Frank came to Homer in 1935, Bob added pizza in 1965, and Ryan has
+              been looking after the place since 1994. People come in from all
+              over Michigan and northern Indiana.
+            </p>
+            <Link href="/about" className="btn-secondary mt-8 !px-7 !py-3.5">
+              Our story
+              <span aria-hidden>&rarr;</span>
+            </Link>
           </div>
-          <a
-            href={site.phoneHref}
-            className="shrink-0 rounded-full border border-ink/20 px-6 py-3 text-center text-sm font-semibold transition-colors hover:border-brick hover:text-brick"
-          >
+        </div>
+      </section>
+
+      {/* Merch */}
+      <section className="border-y border-ink/10 bg-cream-dim">
+        <div className="mx-auto flex max-w-6xl flex-col gap-5 px-5 py-8 sm:px-8 md:flex-row md:items-center md:justify-between">
+          <div>
+            <h2 className="font-display text-2xl font-semibold tracking-tight">
+              {merch.heading}
+            </h2>
+            <p className="mt-1 text-[0.95rem] text-ink/65">{merch.blurb}</p>
+          </div>
+          <a href={site.phoneHref} className="btn-secondary shrink-0 !px-6 !py-3 text-sm">
             Ask at the counter
           </a>
         </div>
       </section>
 
       {/* Visit */}
-      <section className="grain relative overflow-hidden">
-        <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
-          <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
-            <div>
-              <p className="text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-brick">
-                Come in
-              </p>
-              <h2 className="mt-3 font-display text-4xl font-semibold tracking-tight sm:text-5xl">
-                One block of Main Street
-              </h2>
+      <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+          <div>
+            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-red">
+              Visit
+            </p>
+            <h2 className="mt-3 font-display text-4xl font-semibold tracking-tight sm:text-5xl">
+              Downtown Homer
+            </h2>
 
-              <dl className="mt-10 space-y-6">
-                <div>
-                  <dt className="text-xs font-semibold uppercase tracking-[0.18em] text-ink/50">
-                    Address
-                  </dt>
-                  <dd className="mt-1.5">
-                    <a
-                      href={mapsUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="font-display text-2xl font-semibold tracking-tight underline decoration-brick/40 underline-offset-4 hover:text-brick"
-                    >
-                      {fullAddress}
-                    </a>
-                  </dd>
-                </div>
-                <div>
-                  <dt className="text-xs font-semibold uppercase tracking-[0.18em] text-ink/50">
-                    Phone
-                  </dt>
-                  <dd className="mt-1.5">
-                    <a
-                      href={site.phoneHref}
-                      className="font-display text-2xl font-semibold tracking-tight hover:text-brick"
-                    >
-                      {site.phone}
-                    </a>
-                  </dd>
-                </div>
-                <div>
-                  <dt className="text-xs font-semibold uppercase tracking-[0.18em] text-ink/50">
-                    Hours
-                  </dt>
-                  <dd className="mt-2 space-y-1.5">
-                    {hoursSummary.map((row) => (
-                      <p
-                        key={row.label}
-                        className="flex justify-between gap-6 text-[0.98rem] sm:max-w-sm"
-                      >
-                        <span className="text-ink/65">{row.label}</span>
-                        <span className="font-semibold">{row.value}</span>
-                      </p>
-                    ))}
-                  </dd>
-                </div>
-              </dl>
-
-              <div className="mt-8">
-                <OpenNow />
+            <dl className="mt-9 space-y-6">
+              <div>
+                <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-ink/50">
+                  Address
+                </dt>
+                <dd className="mt-1.5">
+                  <a
+                    href={mapsUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-display text-2xl font-semibold tracking-tight underline decoration-red/40 underline-offset-4 hover:text-red"
+                  >
+                    {fullAddress}
+                  </a>
+                </dd>
               </div>
-            </div>
+              <div>
+                <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-ink/50">
+                  Phone
+                </dt>
+                <dd className="mt-1.5">
+                  <a
+                    href={site.phoneHref}
+                    className="font-display text-2xl font-semibold tracking-tight hover:text-red"
+                  >
+                    {site.phone}
+                  </a>
+                </dd>
+              </div>
+              <div>
+                <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-ink/50">
+                  Hours
+                </dt>
+                <dd className="mt-2 space-y-1.5">
+                  {hoursSummary.map((row) => (
+                    <p
+                      key={row.label}
+                      className="flex justify-between gap-6 text-[0.95rem] sm:max-w-sm"
+                    >
+                      <span className="text-ink/65">{row.label}</span>
+                      <span className="font-semibold">{row.value}</span>
+                    </p>
+                  ))}
+                </dd>
+              </div>
+            </dl>
 
-            <MapCard className="min-h-[24rem] lg:min-h-[30rem]" />
+            <div className="mt-7">
+              <OpenNow />
+            </div>
           </div>
+
+          <MapCard className="min-h-[24rem] lg:min-h-[28rem]" />
         </div>
       </section>
     </>

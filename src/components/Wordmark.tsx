@@ -8,7 +8,7 @@ export default function Wordmark({
   size?: "md" | "lg";
 }) {
   const color = tone === "light" ? "text-cream" : "text-ink";
-  const sub = tone === "light" ? "text-brass" : "text-brick";
+  const sub = tone === "light" ? "text-gold" : "text-red";
 
   return (
     <Link href="/" className={`group block leading-none ${color}`}>

@@ -3,7 +3,8 @@ import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import { site, fullAddress, hoursSummary } from "@/data/site";
+import OrderBar from "@/components/OrderBar";
+import { site } from "@/data/site";
 
 const display = Fraunces({
   subsets: ["latin"],
@@ -12,43 +13,37 @@ const display = Fraunces({
   display: "swap",
 });
 
-const body = Inter({
-  subsets: ["latin"],
-  variable: "--font-body",
-  display: "swap",
-});
+const body = Inter({ subsets: ["latin"], variable: "--font-body", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} | Pizza, 20 Taps and Roasted Nuts in Homer, Michigan`,
+    default: `${site.name} | Pizza, Drinks and Specialty Nuts in Homer, MI`,
     template: `%s | ${site.name}`,
   },
-  description:
-    "Family run since 1935. Home of the MacCarelli, twenty taps pouring mostly Michigan, and nuts roasted here since 1897. 103 E Main St, Homer, MI. (517) 568-3502.",
+  description: site.blurb,
   keywords: [
     "Cascarelli's",
-    "Cascarelli's Homer",
-    "Homer Michigan pizza",
-    "MacCarelli pizza",
-    "Michigan craft beer Homer MI",
-    "roasted peanuts Michigan",
+    "Cascarelli's of Homer",
+    "pizza Homer MI",
+    "pizza near me Homer Michigan",
+    "Michigan craft beer on tap",
+    "specialty nuts Michigan",
     "Calhoun County restaurant",
+    "banquet room Homer MI",
   ],
   openGraph: {
     type: "website",
     locale: "en_US",
     url: site.url,
     siteName: site.name,
-    title: "Cascarelli's of Homer | Home of our famous pizza",
-    description:
-      "Ninety years on the same corner. Twenty taps, nuts roasted out back since 1897, and one pizza with Thousand Island on it.",
+    title: `${site.name} | A one of a kind pizza restaurant`,
+    description: site.blurb,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cascarelli's of Homer",
-    description:
-      "Ninety years on Main Street. Twenty taps, roasted nuts, and a pizza with Thousand Island on it.",
+    title: site.name,
+    description: site.blurb,
   },
   alternates: { canonical: "/" },
   robots: { index: true, follow: true },
@@ -58,13 +53,13 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Restaurant",
   name: site.name,
-  description:
-    "Family run tavern and pizzeria in downtown Homer, Michigan, serving since 1935.",
+  description: site.blurb,
   url: site.url,
   telephone: site.phone,
   servesCuisine: ["Pizza", "Italian American", "American"],
   priceRange: "$$",
   foundingDate: "1935",
+  acceptsReservations: "True",
   address: {
     "@type": "PostalAddress",
     streetAddress: site.address.street,
@@ -79,6 +74,7 @@ const jsonLd = {
     reviewCount: site.reviews.count,
   },
   sameAs: [site.social.facebook, site.social.instagram, site.social.untappd],
+  hasMenu: `${site.url}/menu`,
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
@@ -92,12 +88,7 @@ const jsonLd = {
       opens: "11:00",
       closes: "22:00",
     },
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: "Sunday",
-      opens: "12:00",
-      closes: "21:00",
-    },
+    { "@type": "OpeningHoursSpecification", dayOfWeek: "Sunday", opens: "12:00", closes: "21:00" },
   ],
 };
 
@@ -121,9 +112,7 @@ export default function RootLayout({
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />
-        <span className="sr-only">
-          {fullAddress}. {hoursSummary.map((h) => `${h.label}: ${h.value}.`).join(" ")}
-        </span>
+        <OrderBar />
       </body>
     </html>
   );

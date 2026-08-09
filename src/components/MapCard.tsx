@@ -29,7 +29,7 @@ export default function MapCard({ className = "" }: { className?: string }) {
 
   return (
     <div
-      className={`grain grain-dark relative isolate overflow-hidden rounded-2xl bg-olive text-cream shadow-sm ${className}`}
+      className={`grain grain-dark relative isolate overflow-hidden rounded-2xl bg-basil text-cream shadow-sm ${className}`}
     >
       {/* Abstract street grid, drawn rather than loaded. */}
       <svg
@@ -48,13 +48,13 @@ export default function MapCard({ className = "" }: { className?: string }) {
           stroke="currentColor"
           strokeWidth="9"
           fill="none"
-          className="text-brass/25"
+          className="text-gold/25"
         />
       </svg>
 
       <div className="relative grid h-full min-h-[24rem] place-items-center p-8 text-center">
         <div>
-          <p className="text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-brass">
+          <p className="text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-gold">
             Corner of Main
           </p>
           <p className="mt-4 font-display text-4xl font-semibold tracking-tight">
@@ -68,7 +68,7 @@ export default function MapCard({ className = "" }: { className?: string }) {
             <button
               type="button"
               onClick={() => setLoaded(true)}
-              className="rounded-full bg-cream px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-brass"
+              className="rounded-full bg-cream px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-gold"
             >
               Show the map
             </button>
@@ -76,7 +76,7 @@ export default function MapCard({ className = "" }: { className?: string }) {
               href={mapsUrl}
               target="_blank"
               rel="noreferrer"
-              className="rounded-full border border-cream/25 px-6 py-3 text-sm font-semibold text-cream transition-colors hover:border-brass hover:text-brass"
+              className="rounded-full border border-cream/25 px-6 py-3 text-sm font-semibold text-cream transition-colors hover:border-gold hover:text-gold"
             >
               Get directions
             </a>

@@ -60,7 +60,7 @@ export default function OpenNow({ tone = "dark" }: { tone?: "dark" | "light" }) 
     return <span className="inline-block h-5 w-40" aria-hidden />;
   }
 
-  const dot = state.open ? "bg-emerald-500" : "bg-brick";
+  const dot = state.open ? "bg-emerald-500" : "bg-red";
   const text = tone === "light" ? "text-cream/80" : "text-ink/70";
 
   return (
