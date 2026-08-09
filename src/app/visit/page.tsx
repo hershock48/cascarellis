@@ -17,7 +17,7 @@ export default function VisitPage() {
       <PageHero
         kicker="Downtown Homer"
         title="103 E Main Street"
-        intro="Street parking out front and more around the corner. Carry out is always available, and the bar seats fill up first."
+        intro="Park on the street. If the front is full, go around the corner. Bar seats go first, carry out is always an option, and Friday is Friday."
       />
 
       <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">

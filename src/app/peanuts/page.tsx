@@ -12,15 +12,15 @@ export const metadata: Metadata = {
 const varieties = [
   {
     name: "Roasted Peanuts",
-    body: "The original. Same roast the family has been running since the pushcart days.",
+    body: "The original, and still what most people walk out with.",
   },
   {
     name: "Cashews",
-    body: "Small batches, roasted alongside the peanuts and salted while warm.",
+    body: "Small batches, salted while they are still warm. These are the ones people get weird about.",
   },
   {
-    name: "Macadamia Nuts",
-    body: "A later addition. They tend to sell out before the weekend is over.",
+    name: "Macadamias",
+    body: "The expensive ones. Usually gone by Saturday night.",
   },
 ];
 
@@ -30,31 +30,32 @@ export default function PeanutsPage() {
       <PageHero
         kicker="Since 1897"
         title="The nuts came first."
-        intro="Thirty eight years before there was a restaurant in Homer, there was a Cascarelli roasting peanuts. Four generations later the roaster is still running."
+        intro="Thirty eight years before this family owned a building in Homer, there was a Cascarelli roasting peanuts on a cart. The roaster never stopped."
       />
 
       <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
         <div className="grid gap-14 lg:grid-cols-[1.1fr_1fr] lg:gap-24">
           <div>
             <h2 className="font-display text-4xl font-semibold leading-tight tracking-tight">
-              A pushcart, a flood, and a hundred and twenty nine years
+              A pushcart, a flood, and a roaster that never got turned off
             </h2>
             <div className="mt-6 space-y-5 text-[1.05rem] leading-relaxed text-ink/70">
               <p>
                 Robert Cascarelli started with a fruit pushcart in 1897. By 1909
-                the family had a fixed stand and a peanut roaster. The great
-                flood of 1908 took an earlier location and the original roaster
-                cart with it, which the family still talks about.
+                there was a fixed stand and a peanut roaster on it. In between,
+                the flood of 1908 took an earlier location and the original
+                roaster cart with it. The family still brings that up.
               </p>
               <p>
-                The roasting never stopped. It moved with the family to Homer in
-                1935, and it has run in the same building ever since. Bags go
-                out the door with people who came in for pizza and left with
+                The roasting moved to Homer with Frank in 1935 and has run in
+                this building ever since. Most of what goes out the door leaves
+                with somebody who came in for a pizza and is now also carrying
                 three pounds of cashews.
               </p>
               <p>
-                Nuts are sold at the counter and shipped around the region. Call
-                the restaurant for larger orders and holiday tins.
+                Sold at the counter, no ceremony. Call about holiday tins before
+                December rather than during, when everyone else has the same
+                idea.
               </p>
             </div>
             <a

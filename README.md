@@ -50,18 +50,39 @@ excellent, somewhere people will read it.
 - Skip link, focus rings, labelled landmarks, `prefers-reduced-motion` support
 - Click to call on every page, which is how most of their orders arrive
 
+## Where the voice came from
+
+The copy is not invented. It is built from things Cascarelli's and their
+customers actually say:
+
+- **"Home of our famous pizza.. and so much more!"** is their own Facebook
+  tagline, lightly tightened for the headline.
+- **The MacCarelli** is described by reviewers as a Big Mac pizza: Thousand
+  Island instead of red sauce, seasoned ground beef, onion, dill pickle relish,
+  mozzarella and cheddar, with shredded lettuce and a drizzle added after the
+  oven. Multiple people mention driving 25 or more miles for it.
+- **The wait** comes up constantly, 45 to 60 minutes on a Friday. Owning it
+  reads better than hiding it, and it sets expectations before somebody shows
+  up hungry at 7pm.
+- **"Old time saloon vibe," "stepped back in time," and the chandeliers** are
+  all lifted from how customers describe the room.
+- **Ryan** is the third generation owner and reviewers repeatedly mention him
+  telling them the history of the name.
+- Named items pulled from reviews: Porky's Meat Lovers Dream, Baby's Chicken
+  Pie, Annie's Bread, the Flat Iron Salad, the Autumn Harvest Salad, Ryan's
+  Nuts, and a Bloody Mary with a following.
+
 ## What still needs the owner
 
-Everything on the site was pulled from Cascarelli's own pages, their social
-accounts, or customer reviews. Three things need them:
-
-1. **Prices.** Not published anywhere public. Add a `price` field to any item
+1. **Spellings.** MacCarelli, Baby's Chicken Pie and Annie's Bread came from
+   customer reviews, not from Cascarelli's. Confirm before launch.
+2. **Prices.** Not published anywhere public. Add a `price` field to any item
    in `src/data/menu.ts` and it renders automatically.
-2. **The rest of the menu.** Only items with public evidence are listed. Adding
-   more is a matter of pushing objects into the arrays in the same file.
-3. **Photos.** The design is typographic on purpose and holds up without
-   images, but real photos of the room, the oven and the peanut roaster would
-   lift it further.
+3. **The rest of the menu.** Only items with public evidence are listed.
+4. **Photos.** The design is typographic on purpose and holds without images,
+   but the room, the oven and the peanut roaster deserve to be seen.
+5. **Merch.** They already sell mugs, tumblers, hats and shirts at the counter.
+   That is a small store waiting to happen.
 
 ## Editing content
 

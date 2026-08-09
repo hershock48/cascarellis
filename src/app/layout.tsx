@@ -21,17 +21,18 @@ const body = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} | Pizza, Taps and Roasted Nuts in Homer, Michigan`,
+    default: `${site.name} | Pizza, 20 Taps and Roasted Nuts in Homer, Michigan`,
     template: `%s | ${site.name}`,
   },
   description:
-    "Family run since 1935. Hand made pizza, twenty taps pouring Michigan craft, and peanuts roasted on site since 1897. 103 E Main St, Homer, MI.",
+    "Family run since 1935. Home of the MacCarelli, twenty taps pouring mostly Michigan, and nuts roasted here since 1897. 103 E Main St, Homer, MI. (517) 568-3502.",
   keywords: [
     "Cascarelli's",
+    "Cascarelli's Homer",
     "Homer Michigan pizza",
-    "pizza near me",
-    "Michigan craft beer",
-    "roasted peanuts",
+    "MacCarelli pizza",
+    "Michigan craft beer Homer MI",
+    "roasted peanuts Michigan",
     "Calhoun County restaurant",
   ],
   openGraph: {
@@ -39,15 +40,15 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: site.url,
     siteName: site.name,
-    title: `${site.name} | Pizza, Taps and Roasted Nuts`,
+    title: "Cascarelli's of Homer | Home of our famous pizza",
     description:
-      "Four generations in downtown Homer. Pizza since 1965, peanuts since 1897, twenty taps pouring mostly Michigan.",
+      "Ninety years on the same corner. Twenty taps, nuts roasted out back since 1897, and one pizza with Thousand Island on it.",
   },
   twitter: {
     card: "summary_large_image",
-    title: site.name,
+    title: "Cascarelli's of Homer",
     description:
-      "Four generations in downtown Homer. Pizza, twenty taps and roasted nuts.",
+      "Ninety years on Main Street. Twenty taps, roasted nuts, and a pizza with Thousand Island on it.",
   },
   alternates: { canonical: "/" },
   robots: { index: true, follow: true },

@@ -1,7 +1,7 @@
 export const site = {
   name: "Cascarelli's of Homer",
   shortName: "Cascarelli's",
-  tagline: "Pizza, taps and roasted nuts in downtown Homer since 1935.",
+  tagline: "Home of our famous pizza. And a lot of other stuff.",
   established: 1935,
   url: "https://cascarellis.com",
   phone: "(517) 568-3502",

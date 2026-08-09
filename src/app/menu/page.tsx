@@ -15,8 +15,8 @@ export default function MenuPage() {
     <>
       <PageHero
         kicker="Kitchen"
-        title="The menu"
-        intro="Made to order, so give it a few minutes on a Friday night. Anything here can go out the door as a carry out."
+        title="Everything is made when you order it."
+        intro="Which is the good news and the bad news. Anything here goes out the door as a carry out, and that is the faster way to do it."
       />
 
       {/* Jump links */}
@@ -102,11 +102,12 @@ export default function MenuPage() {
 
         <div className="mt-20 rounded-2xl border border-ink/12 bg-cream-dim p-8 text-center sm:p-10">
           <h2 className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">
-            Ready to order?
+            Prices are on the board inside
           </h2>
           <p className="mx-auto mt-3 max-w-md text-[0.98rem] leading-relaxed text-ink/65">
-            Carry out and dine in. Call ahead on Friday and Saturday, those
-            nights get busy.
+            Call and we will tell you, and take the order while we are at it.
+            Friday and Saturday, calling ahead is the difference between eating
+            at seven and eating at eight.
           </p>
           <a
             href={site.phoneHref}

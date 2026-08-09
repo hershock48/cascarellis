@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
-import { drafts, wine } from "@/data/menu";
+import { drafts, wine, cocktails } from "@/data/menu";
 import { site } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Beer & Wine",
+  title: "Beer, Wine and the Bloody Mary",
   description:
-    "Twenty taps at Cascarelli's in Homer, Michigan. Nineteen pour Michigan and regional craft. Wine list changes several times a year.",
+    "Twenty taps at Cascarelli's in Homer, Michigan. Nineteen pour Michigan and regional craft, one pours Pabst. Wine rotates, and the Bloody Mary has a following.",
   alternates: { canonical: "/beer-and-wine" },
 };
 
 const facts = [
   { value: String(drafts.count), label: "Taps on the wall" },
   { value: String(drafts.michiganCount), label: "Pouring Michigan and regional" },
-  { value: "1", label: "National brand, and it is Pabst" },
+  { value: "1", label: "Pabst, and it is staying" },
 ];
 
 export default function BeerAndWinePage() {
@@ -21,8 +21,8 @@ export default function BeerAndWinePage() {
     <>
       <PageHero
         kicker="The bar"
-        title="Twenty taps, nineteen of them Michigan."
-        intro={drafts.note}
+        title="Nineteen are Michigan. One is Pabst."
+        intro="This is a tavern that started serving beer in 1935 and got around to pizza thirty years later. The bar is not an afterthought."
       />
 
       <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
@@ -48,10 +48,13 @@ export default function BeerAndWinePage() {
               What is pouring
             </h2>
             <p className="mt-5 text-[1.05rem] leading-relaxed text-ink/70">
-              The lineup rotates constantly, so there is no point printing it.
-              Ask whoever is behind the bar and they will walk you down the wall.
-              If you want to see what has been on lately, the taplist gets
-              logged on Untappd.
+              The lineup turns over constantly, which is why there is no list on
+              this page and no chalkboard photo from eight months ago. Ask
+              whoever is behind the bar. That is the whole system and it works.
+            </p>
+            <p className="mt-4 text-[1.05rem] leading-relaxed text-ink/70">
+              If you want to see what has been on lately, it gets logged on
+              Untappd.
             </p>
             <a
               href={site.social.untappd}
@@ -59,28 +62,49 @@ export default function BeerAndWinePage() {
               rel="noreferrer"
               className="mt-7 inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 font-semibold text-cream transition-colors hover:bg-ink-soft"
             >
-              Check the taplist on Untappd
+              Recent taplist on Untappd
               <span aria-hidden>&rarr;</span>
             </a>
           </div>
 
-          <div>
-            <h2 className="font-display text-4xl font-semibold tracking-tight">
-              Wine
-            </h2>
-            <p className="mt-5 text-[1.05rem] leading-relaxed text-ink/70">
-              {wine.note}
-            </p>
-            <ul className="mt-7 flex flex-wrap gap-3">
-              {wine.categories.map((c) => (
-                <li
-                  key={c}
-                  className="rounded-full border border-ink/20 px-5 py-2.5 text-sm font-semibold"
-                >
-                  {c}
-                </li>
-              ))}
-            </ul>
+          <div className="space-y-12">
+            <div>
+              <h2 className="font-display text-4xl font-semibold tracking-tight">
+                The Bloody Mary
+              </h2>
+              <p className="mt-5 text-[1.05rem] leading-relaxed text-ink/70">
+                {cocktails.note}
+              </p>
+              <ul className="mt-6 flex flex-wrap gap-3">
+                {cocktails.named.map((c) => (
+                  <li
+                    key={c}
+                    className="rounded-full border border-brick/30 px-5 py-2.5 text-sm font-semibold text-brick"
+                  >
+                    {c}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h2 className="font-display text-4xl font-semibold tracking-tight">
+                Wine
+              </h2>
+              <p className="mt-5 text-[1.05rem] leading-relaxed text-ink/70">
+                {wine.note}
+              </p>
+              <ul className="mt-6 flex flex-wrap gap-3">
+                {wine.categories.map((c) => (
+                  <li
+                    key={c}
+                    className="rounded-full border border-ink/20 px-5 py-2.5 text-sm font-semibold"
+                  >
+                    {c}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>

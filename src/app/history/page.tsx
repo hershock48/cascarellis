@@ -21,13 +21,13 @@ const chapters = [
   },
   {
     year: "1930s to 1950s",
-    title: "A tavern town",
-    body: "Depression era days brought in a dollar sixty to two dollars. By the fifties the draft beer business was moving eight to fourteen barrels a week. Frank hired Mildred Bloominstock as a bartender, which raised eyebrows at the time and says something about how he ran the place.",
+    title: "A dollar sixty a day",
+    body: "That is what a Depression era day brought in. By the fifties the bar was going through eight to fourteen barrels of draft a week. Frank hired Mildred Bloominstock to tend bar, which people had opinions about at the time, and which tells you most of what you need to know about Frank.",
   },
   {
     year: "1964 and 1965",
-    title: "Pizza arrives",
-    body: "Bob Cascarelli joins full time in 1964 and a remodel that year makes room for an oven. In February 1965 pizza goes on the menu. It becomes the thing people drive in for.",
+    title: "Somebody puts in an oven",
+    body: "Bob Cascarelli comes on full time in 1964 and the remodel that year makes room for a pizza oven. February 1965, pizza goes on the menu of a thirty year old tavern. That is the decision the next sixty years hang on.",
   },
   {
     year: "1971",
@@ -36,8 +36,8 @@ const chapters = [
   },
   {
     year: "1994",
-    title: "Third generation",
-    body: "Ryan Cascarelli becomes manager and oversees renovations and modernization while keeping the room recognizably itself.",
+    title: "Ryan takes it on",
+    body: "Third generation on the floor. Renovations happen, things get modernized, and the room somehow still looks like the room. He is usually around, and he is happy to explain where the name came from.",
   },
 ];
 
@@ -46,8 +46,8 @@ export default function HistoryPage() {
     <>
       <PageHero
         kicker="Est. 1935"
-        title="Same family. Same building. Ninety years."
-        intro="Most of what is on these walls has been there longer than most of the people reading this. Here is how it got that way."
+        title="Same family. Same building. Nobody has left."
+        intro="Most of what is hanging on these walls has been there longer than most of the people reading this. Ryan will tell you the whole thing if you ask, but here is the short version."
       />
 
       <section className="mx-auto max-w-3xl px-5 py-16 sm:px-8 sm:py-24">
@@ -73,8 +73,9 @@ export default function HistoryPage() {
 
         <div className="mt-16 border-t border-ink/15 pt-10">
           <p className="font-display text-2xl font-semibold leading-snug tracking-tight text-ink/85 sm:text-3xl">
-            The peanut roasting has run continuously since 1897, through four
-            generations. It is the oldest thing the family does.
+            The peanut roasting has run since 1897, through four generations and
+            one flood. It is the oldest thing this family does, and it will
+            probably outlast the pizza.
           </p>
         </div>
       </section>

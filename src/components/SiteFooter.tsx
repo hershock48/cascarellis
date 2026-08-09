@@ -22,8 +22,8 @@ export default function SiteFooter() {
               Homer, Mich. &middot; Est. 1935
             </p>
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-cream/70">
-              Four generations of one family on one corner of Main Street.
-              Pizza, twenty taps and nuts roasted out back.
+              Home of our famous pizza. And a lot of other stuff. Ninety years
+              on the same corner of Main Street.
             </p>
             <div className="mt-6 flex gap-3">
               <a
