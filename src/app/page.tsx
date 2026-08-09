@@ -1,6 +1,7 @@
 import Link from "next/link";
 import OpenNow from "@/components/OpenNow";
 import MapCard from "@/components/MapCard";
+import Photo from "@/components/Photo";
 import { site, fullAddress, hoursSummary, mapsUrl } from "@/data/site";
 import { hero, drafts, merch } from "@/data/menu";
 
@@ -111,9 +112,17 @@ export default function Home() {
               </a>
             </div>
 
-            {/* Ticket */}
-            <div className="relative mx-auto w-full max-w-sm rotate-[-2deg]">
-              <div className="rounded-lg bg-cream p-8 text-ink shadow-2xl shadow-ink/30">
+            {/* Photo with the ticket layered over it */}
+            <div className="relative mx-auto w-full max-w-md">
+              <Photo
+                name="macCarelli"
+                ratio="tall"
+                tone="dark"
+                sizes="(min-width: 1024px) 28rem, 90vw"
+                className="border-cream/20"
+              />
+              <div className="relative -mt-16 ml-auto w-[17rem] translate-x-2 rotate-[-3deg] sm:-mt-20 sm:w-[18rem] sm:translate-x-6">
+                <div className="rounded-lg bg-cream p-7 text-ink shadow-2xl shadow-ink/40">
                 <p className="text-center text-[0.6rem] font-semibold uppercase tracking-[0.3em] text-brick">
                   Cascarelli&rsquo;s &middot; Homer
                 </p>
@@ -140,9 +149,10 @@ export default function Home() {
                   ))}
                 </ul>
                 <div aria-hidden className="my-6 border-t border-dashed border-ink/25" />
-                <p className="text-center text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-ink/45">
-                  No, we will not explain ourselves
-                </p>
+                  <p className="text-center text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-ink/45">
+                    No, we will not explain ourselves
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -180,10 +190,21 @@ export default function Home() {
 
       {/* Taps */}
       <section className="grain grain-dark relative overflow-hidden bg-olive text-cream">
-        <div className="relative mx-auto grid max-w-6xl gap-12 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-[auto_1fr] lg:items-center lg:gap-20">
-          <p className="font-display text-[clamp(6rem,18vw,12rem)] font-semibold leading-[0.8] tracking-tighter text-brass">
-            {drafts.count}
-          </p>
+        <div className="relative mx-auto grid max-w-6xl gap-12 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-20">
+          <div className="relative">
+            <Photo
+              name="taps"
+              ratio="feature"
+              tone="dark"
+              sizes="(min-width: 1024px) 40vw, 100vw"
+            />
+            <p
+              aria-hidden
+              className="pointer-events-none absolute -bottom-8 -left-3 font-display text-[clamp(5.5rem,13vw,10rem)] font-semibold leading-none tracking-tighter text-brass drop-shadow-[0_4px_18px_rgba(0,0,0,0.45)] sm:-bottom-10 sm:-left-6"
+            >
+              {drafts.count}
+            </p>
+          </div>
           <div>
             <p className="text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-brass">
               On tap
@@ -218,6 +239,12 @@ export default function Home() {
               <h2 className="mt-3 font-display text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
                 The nuts are older than the restaurant.
               </h2>
+              <Photo
+                name="nuts"
+                ratio="wide"
+                sizes="(min-width: 1024px) 45vw, 100vw"
+                className="mt-8"
+              />
             </div>
             <div className="space-y-5 text-lg leading-relaxed text-ink/75">
               <p>
@@ -266,9 +293,22 @@ export default function Home() {
               Read the whole story
               <span aria-hidden>&rarr;</span>
             </Link>
+            <Photo
+              name="heroRoom"
+              ratio="wide"
+              sizes="(min-width: 1024px) 45vw, 100vw"
+              className="mt-10"
+            />
           </div>
 
-          <ol className="relative space-y-8 border-l border-ink/15 pl-8">
+          <div>
+            <Photo
+              name="archive"
+              ratio="tall"
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="mb-10"
+            />
+            <ol className="relative space-y-8 border-l border-ink/15 pl-8">
             {timeline.map((t) => (
               <li key={t.year} className="relative">
                 <span
@@ -283,14 +323,21 @@ export default function Home() {
                 </p>
               </li>
             ))}
-          </ol>
+            </ol>
+          </div>
         </div>
       </section>
 
       {/* Merch strip */}
       <section className="border-y border-ink/10 bg-cream-dim">
         <div className="mx-auto flex max-w-6xl flex-col gap-6 px-5 py-10 sm:px-8 md:flex-row md:items-center md:justify-between">
-          <div>
+          <Photo
+            name="merch"
+            ratio="square"
+            sizes="7rem"
+            className="w-28 shrink-0"
+          />
+          <div className="md:flex-1">
             <h2 className="font-display text-2xl font-semibold tracking-tight">
               There are mugs
             </h2>

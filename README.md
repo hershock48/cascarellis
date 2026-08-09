@@ -84,6 +84,35 @@ customers actually say:
 5. **Merch.** They already sell mugs, tumblers, hats and shirts at the counter.
    That is a small store waiting to happen.
 
+## Adding photos
+
+Six slots are already placed and sized. Until a photo exists, each renders a
+styled placeholder that states what to shoot, so the layout is identical empty
+or full and nothing looks broken while you wait on the owner.
+
+1. Drop the file into `public/photos/`
+2. Open `src/data/photos.ts` and set that entry's `src`, e.g.
+   `src: "/photos/maccarelli.jpg"`
+3. Write real alt text while you are in there
+
+That is the whole process. `next/image` handles resizing, WebP conversion and
+lazy loading.
+
+| Slot | Where it appears | What it wants |
+| --- | --- | --- |
+| `macCarelli` | The red section, with the ticket over it | Overhead, whole pie, natural light |
+| `heroRoom` | The room | The dining room from the door, chandeliers in frame |
+| `taps` | Taps section, the big 20 sits over it | All twenty handles, straight on |
+| `nuts` | Nuts section | The roaster, or bags on the counter |
+| `archive` | Beside the timeline | One of the old framed photos on the wall |
+| `merch` | Merch strip | A few of the handcrafted mugs |
+
+A note on sourcing. Cascarelli's own photos, from their site gallery, Facebook
+and Instagram (`@cascarellisofhomer`), are theirs to license to you. The 65
+photos on Yelp and the shots on Untappd belong to the customers who took them
+and should not be used. Originals from Ryan's phone will beat anything
+currently published on the web.
+
 ## Editing content
 
 Nearly everything lives in two files:

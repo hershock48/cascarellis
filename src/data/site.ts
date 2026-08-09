@@ -14,7 +14,7 @@ export const site = {
   },
   social: {
     facebook: "https://www.facebook.com/cascarellisofhomer/",
-    instagram: "https://www.instagram.com/cascarellisofhomer_/",
+    instagram: "https://www.instagram.com/cascarellisofhomer/",
     untappd: "https://untappd.com/v/cascarelli-s/265542",
   },
   reviews: {
