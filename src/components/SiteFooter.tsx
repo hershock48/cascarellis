@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { site, fullAddress, hoursSummary, mapsUrl } from "@/data/site";
+import GlazedPlate from "@/components/GlazedPlate";
 
 const nav = [
   { href: "/menu", label: "Menu" },
@@ -106,6 +107,9 @@ export default function SiteFooter() {
           </p>
         </div>
       </div>
+
+      {/* Glazed Web signs off below the client's footer, not inside it. */}
+      <GlazedPlate line="Double Dipped by" />
     </footer>
   );
 }
