@@ -1,5 +1,8 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { site } from "@/data/site";
+
+export const metadata: Metadata = { title: "Page Not Found" };
 
 /**
  * The default Next.js 404 is a bare "This page could not be found."

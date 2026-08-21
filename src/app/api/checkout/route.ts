@@ -19,10 +19,11 @@ export async function POST(request: Request) {
   const secret = process.env.STRIPE_SECRET_KEY;
 
   if (!secret) {
+    // The dev detail goes to the server log; the customer gets a way forward.
+    console.error("Checkout unavailable: STRIPE_SECRET_KEY is not set.");
     return NextResponse.json(
       {
-        error:
-          "Checkout is not configured yet. Add STRIPE_SECRET_KEY to the environment.",
+        error: `Online checkout is not available right now. Please call us at ${site.phone} and we will take your order over the phone.`,
       },
       { status: 503 },
     );

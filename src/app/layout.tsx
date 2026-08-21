@@ -116,7 +116,13 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable}`}>
+    // suppressHydrationWarning: the inline script below adds .js to <html>
+    // before hydration, which is deliberate and otherwise trips React 19.
+    <html
+      lang="en"
+      className={`${display.variable} ${body.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         {/*
           Flags that JS is available, before first paint. The reveal animations

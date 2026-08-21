@@ -14,7 +14,8 @@ const occasions = [
 ];
 
 const field =
-  "w-full rounded-card border border-ink/20 bg-cream px-4 py-3 text-[0.98rem] text-ink placeholder:text-ink/40 focus:border-red focus:outline-none";
+  // 16px minimum: anything smaller makes iOS Safari zoom the page on focus.
+  "w-full rounded-card border border-ink/20 bg-cream px-4 py-3 text-base text-ink placeholder:text-ink/40 focus:border-red focus:outline-none";
 const label = "block text-sm font-semibold text-ink";
 
 /**

@@ -36,7 +36,7 @@ export default function Home() {
   return (
     <>
       {/* Hero: food above the fold, ordering above the fold */}
-      <section className="grain grain-dark relative isolate bg-ink text-cream">
+      <section className="grain grain-dark relative isolate overflow-hidden bg-ink text-cream">
         <div
           aria-hidden
           className="pointer-events-none absolute -right-32 -top-40 h-[34rem] w-[34rem] overflow-hidden rounded-full bg-red/30 blur-3xl"
