@@ -1,16 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  /* Warm Italian American palette, kept close to what a 1935 pizzeria reads as. */
-  --color-ink: #1a1512;
-  --color-ink-soft: #2f2621;
-  --color-cream: #fdf8ef;
-  --color-cream-dim: #f4ead8;
-  --color-red: #c1272d;
-  --color-red-bright: #d63a2f;
-  --color-red-deep: #8f1a20;
-  --color-basil: #21402f;
-  --color-gold: #e0a526;
+  /* Moody tavern palette, second pass. The first cut was bright-trattoria
+     (fire-engine #c1272d, sunny #e0a526 gold, near-white cream) and read
+     nothing like the house style: louies runs #0b0705, copperac's whole body
+     is #0d0d0d. Deepened across the board, and --color-red is now EXACTLY
+     the badge's oxblood, so the palette is anchored to their actual mark. */
+  --color-ink: #140e0a;
+  --color-ink-soft: #221812;
+  --color-cream: #f7eedd;
+  --color-cream-dim: #ebdfc6;
+  --color-red: #8f1a20;
+  --color-red-bright: #a82228;
+  --color-red-deep: #6d1216;
+  --color-basil: #1b3326;
+  --color-gold: #c9973c;
 
   --font-display: var(--font-display), Georgia, serif;
   --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;

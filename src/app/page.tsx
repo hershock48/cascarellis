@@ -46,29 +46,29 @@ export default function Home() {
         <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="absolute -right-32 -top-40 h-[34rem] w-[34rem] rounded-full bg-red/30 blur-3xl" />
         </div>
-        <div className="relative mx-auto grid max-w-6xl gap-12 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-16">
-          <div className="hero-in">
-            <p className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-gold">
-              <span>Homer, Michigan</span>
-              <span aria-hidden className="text-cream/25">
-                &middot;
-              </span>
-              <span>Est. 1935</span>
-            </p>
+        <div className="relative mx-auto max-w-3xl px-5 py-12 text-center sm:px-8 sm:py-16">
+          {/* The badge leads, and the pizza clears out of its way. It sits
+              OUTSIDE .hero-in deliberately: hero-rise would fight the pz-logo
+              timeline. Kept small on phones so the Call to Order button still
+              lands above the fold, which is the whole job of this section. */}
+          <PizzaReveal className="!max-w-[11rem] sm:!max-w-[13rem] lg:!max-w-[15rem]" />
 
-            <h1 className="mt-6 font-display text-[clamp(2.15rem,5.4vw,4rem)] font-semibold leading-[1.04] tracking-[-0.015em]">
-              A <span className="whitespace-nowrap">one-of-a-kind</span>
+          {/* No "Homer, Michigan, Est. 1935" kicker here: the badge directly
+              above says all three, and repeating it is a tic. */}
+          <div className="hero-in mt-7">
+            <h1 className="font-display text-[clamp(2.05rem,4.6vw,3.25rem)] font-semibold leading-[1.06] tracking-[-0.015em]">
+              Four generations of
               <br />
-              <span className="italic text-gold">pizza restaurant.</span>
+              <span className="text-gold">family tradition and care.</span>
             </h1>
 
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-cream/80">
+            <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-cream/80">
               Homemade pizzas, sandwiches, burgers, soups and salads, made with
               fresh, locally sourced ingredients. Plus twenty beers on draft and
               our world famous specialty nuts.
             </p>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
               <a href={site.phoneHref} className="btn-primary">
                 Call to Order {site.phone}
               </a>
@@ -80,7 +80,7 @@ export default function Home() {
               </Link>
             </div>
 
-            <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3 border-t border-cream/10 pt-6">
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-x-7 gap-y-3 border-t border-cream/10 pt-6">
               <OpenNow tone="light" />
               <p className="text-sm text-cream/65">
                 <span className="font-semibold text-cream">{site.reviews.rating}</span> stars,{" "}
@@ -88,46 +88,44 @@ export default function Home() {
               </p>
             </div>
           </div>
-
-          {/* The badge behind a pizza that clears out of its way. This took
-              the heroPizza photo slot; when real photography lands, decide
-              which one owns the hero rather than stacking both. */}
-          <PizzaReveal />
         </div>
 
         {/* Signature: cheese oozing off the hero into the strip below. */}
         <CheeseDrip />
       </section>
 
-      {/* Info strip */}
-      <section className="border-b border-ink/10 bg-cream-dim">
+      {/* Info strip. Dark, so the hero, this strip and the marquee read as
+          one continuous dark band — the dark-dominant rhythm of the house
+          style. The CheeseDrip from the hero now drips onto a dark ground,
+          which reads even more like the back bar. */}
+      <section className="border-b border-cream/10 bg-ink-soft text-cream">
         <div className="mx-auto grid max-w-6xl gap-4 px-5 pb-6 pt-14 sm:px-8 md:grid-cols-3 md:gap-8">
           <div>
-            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-red">
+            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-gold">
               Hours
             </p>
-            <p className="mt-1 text-[0.95rem] text-ink/75">
+            <p className="mt-1 text-[0.95rem] text-cream/75">
               Mon to Thu 11am to 9pm &middot; Fri and Sat until 10pm &middot; Sun from 12pm
             </p>
           </div>
           <div>
-            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-red">
+            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-gold">
               Find us
             </p>
             <a
               href={mapsUrl}
               target="_blank"
               rel="noreferrer"
-              className="tap text-[0.95rem] text-ink/75 underline decoration-ink/20 underline-offset-4 hover:text-red"
+              className="tap text-[0.95rem] text-cream/75 underline decoration-cream/25 underline-offset-4 hover:text-gold"
             >
               {fullAddress}
             </a>
           </div>
           <div>
-            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-red">
+            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-gold">
               Live piano
             </p>
-            <p className="mt-1 text-[0.95rem] text-ink/75">
+            <p className="mt-1 text-[0.95rem] text-cream/75">
               {site.music.when}
             </p>
           </div>
@@ -187,13 +185,14 @@ export default function Home() {
         </ul>
       </section>
 
-      {/* Categories */}
-      <section className="grain relative overflow-hidden bg-cream-dim">
+      {/* Categories. Dark ground with parchment cards floating on it, same
+          move as the house style's dark-dominant pages. */}
+      <section className="grain grain-dark relative overflow-hidden bg-ink text-cream">
         <div className="relative mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
           <h2 className="font-display text-4xl font-semibold tracking-tight sm:text-5xl">
             From the kitchen
           </h2>
-          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink/70">
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-cream/70">
             Everything is made in house with fresh, locally sourced ingredients.
           </p>
           <ul className="mt-10 grid gap-6 md:grid-cols-3">
@@ -202,15 +201,15 @@ export default function Home() {
                 as="li"
                 key={c.title}
                 delay={i * 90}
-                className="lift rounded-panel border border-ink/10 bg-cream p-8 hover:border-red/30"
+                className="lift rounded-panel border border-cream/10 bg-ink-soft p-8 hover:border-gold/40"
               >
                 <h3 className="font-display text-2xl font-semibold tracking-tight">
                   {c.title}
                 </h3>
-                <p className="mt-3 text-[0.95rem] leading-relaxed text-ink/70">{c.body}</p>
+                <p className="mt-3 text-[0.95rem] leading-relaxed text-cream/70">{c.body}</p>
                 <Link
                   href={c.href}
-                  className="tap mt-4 gap-2 text-sm font-semibold text-red hover:underline"
+                  className="tap mt-4 gap-2 text-sm font-semibold text-gold hover:underline"
                 >
                   View now
                   <span aria-hidden>&rarr;</span>

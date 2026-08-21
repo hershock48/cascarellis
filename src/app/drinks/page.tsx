@@ -205,7 +205,7 @@ export default function DrinksPage() {
 
           {wineList.map((section) => (
             <Reveal key={section.id} className="mt-10">
-              <h3 className="font-display text-2xl font-semibold italic tracking-tight text-red">
+              <h3 className="font-display text-2xl font-semibold tracking-tight text-red">
                 {section.title}
               </h3>
               <ul className="mt-5 grid gap-x-14 gap-y-6 md:grid-cols-2">
@@ -232,7 +232,7 @@ export default function DrinksPage() {
                       </span>
                       <WineBadges organic={wine.organic} vegan={wine.vegan} />
                     </div>
-                    <p className="text-[0.93rem] italic leading-relaxed text-ink/65">
+                    <p className="text-[0.93rem] leading-relaxed text-ink/65">
                       {wine.notes}
                     </p>
                   </li>

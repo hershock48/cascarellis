@@ -20,9 +20,12 @@ const display = Fraunces({
   subsets: ["latin"],
   variable: "--font-display",
   weight: "variable",
-  style: ["normal", "italic"],
-  /* opsz only: SOFT and WONK were shipping in the woff2 with no rule ever
-     setting them. Dropping them cuts the font payload with zero visual change. */
+  /* Roman only. The italic cut is deliberately NOT loaded: Fraunces italic
+     has a wobbly, hand-lettered slant that Kevin rejected on sight, and not
+     loading it means no future edit can reintroduce it by typing `italic`.
+     Dropping it also halves this face's payload.
+     opsz only for the same reason SOFT and WONK are gone: nothing sets them. */
+  style: ["normal"],
   axes: ["opsz"],
   display: "swap",
 });
