@@ -83,7 +83,7 @@ export default function SiteHeader() {
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-3.5 sm:px-8">
         <Link href="/" className="group flex items-center gap-3 leading-none">
           <Image
-            src="/logo.png"
+            src="/logo-color.png"
             alt=""
             width={48}
             height={48}

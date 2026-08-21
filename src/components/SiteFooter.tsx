@@ -19,13 +19,12 @@ export default function SiteFooter() {
       <div className="relative mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
         <div className="grid gap-12 md:grid-cols-[1.3fr_1fr_1fr]">
           <div>
-            {/* The badge is near-ink, so a cream ring keeps it legible here. */}
             <Image
-              src="/logo.png"
+              src="/logo-color.png"
               alt=""
               width={72}
               height={72}
-              className="h-[72px] w-[72px] rounded-full ring-1 ring-cream/25"
+              className="h-[72px] w-[72px] rounded-full ring-1 ring-gold/40"
             />
             <p className="mt-4 font-display text-3xl font-semibold tracking-tight">
               Cascarelli&rsquo;s

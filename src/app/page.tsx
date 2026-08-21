@@ -5,6 +5,7 @@ import Photo from "@/components/Photo";
 import Reveal from "@/components/Reveal";
 import Marquee from "@/components/Marquee";
 import CheeseDrip from "@/components/CheeseDrip";
+import PizzaReveal from "@/components/PizzaReveal";
 import { site, fullAddress, hoursSummary, mapsUrl } from "@/data/site";
 import { bestSellers, nuts, drinks, merch } from "@/data/menu";
 
@@ -84,13 +85,10 @@ export default function Home() {
             </div>
           </div>
 
-          <Photo
-            name="heroPizza"
-            ratio="feature"
-            tone="dark"
-            priority
-            sizes="(min-width: 1024px) 45vw, 100vw"
-          />
+          {/* The badge behind a pizza that clears out of its way. This took
+              the heroPizza photo slot; when real photography lands, decide
+              which one owns the hero rather than stacking both. */}
+          <PizzaReveal />
         </div>
 
         {/* Signature: cheese oozing off the hero into the strip below. */}
