@@ -103,7 +103,7 @@ export default function Photo({
           </svg>
           <p
             className={`mt-3 max-w-[22ch] text-[0.8rem] leading-relaxed ${
-              dark ? "text-cream/55" : "text-ink/50"
+              dark ? "text-cream/55" : "text-ink/65"
             }`}
           >
             {photo.brief}

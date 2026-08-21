@@ -46,7 +46,7 @@ export default function ContactPage() {
 
             <dl className="mt-9 space-y-7">
               <div>
-                <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-ink/50">
+                <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-ink/65">
                   Phone
                 </dt>
                 <dd className="mt-1.5">
@@ -59,7 +59,7 @@ export default function ContactPage() {
                 </dd>
               </div>
               <div>
-                <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-ink/50">
+                <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-ink/65">
                   Address
                 </dt>
                 <dd className="mt-1.5">
@@ -74,7 +74,7 @@ export default function ContactPage() {
                 </dd>
               </div>
               <div>
-                <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-ink/50">
+                <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-ink/65">
                   Reservations
                 </dt>
                 <dd className="mt-1.5 text-[0.98rem] leading-relaxed text-ink/70">
@@ -89,7 +89,7 @@ export default function ContactPage() {
                 </dd>
               </div>
               <div>
-                <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-ink/50">
+                <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-ink/65">
                   Follow along
                 </dt>
                 <dd className="mt-3 flex flex-wrap gap-3">
@@ -113,8 +113,11 @@ export default function ContactPage() {
             </dl>
           </Reveal>
 
-          <Reveal delay={150}>
-            <MapCard className="min-h-[26rem] lg:min-h-[34rem]" />
+          {/* h-full down the chain: the Reveal div replaced MapCard as the
+              grid child, and without it the card stopped stretching to the
+              row height it had before the motion pass. */}
+          <Reveal className="h-full lg:[transition-delay:150ms]">
+            <MapCard className="h-full min-h-[26rem] lg:min-h-[34rem]" />
           </Reveal>
         </div>
       </section>

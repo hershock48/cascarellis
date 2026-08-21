@@ -101,7 +101,7 @@ export default function MenuPage() {
                       {item.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="rounded-full border border-ink/15 px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-wider text-ink/60"
+                          className="rounded-full border border-ink/15 px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-wider text-ink/65"
                         >
                           {tag}
                         </span>
@@ -120,8 +120,8 @@ export default function MenuPage() {
             Ready to order?
           </h2>
           <p className="mx-auto mt-3 max-w-md text-[0.98rem] leading-relaxed text-ink/65">
-            Dine in or carry out. Groups of {site.reservations.min} or more can
-            reserve the banquet room or the patio.
+            Dine in or carry out. Groups of {site.reservations.min} to{" "}
+            {site.reservations.max} can reserve the banquet room or the patio.
           </p>
           <a href={site.phoneHref} className="btn-primary mt-6">
             Call {site.phone}

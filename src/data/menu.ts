@@ -193,12 +193,13 @@ export const nuts = {
   ],
 };
 
-/** The full bar menus live in bar.ts; this is the homepage summary. */
+/** The full bar menus live in bar.ts; this is the homepage summary.
+    "Most of them" rather than a number: the tap list rotates, and the
+    audited snapshot in bar.ts had 17-18 Michigan pours of 20, so any exact
+    count printed here goes false the week a tap changes. */
 export const drinks = {
   drafts: {
-    count: 20,
-    michiganCount: 19,
-    heading: "20 beers on draft, and 19 of them are from Michigan",
+    heading: "20 beers on draft, and most of them are from Michigan",
     blurb:
       "The list rotates constantly, so ask what is pouring. Draft beer and wine are available to go.",
   },

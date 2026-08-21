@@ -37,11 +37,15 @@ export default function Home() {
   return (
     <>
       {/* Hero: food above the fold, ordering above the fold */}
-      <section className="grain grain-dark relative isolate overflow-hidden bg-ink text-cream">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-32 -top-40 h-[34rem] w-[34rem] overflow-hidden rounded-full bg-red/30 blur-3xl"
-        />
+      {/* overflow-x-clip, not overflow-hidden: the pizza slice's exit needs
+          horizontal containment, but the CheeseDrip hangs BELOW this section
+          by design and overflow-hidden was decapitating it. Per-axis clip
+          keeps the vertical axis visible. The blur blob gets its own inset-0
+          clip layer so it cannot leak above the section either. */}
+      <section className="grain grain-dark relative isolate overflow-x-clip bg-ink text-cream">
+        <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="absolute -right-32 -top-40 h-[34rem] w-[34rem] rounded-full bg-red/30 blur-3xl" />
+        </div>
         <div className="relative mx-auto grid max-w-6xl gap-12 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-16">
           <div className="hero-in">
             <p className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-gold">
@@ -275,7 +279,7 @@ export default function Home() {
                 className="lift rounded-card border border-ink/10 bg-cream-dim px-5 py-4"
               >
                 <p className="font-display text-lg font-bold tracking-tight">{f.name}</p>
-                <p className="mt-0.5 text-sm text-ink/60">{f.note}</p>
+                <p className="mt-0.5 text-sm text-ink/65">{f.note}</p>
               </Reveal>
             ))}
           </ul>
@@ -387,7 +391,7 @@ export default function Home() {
 
             <dl className="mt-9 space-y-6">
               <div>
-                <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-ink/50">
+                <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-ink/65">
                   Address
                 </dt>
                 <dd className="mt-1.5">
@@ -402,7 +406,7 @@ export default function Home() {
                 </dd>
               </div>
               <div>
-                <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-ink/50">
+                <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-ink/65">
                   Phone
                 </dt>
                 <dd className="mt-1.5">
@@ -415,7 +419,7 @@ export default function Home() {
                 </dd>
               </div>
               <div>
-                <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-ink/50">
+                <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-ink/65">
                   Hours
                 </dt>
                 <dd className="mt-2 space-y-1.5">

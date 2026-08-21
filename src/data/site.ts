@@ -21,11 +21,12 @@ export const site = {
     untappd: "https://untappd.com/v/cascarelli-s/265542",
   },
   reviews: { rating: 4.6, count: 341 },
-  /** Reservations, from their current site. */
+  /** Reservations, from their current site. The note carries the same 8-45
+      range as min/max so no surface contradicts another. */
   reservations: {
     min: 8,
     max: 45,
-    note: "We accept reservations for groups of eight or more. Banquet room and patio available.",
+    note: "We accept reservations for groups of eight to forty-five. Banquet room and patio available.",
   },
   /** Live music, from their current site. */
   music: {

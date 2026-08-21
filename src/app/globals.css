@@ -392,27 +392,37 @@
      and reduced motion (which sets animation: none globally below) both get
      the finished badge and nothing else. Transforms and opacity only.
      --------------------------------------------------------------------- */
+  /* No will-change here: the animation promotes these layers while it runs,
+     and a permanent hint would hold three container-sized GPU layers for
+     elements that sit invisible after the one-shot reveal ends.
+
+     One duration for all four timelines, single-sourced as --pz-t: the
+     keyframes choreograph by percentage, so four equal literals would stay
+     in sync only by accident. Retune the tempo here and only here. */
+  .pz-stage {
+    --pz-t: 3.4s;
+  }
+
   .pz-pie,
   .pz-strings,
   .pz-slice {
     opacity: 0;
-    will-change: transform, opacity;
   }
 
   .js .pz-pie {
-    animation: pz-pie 3.4s cubic-bezier(0.45, 0, 0.25, 1) both;
+    animation: pz-pie var(--pz-t) cubic-bezier(0.45, 0, 0.25, 1) both;
   }
 
   .js .pz-strings {
-    animation: pz-strings 3.4s cubic-bezier(0.3, 0, 0.4, 1) both;
+    animation: pz-strings var(--pz-t) cubic-bezier(0.3, 0, 0.4, 1) both;
   }
 
   .js .pz-slice {
-    animation: pz-slice 3.4s cubic-bezier(0.42, 0, 0.3, 1) both;
+    animation: pz-slice var(--pz-t) cubic-bezier(0.42, 0, 0.3, 1) both;
   }
 
   .js .pz-logo {
-    animation: pz-logo 3.4s cubic-bezier(0.34, 1.3, 0.5, 1) both;
+    animation: pz-logo var(--pz-t) cubic-bezier(0.34, 1.3, 0.5, 1) both;
   }
 
   @keyframes pz-pie {
@@ -509,7 +519,12 @@
      duration still reports its animation-name and the motion audit asserts
      none on every element. The universal rule also catches what an itemized
      list forgets: an earlier version named .cheese-drop, a class that does
-     not exist, and missed .cheese-edge and Tailwind's animate-ping. */
+     not exist, and missed .cheese-edge and Tailwind's animate-ping.
+
+     THE CONTRACT THIS CREATES: any new element that is hidden by default and
+     made visible BY its animation (the hero-in / pz-* house pattern) must
+     add an explicit restore above, or reduced-motion visitors get a hole in
+     the page. Check this block whenever a new keyframe lands. */
   *,
   *::before,
   *::after {

@@ -20,10 +20,13 @@ export async function POST(request: Request) {
 
   if (!secret) {
     // The dev detail goes to the server log; the customer gets a way forward.
+    // No phone number in this copy: CartDrawer appends the linked number
+    // after every error, and baking it in here printed it twice.
     console.error("Checkout unavailable: STRIPE_SECRET_KEY is not set.");
     return NextResponse.json(
       {
-        error: `Online checkout is not available right now. Please call us at ${site.phone} and we will take your order over the phone.`,
+        error:
+          "Online checkout is not available right now. Please call us and we will take your order over the phone.",
       },
       { status: 503 },
     );

@@ -3,13 +3,21 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import { drinks } from "@/data/menu";
-import { tapList, tapNotes, wineList, cocktails, zeroProof } from "@/data/bar";
+import {
+  tapList,
+  tapNotes,
+  cocktailNotes,
+  wineList,
+  cocktails,
+  zeroProof,
+  type DrinkSection,
+} from "@/data/bar";
 import { site } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Drinks",
   description:
-    "Twenty beers on draft at Cascarelli's in Homer, Michigan, and nineteen are from Michigan. Full wine list, Moscow mules, martinis, mocktails, and draft beer and wine to go.",
+    "Twenty beers on draft at Cascarelli's in Homer, Michigan, most of them Michigan pours. Full wine list, Moscow mules, martinis, mocktails, and draft beer and wine to go.",
   alternates: { canonical: "/drinks" },
 };
 
@@ -34,17 +42,61 @@ function SectionHeading({ title }: { title: string }) {
   );
 }
 
+/* One card for every DrinkSection grid on the page, so the cocktails and
+   zero-proof halves cannot drift apart. The right-hand column arrives 150ms
+   after the left, which reads as weather rather than a slide transition, but
+   only at md+ where two columns exist: on a phone the grid stacks, and a
+   delay keyed to column position made lower cards pop in before upper ones. */
+function DrinkCards({ sections }: { sections: DrinkSection[] }) {
+  return (
+    <div className="mt-8 grid gap-8 md:grid-cols-2">
+      {sections.map((section, i) => (
+        <Reveal
+          key={section.id}
+          className={`rounded-panel border border-ink/10 bg-cream-dim p-7 sm:p-8 ${
+            i % 2 === 1 ? "md:[transition-delay:150ms]" : ""
+          }`}
+        >
+          <h3 className="font-display text-2xl font-semibold tracking-tight">
+            {section.title}
+          </h3>
+          {section.blurb && (
+            <p className="mt-2 text-[0.95rem] leading-relaxed text-ink/65">
+              {section.blurb}
+            </p>
+          )}
+          <ul className="mt-5 space-y-3">
+            {section.items.map((item) => (
+              <li key={item.name}>
+                <div className="flex items-baseline gap-3">
+                  <span className="font-semibold">{item.name}</span>
+                  <span
+                    aria-hidden
+                    className="min-w-6 flex-1 translate-y-[-0.2rem] border-b border-dotted border-ink/25"
+                  />
+                  <span className="font-display font-bold text-red">{item.price}</span>
+                </div>
+                {item.note && <p className="mt-0.5 text-sm text-ink/65">{item.note}</p>}
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+      ))}
+    </div>
+  );
+}
+
 function WineBadges({ organic, vegan }: { organic?: boolean; vegan?: boolean }) {
   if (!organic && !vegan) return null;
   return (
     <span className="flex shrink-0 gap-1.5">
       {organic && (
-        <span className="rounded-full border border-ink/15 px-2 py-0.5 text-[0.58rem] font-semibold uppercase tracking-wider text-ink/55">
+        <span className="rounded-full border border-ink/15 px-2 py-0.5 text-[0.58rem] font-semibold uppercase tracking-wider text-ink/65">
           Organic
         </span>
       )}
       {vegan && (
-        <span className="rounded-full border border-ink/15 px-2 py-0.5 text-[0.58rem] font-semibold uppercase tracking-wider text-ink/55">
+        <span className="rounded-full border border-ink/15 px-2 py-0.5 text-[0.58rem] font-semibold uppercase tracking-wider text-ink/65">
           Vegan
         </span>
       )}
@@ -82,7 +134,7 @@ export default function DrinksPage() {
 
       <div className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
         {/* Tap list */}
-        <section id="taps" className="anchor-offset">
+        <section id="taps" className="anchor-offset-plain">
           <SectionHeading title="On tap right now" />
           <p className="mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-ink/65">
             {tapNotes.rotation} Recent pours are logged on{" "}
@@ -99,16 +151,18 @@ export default function DrinksPage() {
 
           <Reveal>
             <ul className="mt-8 grid gap-x-10 gap-y-4 sm:grid-cols-2">
+            {/* Keyed on name+brewery: the list rotates and two breweries can
+                pour identically named seasonals. */}
             {tapList.map((tap) => (
               <li
-                key={tap.name}
+                key={`${tap.name}-${tap.brewery}`}
                 className="flex items-baseline justify-between gap-4 border-b border-ink/10 pb-3.5"
               >
                 <div>
                   <span className="font-display text-lg font-bold tracking-tight">
                     {tap.name}
                   </span>
-                  <span className="mt-0.5 block text-sm text-ink/60">
+                  <span className="mt-0.5 block text-sm text-ink/65">
                     {tap.brewery}
                     {tap.local && (
                       <span className="ml-2 rounded-full bg-red/10 px-2 py-0.5 text-[0.6rem] font-semibold uppercase tracking-wider text-red">
@@ -118,7 +172,7 @@ export default function DrinksPage() {
                   </span>
                 </div>
                 {tap.abv && (
-                  <span className="shrink-0 text-sm font-semibold text-ink/55">{tap.abv}</span>
+                  <span className="shrink-0 text-sm font-semibold text-ink/65">{tap.abv}</span>
                 )}
               </li>
             ))}
@@ -133,49 +187,16 @@ export default function DrinksPage() {
         </section>
 
         {/* Cocktails */}
-        <section id="cocktails" className="anchor-offset mt-16">
+        <section id="cocktails" className="anchor-offset-plain mt-16">
           <SectionHeading title="Cocktails" />
-          <div className="mt-8 grid gap-8 md:grid-cols-2">
-            {/* Columns arrive ~150ms apart, which reads as weather rather than
-                a slide transition. Rows separate themselves by scroll. */}
-            {cocktails.map((section, i) => (
-              <Reveal
-                key={section.id}
-                delay={(i % 2) * 150}
-                className="rounded-panel border border-ink/10 bg-cream-dim p-7 sm:p-8"
-              >
-                <h3 className="font-display text-2xl font-semibold tracking-tight">
-                  {section.title}
-                </h3>
-                {section.blurb && (
-                  <p className="mt-2 text-[0.95rem] leading-relaxed text-ink/65">
-                    {section.blurb}
-                  </p>
-                )}
-                <ul className="mt-5 space-y-3">
-                  {section.items.map((item) => (
-                    <li key={item.name}>
-                      <div className="flex items-baseline gap-3">
-                        <span className="font-semibold">{item.name}</span>
-                        <span
-                          aria-hidden
-                          className="min-w-6 flex-1 translate-y-[-0.2rem] border-b border-dotted border-ink/25"
-                        />
-                        <span className="font-display font-bold text-red">{item.price}</span>
-                      </div>
-                      {item.note && (
-                        <p className="mt-0.5 text-sm text-ink/55">{item.note}</p>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
-            ))}
-          </div>
+          <p className="mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-ink/65">
+            {cocktailNotes}
+          </p>
+          <DrinkCards sections={cocktails} />
         </section>
 
         {/* Wine */}
-        <section id="wine" className="anchor-offset mt-16">
+        <section id="wine" className="anchor-offset-plain mt-16">
           <SectionHeading title="Wine list" />
           <p className="mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-ink/65">
             Priced by the glass and the bottle. Bottles travel, so take one home
@@ -205,13 +226,13 @@ export default function DrinksPage() {
                         {wine.glass ? `${wine.glass} / ${wine.bottle}` : `Bottle ${wine.bottle}`}
                       </span>
                     </div>
-                    <div className="flex flex-wrap items-center gap-2 text-sm text-ink/60">
+                    <div className="flex flex-wrap items-center gap-2 text-sm text-ink/65">
                       <span>
                         {wine.producer} &middot; {wine.region}
                       </span>
                       <WineBadges organic={wine.organic} vegan={wine.vegan} />
                     </div>
-                    <p className="text-[0.93rem] italic leading-relaxed text-ink/55">
+                    <p className="text-[0.93rem] italic leading-relaxed text-ink/65">
                       {wine.notes}
                     </p>
                   </li>
@@ -220,49 +241,20 @@ export default function DrinksPage() {
             </Reveal>
           ))}
 
-          <p className="mt-6 text-sm text-ink/55">
+          <p className="mt-6 text-sm text-ink/65">
             Glass / bottle pricing. Wines marked organic or vegan are noted on
             the printed list.
           </p>
         </section>
 
         {/* Zero proof */}
-        <section id="zero-proof" className="anchor-offset mt-16">
+        <section id="zero-proof" className="anchor-offset-plain mt-16">
           <SectionHeading title="Zero proof" />
           <p className="mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-ink/65">
             Mocktails for the table, craft root beer on tap, and everything the
             kids could want.
           </p>
-          <div className="mt-8 grid gap-8 md:grid-cols-2">
-            {zeroProof.map((section, i) => (
-              <Reveal
-                key={section.id}
-                delay={(i % 2) * 150}
-                className="rounded-panel border border-ink/10 bg-cream-dim p-7 sm:p-8"
-              >
-                <h3 className="font-display text-2xl font-semibold tracking-tight">
-                  {section.title}
-                </h3>
-                <ul className="mt-5 space-y-3">
-                  {section.items.map((item) => (
-                    <li key={item.name}>
-                      <div className="flex items-baseline gap-3">
-                        <span className="font-semibold">{item.name}</span>
-                        <span
-                          aria-hidden
-                          className="min-w-6 flex-1 translate-y-[-0.2rem] border-b border-dotted border-ink/25"
-                        />
-                        <span className="font-display font-bold text-red">{item.price}</span>
-                      </div>
-                      {item.note && (
-                        <p className="mt-0.5 text-sm text-ink/55">{item.note}</p>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
-            ))}
-          </div>
+          <DrinkCards sections={zeroProof} />
         </section>
 
         <div className="mt-16 rounded-panel border border-ink/12 bg-cream-dim p-8 text-center sm:p-10">

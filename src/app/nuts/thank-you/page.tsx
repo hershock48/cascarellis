@@ -32,7 +32,7 @@ export default function ThankYouPage() {
           business days to reach you.
         </p>
 
-        <p className="mt-4 text-[1rem] leading-relaxed text-ink/60">
+        <p className="mt-4 text-[1rem] leading-relaxed text-ink/65">
           Something not right? Call us at{" "}
           <a href={site.phoneHref} className="font-semibold text-red underline">
             {site.phone}

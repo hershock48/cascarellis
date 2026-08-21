@@ -118,7 +118,7 @@ export default function CartDrawer() {
 
         {cart.lines.length === 0 ? (
           <div className="flex flex-1 items-center justify-center p-8 text-center">
-            <p className="text-ink/60">Nothing in here yet.</p>
+            <p className="text-ink/65">Nothing in here yet.</p>
           </div>
         ) : (
           <>
@@ -132,7 +132,7 @@ export default function CartDrawer() {
                       <p className="font-display text-lg font-bold leading-tight tracking-tight">
                         {hit.product.name}
                       </p>
-                      <p className="mt-0.5 text-sm text-ink/60">{hit.variant.label}</p>
+                      <p className="mt-0.5 text-sm text-ink/65">{hit.variant.label}</p>
 
                       <div className="mt-3 inline-flex items-center rounded-full border border-ink/20">
                         <button
@@ -167,7 +167,7 @@ export default function CartDrawer() {
                       <button
                         type="button"
                         onClick={() => cart.remove(line.sku)}
-                        className="mt-2 text-xs text-ink/50 underline underline-offset-4 hover:text-red"
+                        className="mt-2 text-xs text-ink/65 underline underline-offset-4 hover:text-red"
                       >
                         Remove
                       </button>
@@ -203,7 +203,7 @@ export default function CartDrawer() {
                 </div>
               </dl>
 
-              <p className="mt-2 text-xs text-ink/50">
+              <p className="mt-2 text-xs text-ink/65">
                 Tax, if it applies, is calculated at checkout.
               </p>
 
@@ -225,7 +225,7 @@ export default function CartDrawer() {
                 {busy ? "Taking you to checkout..." : "Check out"}
               </button>
 
-              <p className="mt-3 text-center text-xs text-ink/50">
+              <p className="mt-3 text-center text-xs text-ink/65">
                 Secure payment by Stripe
               </p>
             </footer>

@@ -37,7 +37,7 @@ export default function NotFound() {
               className="lift flex h-full flex-col rounded-panel border border-ink/12 bg-cream-dim p-6 hover:border-red/30"
             >
               <span className="font-display text-xl font-bold tracking-tight">{l.label}</span>
-              <span className="mt-1 text-sm text-ink/60">{l.note}</span>
+              <span className="mt-1 text-sm text-ink/65">{l.note}</span>
             </Link>
           </li>
         ))}

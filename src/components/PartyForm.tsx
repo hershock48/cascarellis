@@ -142,13 +142,16 @@ export default function PartyForm() {
           <label htmlFor="guests" className={label}>
             About how many people
           </label>
+          {/* Bounds come from the same constants as the advertised range, so
+              the form cannot validate a party size the site says we cannot
+              seat. min stays 1: a 6-person ask is still worth hearing. */}
           <input
             id="guests"
             name="guests"
             type="number"
             inputMode="numeric"
             min={1}
-            max={200}
+            max={site.reservations.max}
             placeholder={`${site.reservations.min} to ${site.reservations.max}`}
             className={`${field} mt-1.5`}
           />
@@ -192,7 +195,7 @@ export default function PartyForm() {
         <button type="submit" disabled={status === "sending"} className="btn-primary disabled:opacity-60">
           {status === "sending" ? "Sending..." : "Send inquiry"}
         </button>
-        <p className="text-sm text-ink/60">
+        <p className="text-sm text-ink/65">
           In a hurry?{" "}
           <a href={site.phoneHref} className="font-semibold text-red underline">
             Call {site.phone}

@@ -28,12 +28,13 @@ export default function EmploymentPage() {
 
       <section className="mx-auto max-w-5xl px-5 py-14 sm:px-8 sm:py-20">
         <ul className="grid gap-6 md:grid-cols-3">
-          {/* Three cards arriving ~150ms apart, per the desynchronisation rule. */}
+          {/* Three cards arriving ~120ms apart: desynchronized, but the last
+              card stays inside Reveal's ~240ms delay ceiling. */}
           {roles.map((r, i) => (
             <Reveal
               as="li"
               key={r.title}
-              delay={i * 150}
+              delay={i * 120}
               className="rounded-panel border border-ink/10 bg-cream-dim p-7"
             >
               <h2 className="font-display text-2xl font-semibold tracking-tight">{r.title}</h2>

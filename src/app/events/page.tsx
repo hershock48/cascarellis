@@ -52,7 +52,9 @@ export default function EventsPage() {
             </p>
           </Reveal>
 
-          <Reveal delay={150}>
+          {/* Delay gated to lg, where this is a second column: stacked on
+              mobile, a flat delay revealed it out of order. */}
+          <Reveal className="lg:[transition-delay:150ms]">
             <Photo name="banquet" ratio="feature" sizes="(min-width: 1024px) 50vw, 100vw" />
             <p className="mt-7 text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-red">
               Groups of {site.reservations.min} to {site.reservations.max}

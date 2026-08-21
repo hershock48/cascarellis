@@ -15,6 +15,9 @@ export const photos = {
   heroPizza: {
     src: null,
     alt: "A fresh Cascarelli's pizza coming out of the oven",
+    /** The hero slot is currently the PizzaReveal badge animation, not this
+        photo. When the shot lands, decide in page.tsx which one owns the
+        hero rather than re-adding this beside the animation. */
     brief: "Hero shot. A whole pizza, overhead or three quarter, natural light",
   } satisfies Photo,
 

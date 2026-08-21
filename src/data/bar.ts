@@ -9,7 +9,8 @@
 
 export type Tap = { name: string; brewery: string; abv?: string; local?: boolean };
 
-/** `local` marks the hometown pour, brewed in Homer. */
+/** `local` marks the hometown pour: the printed tap list itself reads
+    "Odd Brothers Craft Cider ~ Homer", so the badge is sourced, not assumed. */
 export const tapList: Tap[] = [
   { name: "M-43 Orange Cream", brewery: "Old Nation Brewery", abv: "6.8%" },
   { name: "Bell's Flyover Lager", brewery: "Bell's Brewery", abv: "4.5%" },
@@ -38,6 +39,11 @@ export const tapNotes = {
   rotation:
     "The lineup turns over constantly, so ask whoever is behind the bar what just got tapped.",
 };
+
+/** From their old site, kept because the printed clipboard only carries the
+    standing list: seasonal drinks exist beyond it. */
+export const cocktailNotes =
+  "Seasonal drinks rotate through the year, and our Bloody Mary has a following. Ask what is pouring.";
 
 export type Wine = {
   name: string;
@@ -87,8 +93,11 @@ export const wineList: WineSection[] = [
         region: "Italy",
         glass: 10,
         bottle: 39,
+        /* The printed list gives Merlot the byte-identical note; that is the
+           print itself repeating (Imperial Beverage template), not a paste
+           error here — checked against both photo pages. */
         notes: "Fruit-forward wine with dark cherry, blackberry, and baking spice",
-        vegan: true,
+        organic: true,
       },
     ],
   },

@@ -21,7 +21,9 @@ const display = Fraunces({
   variable: "--font-display",
   weight: "variable",
   style: ["normal", "italic"],
-  axes: ["opsz", "SOFT", "WONK"],
+  /* opsz only: SOFT and WONK were shipping in the woff2 with no rule ever
+     setting them. Dropping them cuts the font payload with zero visual change. */
+  axes: ["opsz"],
   display: "swap",
 });
 
@@ -32,8 +34,21 @@ const body = Nunito_Sans({
   display: "swap",
 });
 
+/**
+ * The URL absolute metadata resolves against. site.url is cascarellis.com,
+ * which today still points at their OLD site (wrong TLS cert, 302s to HTML),
+ * so share images built on it were unreachable for every scraper. Until the
+ * domain cuts over, prefer the host actually serving this deployment; after
+ * cutover, set NEXT_PUBLIC_SITE_URL=https://cascarellis.com in Vercel.
+ */
+const baseUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : site.url);
+
 export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
+  metadataBase: new URL(baseUrl),
   title: {
     default: `${site.name} | Pizza, Drinks and Specialty Nuts in Homer, MI`,
     template: `%s | ${site.name}`,
@@ -49,25 +64,23 @@ export const metadata: Metadata = {
     "Calhoun County restaurant",
     "banquet room Homer MI",
   ],
+  /* No og:title/og:description here: Next does not deep-merge openGraph, so
+     root values were shipping identically on all 8 routes and drowning the
+     per-page titles. With them absent, scrapers fall back to each page's own
+     <title> and meta description; the image and site identity stay shared. */
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: site.url,
     siteName: site.name,
-    title: `${site.name} | A one of a kind pizza restaurant`,
-    description: site.blurb,
     images: [{ url: "/logo-color.png", width: 640, height: 640, alt: `${site.name} logo` }],
   },
   twitter: {
     card: "summary",
-    title: site.name,
-    description: site.blurb,
     images: ["/logo-color.png"],
   },
-  icons: {
-    icon: "/logo-color.png",
-    apple: "/logo-color.png",
-  },
+  /* No `icons` entry: src/app/favicon.ico (5KB, cut from the color badge)
+     serves the tab icon via the file convention. Pointing metadata at the
+     640px logo-color.png made browsers pull 69KB for a 16px icon. */
   alternates: { canonical: "/" },
   robots: { index: true, follow: true },
 };
@@ -78,8 +91,8 @@ const jsonLd = {
   name: site.name,
   description: site.blurb,
   url: site.url,
-  logo: `${site.url}/logo-color.png`,
-  image: `${site.url}/logo-color.png`,
+  logo: `${baseUrl}/logo-color.png`,
+  image: `${baseUrl}/logo-color.png`,
   telephone: site.phone,
   servesCuisine: ["Pizza", "Italian American", "American"],
   priceRange: "$$",

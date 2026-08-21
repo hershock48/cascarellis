@@ -35,19 +35,19 @@ export default function NutsPage() {
         <div className="mx-auto grid max-w-6xl gap-4 px-5 py-5 text-[0.92rem] sm:px-8 md:grid-cols-3">
           <p>
             <span className="font-semibold">Flat {formatUSD(shipping.flatRate)} shipping</span>
-            <span className="text-ink/60">, anywhere in the US</span>
+            <span className="text-ink/65">, anywhere in the US</span>
           </p>
           <p>
             <span className="font-semibold">
               Free over {formatUSD(shipping.freeThreshold)}
             </span>
-            <span className="text-ink/60"> automatically</span>
+            <span className="text-ink/65"> automatically</span>
           </p>
           <p>
             <span className="font-semibold">
               Ships in {shipping.estimateDays.min} to {shipping.estimateDays.max} business days
             </span>
-            <span className="text-ink/60">, roasted before it goes out</span>
+            <span className="text-ink/65">, roasted before it goes out</span>
           </p>
         </div>
       </section>
@@ -78,7 +78,7 @@ export default function NutsPage() {
             ))}
           </ul>
 
-          <p className="mt-10 text-center text-sm text-ink/55">
+          <p className="mt-10 text-center text-sm text-ink/65">
             Payments handled by Stripe. We never see your card number. Questions
             about an order?{" "}
             <a href={site.phoneHref} className="font-semibold text-red underline">

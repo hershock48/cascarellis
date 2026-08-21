@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { site } from "@/data/site";
 
 /**
@@ -172,16 +173,18 @@ export default function PizzaReveal({ className = "" }: { className?: string }) 
 
   return (
     <div className={`pz-stage relative mx-auto aspect-square w-full max-w-[26rem] ${className}`}>
-      {/* The finished state: the badge, ringed in gold. */}
+      {/* The finished state: the badge, ringed in gold. next/image rather
+          than the True North plain-img precedent: that mark needed measured
+          absolute geometry across two layers; this is one image at one size,
+          and the optimizer cuts the 69KB PNG to a ~20KB WebP at 416px. */}
       <span className="pz-logo absolute inset-0 block rounded-full border-[3px] border-gold/80 shadow-[0_24px_60px_-28px_rgba(0,0,0,0.55)]">
-        {/* Plain <img> per the True North precedent: one already-optimized
-            PNG composing a mark; next/image adds nothing here. */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src="/logo-color.png"
-          alt={`${site.name}, Homer, Michigan, since 1935`}
+          alt={`${site.name}, est. ${site.established}`}
           width={640}
           height={640}
+          priority
+          sizes="(min-width: 480px) 416px, 100vw"
           className="h-full w-full"
         />
       </span>
