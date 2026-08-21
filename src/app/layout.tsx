@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bodoni_Moda, Figtree } from "next/font/google";
+import { Fraunces, Nunito_Sans } from "next/font/google";
 import "./globals.css";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -9,21 +9,26 @@ import { CartProvider } from "@/lib/cart";
 import { site } from "@/data/site";
 
 /**
- * Bodoni was cut in Parma in the 1790s, so the display face is literally
- * Italian. It is only used at large sizes, where the hairlines survive.
- * Figtree carries every small size and all body copy.
+ * Fraunces for display: a warm, slightly wonky vintage serif whose optical
+ * size axis thickens it at text sizes and sharpens it at poster sizes. It
+ * reads like a 1930s soda-fountain menu, which is the badge's own era, and
+ * it replaced Bodoni Moda, whose hairline didone contrast Kevin vetoed on
+ * sight. Nunito Sans carries body copy: rounder and warmer than the Figtree
+ * it replaced in the same decision.
  */
-const display = Bodoni_Moda({
+const display = Fraunces({
   subsets: ["latin"],
   variable: "--font-display",
-  weight: ["400", "500", "600", "700"],
+  weight: "variable",
   style: ["normal", "italic"],
+  axes: ["opsz", "SOFT", "WONK"],
   display: "swap",
 });
 
-const body = Figtree({
+const body = Nunito_Sans({
   subsets: ["latin"],
   variable: "--font-body",
+  weight: "variable",
   display: "swap",
 });
 

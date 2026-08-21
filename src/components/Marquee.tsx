@@ -10,8 +10,9 @@ import { site } from "@/data/site";
  * that or phones show it frozen. The original eleven-item list measured
  * 5920px and blew it. "Draft beer and wine to go" was cut here specifically
  * because the homepage already says it twice. This six-item list measured
- * 3901px doubled, about 195px of headroom. Adding an item means re-measuring
- * in the browser, not eyeballing.
+ * 3944px doubled in Nunito Sans (the font this track renders in; a font swap
+ * moves this number, which is why it was re-measured after one). About 150px
+ * of headroom. Adding an item means re-measuring in the browser.
  */
 export default function Marquee() {
   const items = [
