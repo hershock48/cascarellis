@@ -150,6 +150,32 @@ export const menu: MenuSection[] = [
       { name: "Lasagna", description: "Layered and baked to order." },
     ],
   },
+  {
+    id: "sweets",
+    title: "Sweet Treats",
+    blurb: "Homemade truffles and a proper float to finish.",
+    items: [
+      {
+        name: "Root Beer Float",
+        description:
+          "Two scoops of rich vanilla ice cream in a chilled mug of delicious Michigan made craft root beer.",
+        price: "$7",
+        popular: true,
+      },
+      {
+        name: "Truffle Plate",
+        description:
+          "Your choice of any four homemade truffles, topped with Ghirardelli chocolate and Ghirardelli white chocolate syrups.",
+        price: "$8.50",
+      },
+      {
+        name: "Individual Truffle",
+        description:
+          "Eight rich and decadent homemade varieties: Oreo, Chocolate Marshmallow, Mint Chocolate, Lemon, Toffee Crunch, Birthday Cake, Java Chip and Peanut Butter.",
+        price: "$2.25",
+      },
+    ],
+  },
 ];
 
 /** Straight from their Food page. */
@@ -167,6 +193,7 @@ export const nuts = {
   ],
 };
 
+/** The full bar menus live in bar.ts; this is the homepage summary. */
 export const drinks = {
   drafts: {
     count: 20,
@@ -174,18 +201,6 @@ export const drinks = {
     heading: "20 beers on draft, and 19 of them are from Michigan",
     blurb:
       "The list rotates constantly, so ask what is pouring. Draft beer and wine are available to go.",
-  },
-  wine: {
-    heading: "Wine",
-    blurb:
-      "A curated selection of red, white, rosé and sparkling that changes a few times a year.",
-    categories: ["Red", "White", "Rosé", "Sparkling"],
-  },
-  cocktails: {
-    heading: "From the bar",
-    blurb:
-      "Our Bloody Mary has a following, and seasonal drinks rotate through the year.",
-    named: ["Bloody Mary", "Caramel Apple", "Salted Caramel White Russian"],
   },
   toGo: "Pick up draft beer or wine to go on your way out.",
 };

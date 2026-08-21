@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -80,12 +81,22 @@ export default function SiteHeader() {
       </div>
 
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-3.5 sm:px-8">
-        <Link href="/" className="group block leading-none">
-          <span className="block font-display text-2xl font-semibold tracking-tight text-ink sm:text-[1.7rem]">
-            Cascarelli&rsquo;s
-          </span>
-          <span className="mt-1 block text-[0.58rem] font-semibold uppercase tracking-[0.26em] text-red">
-            Homer, Michigan &middot; Est. 1935
+        <Link href="/" className="group flex items-center gap-3 leading-none">
+          <Image
+            src="/logo.png"
+            alt=""
+            width={48}
+            height={48}
+            priority
+            className="h-11 w-11 shrink-0 sm:h-12 sm:w-12"
+          />
+          <span className="block">
+            <span className="block font-display text-2xl font-semibold tracking-tight text-ink sm:text-[1.7rem]">
+              Cascarelli&rsquo;s
+            </span>
+            <span className="mt-1 block text-[0.58rem] font-semibold uppercase tracking-[0.26em] text-red">
+              Homer, Michigan &middot; Est. 1935
+            </span>
           </span>
         </Link>
 

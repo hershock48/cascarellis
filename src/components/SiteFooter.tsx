@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { site, fullAddress, hoursSummary, mapsUrl } from "@/data/site";
 import GlazedPlate from "@/components/GlazedPlate";
@@ -18,7 +19,15 @@ export default function SiteFooter() {
       <div className="relative mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
         <div className="grid gap-12 md:grid-cols-[1.3fr_1fr_1fr]">
           <div>
-            <p className="font-display text-3xl font-semibold tracking-tight">
+            {/* The badge is near-ink, so a cream ring keeps it legible here. */}
+            <Image
+              src="/logo.png"
+              alt=""
+              width={72}
+              height={72}
+              className="h-[72px] w-[72px] rounded-full ring-1 ring-cream/25"
+            />
+            <p className="mt-4 font-display text-3xl font-semibold tracking-tight">
               Cascarelli&rsquo;s
             </p>
             <p className="mt-1 text-[0.6rem] font-semibold uppercase tracking-[0.26em] text-gold">
