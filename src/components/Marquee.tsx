@@ -1,18 +1,23 @@
 import { site } from "@/data/site";
-import { nuts } from "@/data/menu";
 
 /**
  * Slow scrolling band of the things worth knowing. Pure CSS, duplicated once
  * so the loop is seamless, paused on hover and frozen entirely under
  * prefers-reduced-motion.
+ *
+ * BUDGET: the animated element is the doubled track and mobile GPUs stop
+ * compositing a layer past ~4096px, so the doubled track must measure under
+ * that or phones show it frozen. The original eleven-item list measured
+ * 5920px and blew it. "Draft beer and wine to go" was cut here specifically
+ * because the homepage already says it twice. This six-item list measured
+ * 3901px doubled, about 195px of headroom. Adding an item means re-measuring
+ * in the browser, not eyeballing.
  */
 export default function Marquee() {
   const items = [
     `${site.music.what}, ${site.music.when.toLowerCase()}`,
     "20 beers on draft",
     "Specialty nuts shipped nationwide",
-    "Draft beer and wine to go",
-    ...nuts.flavors.slice(0, 3).map((f) => f.name),
     `Groups of ${site.reservations.min} to ${site.reservations.max}`,
     "Gluten free crust available",
     "Serving Homer since 1935",

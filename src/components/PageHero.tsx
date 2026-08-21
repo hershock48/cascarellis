@@ -20,7 +20,9 @@ export default function PageHero({
         aria-hidden
         className="pointer-events-none absolute -right-32 -top-48 h-[28rem] w-[28rem] rounded-full bg-red/25 blur-3xl"
       />
-      <div className="relative mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
+      {/* hero-in staggers the children on load, same entrance as the homepage
+          hero. Gated on .js and disabled under reduced motion in globals.css. */}
+      <div className="hero-in relative mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
         <p className="text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-gold">
           {kicker}
         </p>

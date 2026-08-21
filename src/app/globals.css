@@ -213,7 +213,12 @@
     transform: scaleX(1);
   }
 
-  /* Marquee */
+  /* Marquee.
+     The animated element is .marquee-inner, two copies of the track. Mobile
+     GPUs stop compositing a layer past ~4096px, at which point iOS Safari can
+     decline to animate at all, so the doubled track is a hard budget: keep it
+     under 4096px. The item list in Marquee.tsx is what spends it; the measured
+     width ships in a comment there. */
   .marquee {
     overflow: hidden;
   }
@@ -361,6 +366,19 @@
   .site-header[data-stuck] {
     box-shadow: 0 6px 24px -18px color-mix(in srgb, var(--color-ink) 70%, transparent);
   }
+
+  /* The badge gives a small twist when you hover the lockup. Brand doing
+     something, rather than a generic effect: the mark is a round pizza badge,
+     so it turns. 10deg on the 44px header mark travels about 4px at the rim,
+     present but quiet. */
+  .badge-tilt {
+    transition: transform 0.5s cubic-bezier(0.34, 1.32, 0.5, 1);
+  }
+
+  .group:hover .badge-tilt,
+  .group:focus-visible .badge-tilt {
+    transform: rotate(10deg);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -368,37 +386,35 @@
     scroll-behavior: auto;
   }
 
+  /* Restore the JS-hidden states so the page is complete, not merely still. */
   .js [data-reveal],
   .js .hero-in > * {
     opacity: 1 !important;
     transform: none !important;
-    animation: none !important;
     transition: none !important;
   }
 
-  .marquee-inner,
-  .cheese-drop,
-  .cheese-fall {
-    animation: none !important;
-  }
-
-  /* Drips stay, they just stop moving. */
+  /* The cheese edge stays drawn at rest; the falling drops stay gone. */
   .cheese-fall {
     opacity: 0 !important;
   }
 
-  .lift:hover {
+  .lift:hover,
+  .lift:hover img,
+  .group:hover .badge-tilt,
+  .group:focus-visible .badge-tilt {
     transform: none;
   }
 
-  .lift:hover img {
-    transform: none;
-  }
-
+  /* animation: none rather than a near-zero duration, because a clamped
+     duration still reports its animation-name and the motion audit asserts
+     none on every element. The universal rule also catches what an itemized
+     list forgets: an earlier version named .cheese-drop, a class that does
+     not exist, and missed .cheese-edge and Tailwind's animate-ping. */
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
+    animation: none !important;
     transition-duration: 0.01ms !important;
   }
 }

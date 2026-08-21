@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
+import Reveal from "@/components/Reveal";
 import { drinks } from "@/data/menu";
 import { tapList, tapNotes, wineList, cocktails, zeroProof } from "@/data/bar";
 import { site } from "@/data/site";
@@ -96,7 +97,8 @@ export default function DrinksPage() {
             .
           </p>
 
-          <ul className="mt-8 grid gap-x-10 gap-y-4 sm:grid-cols-2">
+          <Reveal>
+            <ul className="mt-8 grid gap-x-10 gap-y-4 sm:grid-cols-2">
             {tapList.map((tap) => (
               <li
                 key={tap.name}
@@ -121,19 +123,25 @@ export default function DrinksPage() {
               </li>
             ))}
           </ul>
+          </Reveal>
 
-          <p className="mt-8 rounded-panel border border-red/20 bg-red/5 px-6 py-4 text-center font-display text-lg font-bold tracking-tight text-red">
-            {tapNotes.flights}
-          </p>
+          <Reveal delay={150}>
+            <p className="mt-8 rounded-panel border border-red/20 bg-red/5 px-6 py-4 text-center font-display text-lg font-bold tracking-tight text-red">
+              {tapNotes.flights}
+            </p>
+          </Reveal>
         </section>
 
         {/* Cocktails */}
         <section id="cocktails" className="anchor-offset mt-16">
           <SectionHeading title="Cocktails" />
           <div className="mt-8 grid gap-8 md:grid-cols-2">
-            {cocktails.map((section) => (
-              <div
+            {/* Columns arrive ~150ms apart, which reads as weather rather than
+                a slide transition. Rows separate themselves by scroll. */}
+            {cocktails.map((section, i) => (
+              <Reveal
                 key={section.id}
+                delay={(i % 2) * 150}
                 className="rounded-panel border border-ink/10 bg-cream-dim p-7 sm:p-8"
               >
                 <h3 className="font-display text-2xl font-semibold tracking-tight">
@@ -161,7 +169,7 @@ export default function DrinksPage() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </Reveal>
             ))}
           </div>
         </section>
@@ -175,7 +183,7 @@ export default function DrinksPage() {
           </p>
 
           {wineList.map((section) => (
-            <div key={section.id} className="mt-10">
+            <Reveal key={section.id} className="mt-10">
               <h3 className="font-display text-2xl font-semibold italic tracking-tight text-red">
                 {section.title}
               </h3>
@@ -209,7 +217,7 @@ export default function DrinksPage() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </Reveal>
           ))}
 
           <p className="mt-6 text-sm text-ink/55">
@@ -226,9 +234,10 @@ export default function DrinksPage() {
             kids could want.
           </p>
           <div className="mt-8 grid gap-8 md:grid-cols-2">
-            {zeroProof.map((section) => (
-              <div
+            {zeroProof.map((section, i) => (
+              <Reveal
                 key={section.id}
+                delay={(i % 2) * 150}
                 className="rounded-panel border border-ink/10 bg-cream-dim p-7 sm:p-8"
               >
                 <h3 className="font-display text-2xl font-semibold tracking-tight">
@@ -251,7 +260,7 @@ export default function DrinksPage() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </Reveal>
             ))}
           </div>
         </section>

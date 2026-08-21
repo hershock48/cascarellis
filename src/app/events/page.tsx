@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import Photo from "@/components/Photo";
 import PartyForm from "@/components/PartyForm";
+import Reveal from "@/components/Reveal";
 import { site } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -36,7 +37,7 @@ export default function EventsPage() {
 
       <section className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-          <div>
+          <Reveal>
             <Photo name="piano" ratio="feature" sizes="(min-width: 1024px) 50vw, 100vw" />
             <p className="mt-7 text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-red">
               {site.music.when}
@@ -49,9 +50,9 @@ export default function EventsPage() {
               reservation needed, but the room does fill up on a Saturday, so
               earlier is easier.
             </p>
-          </div>
+          </Reveal>
 
-          <div>
+          <Reveal delay={150}>
             <Photo name="banquet" ratio="feature" sizes="(min-width: 1024px) 50vw, 100vw" />
             <p className="mt-7 text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-red">
               Groups of {site.reservations.min} to {site.reservations.max}
@@ -76,7 +77,7 @@ export default function EventsPage() {
             <a href={site.phoneHref} className="btn-primary mt-8">
               Call {site.phone}
             </a>
-          </div>
+          </Reveal>
         </div>
 
         <div id="inquire" className="anchor-offset-plain mt-16 sm:mt-20">

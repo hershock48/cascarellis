@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
+import Reveal from "@/components/Reveal";
 import { site } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -27,15 +28,21 @@ export default function EmploymentPage() {
 
       <section className="mx-auto max-w-5xl px-5 py-14 sm:px-8 sm:py-20">
         <ul className="grid gap-6 md:grid-cols-3">
-          {roles.map((r) => (
-            <li key={r.title} className="rounded-panel border border-ink/10 bg-cream-dim p-7">
+          {/* Three cards arriving ~150ms apart, per the desynchronisation rule. */}
+          {roles.map((r, i) => (
+            <Reveal
+              as="li"
+              key={r.title}
+              delay={i * 150}
+              className="rounded-panel border border-ink/10 bg-cream-dim p-7"
+            >
               <h2 className="font-display text-2xl font-semibold tracking-tight">{r.title}</h2>
               <p className="mt-3 text-[0.95rem] leading-relaxed text-ink/70">{r.body}</p>
-            </li>
+            </Reveal>
           ))}
         </ul>
 
-        <div className="mt-12 rounded-panel border border-ink/12 bg-cream p-8 text-center sm:p-10">
+        <Reveal className="mt-12 rounded-panel border border-ink/12 bg-cream p-8 text-center sm:p-10">
           <h2 className="font-display text-3xl font-semibold tracking-tight">
             How to apply
           </h2>
@@ -46,7 +53,7 @@ export default function EmploymentPage() {
           <a href={site.phoneHref} className="btn-primary mt-6">
             Call {site.phone}
           </a>
-        </div>
+        </Reveal>
       </section>
     </>
   );

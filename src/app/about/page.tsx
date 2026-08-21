@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import Photo from "@/components/Photo";
+import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -57,8 +58,10 @@ export default function AboutPage() {
         <Photo name="room" ratio="wide" sizes="(min-width: 1024px) 64rem, 100vw" />
 
         <ol className="relative mt-14 space-y-12 border-l border-ink/15 pl-8 sm:pl-12">
+          {/* Each chapter rises as the reader reaches it; scroll spacing does
+              the desynchronising, so no per-item delay. */}
           {chapters.map((c) => (
-            <li key={c.year} className="relative">
+            <Reveal as="li" key={c.year} className="relative">
               <span
                 aria-hidden
                 className="absolute -left-[2.06rem] top-3 h-3 w-3 rounded-full bg-red ring-4 ring-cream sm:-left-[3.06rem]"
@@ -70,11 +73,11 @@ export default function AboutPage() {
                 {c.title}
               </h2>
               <p className="mt-3 text-[1.05rem] leading-relaxed text-ink/70">{c.body}</p>
-            </li>
+            </Reveal>
           ))}
         </ol>
 
-        <div className="mt-14 rounded-panel border border-ink/12 bg-cream-dim p-8 sm:p-10">
+        <Reveal className="mt-14 rounded-panel border border-ink/12 bg-cream-dim p-8 sm:p-10">
           <p className="font-display text-2xl font-semibold leading-snug tracking-tight sm:text-3xl">
             The nut roasting has run through all four generations. It is the
             oldest thing this family does.
@@ -87,7 +90,7 @@ export default function AboutPage() {
               See the menu
             </Link>
           </div>
-        </div>
+        </Reveal>
       </section>
     </>
   );

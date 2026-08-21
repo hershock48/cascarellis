@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import MenuSubnav from "@/components/MenuSubnav";
+import Reveal from "@/components/Reveal";
 import { menu, menus } from "@/data/menu";
 import { site } from "@/data/site";
 
@@ -63,6 +64,9 @@ export default function MenuPage() {
               </p>
             )}
 
+            {/* The heading stays static so anchor jumps land on settled text;
+                only the items rise. */}
+            <Reveal>
             <ul className="mt-8 grid gap-x-14 gap-y-7 md:grid-cols-2">
               {section.items.map((item) => (
                 <li key={item.name} className="grid content-start gap-1.5">
@@ -107,6 +111,7 @@ export default function MenuPage() {
                 </li>
               ))}
             </ul>
+            </Reveal>
           </section>
         ))}
 

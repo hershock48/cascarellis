@@ -88,7 +88,7 @@ export default function SiteHeader() {
             width={48}
             height={48}
             priority
-            className="h-11 w-11 shrink-0 sm:h-12 sm:w-12"
+            className="badge-tilt h-11 w-11 shrink-0 sm:h-12 sm:w-12"
           />
           <span className="block">
             <span className="block font-display text-2xl font-semibold tracking-tight text-ink sm:text-[1.7rem]">

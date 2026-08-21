@@ -3,6 +3,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import MapCard from "@/components/MapCard";
 import OpenNow from "@/components/OpenNow";
+import Reveal from "@/components/Reveal";
 import { site, fullAddress, hours, formatHour, mapsUrl } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -23,7 +24,7 @@ export default function ContactPage() {
 
       <section className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
-          <div>
+          <Reveal>
             <div className="rounded-panel border border-ink/12 bg-cream-dim p-7 sm:p-8">
               <OpenNow />
               <table className="mt-5 w-full text-[0.97rem]">
@@ -110,9 +111,11 @@ export default function ContactPage() {
                 </dd>
               </div>
             </dl>
-          </div>
+          </Reveal>
 
-          <MapCard className="min-h-[26rem] lg:min-h-[34rem]" />
+          <Reveal delay={150}>
+            <MapCard className="min-h-[26rem] lg:min-h-[34rem]" />
+          </Reveal>
         </div>
       </section>
     </>
