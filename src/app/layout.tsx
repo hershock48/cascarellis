@@ -20,10 +20,11 @@ const display = Fraunces({
   subsets: ["latin"],
   variable: "--font-display",
   weight: "variable",
-  /* Roman only. The italic cut is deliberately NOT loaded: Fraunces italic
-     has a wobbly, hand-lettered slant that Kevin rejected on sight, and not
-     loading it means no future edit can reintroduce it by typing `italic`.
-     Dropping it also halves this face's payload.
+  /* Roman only. The slanted cut is deliberately NOT loaded: Fraunces draws a
+     wobbly, hand-lettered slant that Kevin rejected on sight, so no future
+     edit can bring the real thing back, and the payload halves.
+     (Do not name the Tailwind utility for it in this comment: the class
+     scanner reads comments too, and mentioning it emitted the rule.)
      opsz only for the same reason SOFT and WONK are gone: nothing sets them. */
   style: ["normal"],
   axes: ["opsz"],
