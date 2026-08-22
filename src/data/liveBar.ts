@@ -86,9 +86,18 @@ const STATIC_BAR: BarData = {
   updatedAt: null,
 };
 
-function feedUrl(): string | null {
-  const base = process.env.SCOOPLIST_FEED_URL;
-  return base ? base.replace(/\/$/, "") : null;
+/**
+ * The feed's home, as a code default rather than a required env var: it is
+ * this client's own infrastructure URL, a public fact like their phone
+ * number, and requiring a dashboard step to turn the feature on left the
+ * site running on the snapshot with nothing saying so. SCOOPLIST_FEED_URL
+ * still overrides for local testing or a future host move, and every
+ * failure path still lands on the bar.ts snapshot.
+ */
+const DEFAULT_FEED = "https://cascarellistaps.glazedweb.com";
+
+function feedUrl(): string {
+  return (process.env.SCOOPLIST_FEED_URL || DEFAULT_FEED).replace(/\/$/, "");
 }
 
 function board(feed: Feed, key: string): FeedFlavor[] {
@@ -174,7 +183,6 @@ function liveSections(feed: Feed, statics: DrinkSection[]): DrinkSection[] | nul
 /** The bar — each half live when its boards map cleanly, snapshot otherwise. */
 export async function barData(): Promise<BarData> {
   const base = feedUrl();
-  if (!base) return STATIC_BAR;
 
   let feed: Feed;
   try {
