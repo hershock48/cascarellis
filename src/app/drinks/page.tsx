@@ -3,15 +3,8 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import { drinks } from "@/data/menu";
-import {
-  tapNotes,
-  cocktailNotes,
-  wineList,
-  cocktails,
-  zeroProof,
-  type DrinkSection,
-} from "@/data/bar";
-import { tapsData } from "@/data/liveTaps";
+import { tapNotes, cocktailNotes, type DrinkSection } from "@/data/bar";
+import { barData } from "@/data/liveBar";
 import { site } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -106,8 +99,9 @@ function WineBadges({ organic, vegan }: { organic?: boolean; vegan?: boolean }) 
 
 export default async function DrinksPage() {
   /* Live from Scooplist when the feed answers, the bar.ts snapshot on any
-     failure — the page renders either way (liveTaps.ts owns the fallback). */
-  const { taps, onDeck, live, updatedAt } = await tapsData();
+     failure — per section, and the page renders either way (liveBar.ts
+     owns the fallback). */
+  const { taps, onDeck, wineList, cocktails, zeroProof, live, updatedAt } = await barData();
 
   return (
     <>
@@ -195,7 +189,7 @@ export default async function DrinksPage() {
             </p>
           )}
 
-          {live && updatedAt && (
+          {live.taps && updatedAt && (
             <p className="mt-3 text-sm text-ink/65">
               Live from behind the bar &middot; updated{" "}
               {new Date(updatedAt).toLocaleDateString("en-US", {
@@ -255,7 +249,8 @@ export default async function DrinksPage() {
                     </div>
                     <div className="flex flex-wrap items-center gap-2 text-sm text-ink/65">
                       <span>
-                        {wine.producer} &middot; {wine.region}
+                        {wine.producer}
+                        {wine.region && <> &middot; {wine.region}</>}
                       </span>
                       <WineBadges organic={wine.organic} vegan={wine.vegan} />
                     </div>
