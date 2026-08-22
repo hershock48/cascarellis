@@ -7,7 +7,15 @@
  * Prices are as printed. Update here and every page renders the change.
  */
 
-export type Tap = { name: string; brewery: string; abv?: string; local?: boolean };
+export type Tap = {
+  name: string;
+  brewery: string;
+  abv?: string;
+  local?: boolean;
+  /** Last call — still pouring, but the keg is nearly blown. Only ever set
+      by the live feed (liveTaps.ts); the static snapshot cannot know it. */
+  low?: boolean;
+};
 
 /** `local` marks the hometown pour: the printed tap list itself reads
     "Odd Brothers Craft Cider ~ Homer", so the badge is sourced, not assumed. */

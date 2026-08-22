@@ -4,7 +4,6 @@ import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import { drinks } from "@/data/menu";
 import {
-  tapList,
   tapNotes,
   cocktailNotes,
   wineList,
@@ -12,6 +11,7 @@ import {
   zeroProof,
   type DrinkSection,
 } from "@/data/bar";
+import { tapsData } from "@/data/liveTaps";
 import { site } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -104,7 +104,11 @@ function WineBadges({ organic, vegan }: { organic?: boolean; vegan?: boolean }) 
   );
 }
 
-export default function DrinksPage() {
+export default async function DrinksPage() {
+  /* Live from Scooplist when the feed answers, the bar.ts snapshot on any
+     failure — the page renders either way (liveTaps.ts owns the fallback). */
+  const { taps, onDeck, live, updatedAt } = await tapsData();
+
   return (
     <>
       <PageHero
@@ -153,7 +157,7 @@ export default function DrinksPage() {
             <ul className="mt-8 grid gap-x-10 gap-y-4 sm:grid-cols-2">
             {/* Keyed on name+brewery: the list rotates and two breweries can
                 pour identically named seasonals. */}
-            {tapList.map((tap) => (
+            {taps.map((tap) => (
               <li
                 key={`${tap.name}-${tap.brewery}`}
                 className="flex items-baseline justify-between gap-4 border-b border-ink/10 pb-3.5"
@@ -169,6 +173,11 @@ export default function DrinksPage() {
                         Made in Homer
                       </span>
                     )}
+                    {tap.low && (
+                      <span className="ml-2 rounded-full bg-gold/15 px-2 py-0.5 text-[0.6rem] font-semibold uppercase tracking-wider text-red">
+                        Last call
+                      </span>
+                    )}
                   </span>
                 </div>
                 {tap.abv && (
@@ -178,6 +187,24 @@ export default function DrinksPage() {
             ))}
           </ul>
           </Reveal>
+
+          {onDeck.length > 0 && (
+            <p className="mt-6 text-[0.95rem] text-ink/65">
+              <span className="font-semibold text-ink">On deck:</span>{" "}
+              {onDeck.map((t) => t.name).join(", ")}
+            </p>
+          )}
+
+          {live && updatedAt && (
+            <p className="mt-3 text-sm text-ink/65">
+              Live from behind the bar &middot; updated{" "}
+              {new Date(updatedAt).toLocaleDateString("en-US", {
+                timeZone: "America/Detroit",
+                month: "long",
+                day: "numeric",
+              })}
+            </p>
+          )}
 
           <Reveal delay={150}>
             <p className="mt-8 rounded-panel border border-red/20 bg-red/5 px-6 py-4 text-center font-display text-lg font-bold tracking-tight text-red">
