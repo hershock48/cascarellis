@@ -35,39 +35,31 @@ function SectionHeading({ title }: { title: string }) {
   );
 }
 
-/* One card for every DrinkSection grid on the page, so the cocktails and
-   zero-proof halves cannot drift apart. The right-hand column arrives 150ms
-   after the left, which reads as weather rather than a slide transition, but
-   only at md+ where two columns exist: on a phone the grid stacks, and a
-   delay keyed to column position made lower cards pop in before upper ones. */
-function DrinkCards({ sections }: { sections: DrinkSection[] }) {
+/* One treatment for every DrinkSection on the page, and it is the wine
+   list's: a red group heading, then rows under hairlines with a dotted
+   leader to the price. No panels; the third pass took the boxes out. The
+   right-hand column arrives 150ms after the left, but only at md+ where two
+   columns exist: on a phone the grid stacks, and a delay keyed to column
+   position made lower groups pop in before upper ones. */
+function DrinkLists({ sections }: { sections: DrinkSection[] }) {
   return (
-    <div className="mt-8 grid gap-8 md:grid-cols-2">
+    <div className="mt-10 grid gap-x-14 gap-y-12 md:grid-cols-2">
       {sections.map((section, i) => (
-        <Reveal
-          key={section.id}
-          className={`rounded-panel border border-ink/10 bg-cream-dim p-7 sm:p-8 ${
-            i % 2 === 1 ? "md:[transition-delay:150ms]" : ""
-          }`}
-        >
-          <h3 className="font-display text-2xl font-semibold tracking-tight">
-            {section.title}
-          </h3>
+        <Reveal key={section.id} className={i % 2 === 1 ? "md:[transition-delay:150ms]" : ""}>
+          <h3 className="font-display text-2xl font-semibold text-red">{section.title}</h3>
           {section.blurb && (
-            <p className="mt-2 text-[0.95rem] leading-relaxed text-ink/65">
-              {section.blurb}
-            </p>
+            <p className="mt-2 text-[0.95rem] leading-relaxed text-ink/65">{section.blurb}</p>
           )}
-          <ul className="mt-5 space-y-3">
+          <ul className="mt-5">
             {section.items.map((item) => (
-              <li key={item.name}>
+              <li key={item.name} className="border-b border-ink/10 py-3">
                 <div className="flex items-baseline gap-3">
-                  <span className="font-semibold">{item.name}</span>
+                  <span className="font-display text-lg font-bold">{item.name}</span>
                   <span
                     aria-hidden
                     className="min-w-6 flex-1 translate-y-[-0.2rem] border-b border-dotted border-ink/25"
                   />
-                  <span className="font-display font-bold text-red">{item.price}</span>
+                  <span className="shrink-0 text-sm font-semibold text-ink/70">{item.price}</span>
                 </div>
                 {item.note && <p className="mt-0.5 text-sm text-ink/65">{item.note}</p>}
               </li>
@@ -213,7 +205,7 @@ export default async function DrinksPage() {
           <p className="mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-ink/65">
             {cocktailNotes}
           </p>
-          <DrinkCards sections={cocktails} />
+          <DrinkLists sections={cocktails} />
         </section>
 
         {/* Wine */}
@@ -276,7 +268,7 @@ export default async function DrinksPage() {
             Mocktails for the table, craft root beer on tap, and everything the
             kids could want.
           </p>
-          <DrinkCards sections={zeroProof} />
+          <DrinkLists sections={zeroProof} />
         </section>
 
         <div className="mt-16 rounded-panel border border-ink/12 bg-cream-dim p-8 text-center sm:p-10">

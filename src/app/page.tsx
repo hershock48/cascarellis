@@ -36,11 +36,13 @@ export default function Home() {
   return (
     <div className="bg-ink text-cream">
       {/* Hero. Text first in the source so Call to Order is above the fold
-          on a phone, with the pizza beneath it; on a wide screen the two sit
-          side by side and the photograph runs the full height. */}
+          on a phone, with the pizza beneath it. On a wide screen the two sit
+          side by side: the text keeps the page's left margin (the padding
+          below is the same arithmetic as mx-auto max-w-6xl px-8) and the
+          photograph runs full height and bleeds to the right edge. */}
       <section className="grain grain-dark relative isolate overflow-hidden">
-        <div className="relative mx-auto grid max-w-6xl gap-10 px-5 pb-12 pt-12 sm:px-8 lg:min-h-[calc(100svh-var(--header-h))] lg:grid-cols-[1.05fr_1fr] lg:items-stretch lg:gap-16 lg:py-0">
-          <div className="hero-in flex flex-col justify-center lg:py-20">
+        <div className="relative grid gap-10 px-5 pb-12 pt-12 sm:px-8 lg:min-h-[calc(100svh-var(--header-h))] lg:grid-cols-2 lg:items-stretch lg:gap-0 lg:p-0">
+          <div className="hero-in flex flex-col justify-center lg:py-20 lg:pr-16 lg:pl-[max(2rem,calc((100vw-72rem)/2+2rem))]">
             <Eyebrow>Homer, Michigan &middot; Since {site.established}</Eyebrow>
             <h1 className="mt-5 max-w-xl font-display text-[clamp(2.75rem,7vw,5rem)] font-semibold leading-[0.95] text-cream">
               A one-of-a-kind pizza restaurant
