@@ -64,10 +64,8 @@ export const photos = {
     position: "50% 84%",
   } satisfies Photo,
 
-  /** Shot and sent, but the file did not arrive with the other five. Re-send
-      it and run the ingest tool; the slot is already wired in menu.ts. */
   burger: {
-    src: null,
+    src: "/photos/burger.jpg",
     alt: "A bacon cheeseburger on a brioche bun with seasoned fries",
     brief: "The burger and fries, three quarter angle",
     position: "50% 84%",

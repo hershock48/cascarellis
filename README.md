@@ -78,11 +78,11 @@ their sections on `/menu`, and the pizza is the link card every share shows.
 One command per new shot, then one line:
 
 ```bash
-node tools/ingest-photo.mjs ~/Downloads/IMG_1234.jpg burger
-# writes public/photos/burger.jpg: rotated, EXIF stripped, 1600px, JPEG q82
+node tools/ingest-photo.mjs ~/Downloads/IMG_1234.jpg taps
+# writes public/photos/taps.jpg: rotated, EXIF stripped, 1600px, JPEG q82
 ```
 
-then set `src: "/photos/burger.jpg"` on that slot in `src/data/photos.ts`.
+then set `src: "/photos/taps.jpg"` on that slot in `src/data/photos.ts`.
 Each slot carries a `position` for the crop, because every plate shot has
 the storefront in the top half and the food in the bottom. Empty slots render
 a styled placeholder naming the shot, so the layout never shifts. If the

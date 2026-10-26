@@ -40,7 +40,9 @@ export type MenuSection = {
  * shot, they can come back up here.
  *
  * Descriptions say what is in the photograph and nothing the photograph
- * does not show. The burger joins the trio once its file lands (photos.ts).
+ * does not show. The burger runs on the menu page under Sandwiches and
+ * Burgers; swap it into this trio if the pizza, steak and bread ever need
+ * a change of pace.
  */
 export const bestSellers: MenuItem[] = [
   {
