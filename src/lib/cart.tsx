@@ -4,9 +4,9 @@ import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
   useMemo,
   useState,
+  useSyncExternalStore,
 } from "react";
 import { findSku, formatUSD, shipping } from "@/data/shop";
 
@@ -24,61 +24,106 @@ type CartValue = {
   clear: () => void;
   open: boolean;
   setOpen: (v: boolean) => void;
-  /** True once the saved cart has been read back from storage. Anything that
-      wants to replace the cart on mount must wait for this: child effects run
-      before the provider's restore effect, so an unguarded clear() on mount is
-      overwritten by the restore a moment later. */
-  hydrated: boolean;
 };
 
 const CartContext = createContext<CartValue | null>(null);
 const STORAGE_KEY = "cascarellis-cart-v1";
 const MAX_QTY = 20;
+const EMPTY = "[]";
+
+/* ───────────────────────────── the store ─────────────────────────────────
+   localStorage IS the cart. The provider does not keep its own copy and
+   restore it after mount; it subscribes to storage through
+   useSyncExternalStore, which is what React wants for state that lives
+   outside the tree. Two things fall out of that:
+
+   - The hydration dance is React's: the server snapshot is an empty cart,
+     the client snapshot is whatever is saved, and React swaps them as part
+     of hydration rather than in an effect that races every other effect.
+     (The thank-you page's clear() used to lose exactly that race.)
+   - Every write goes to storage first and notifies second, so a mutation
+     from any component, or from another tab via the storage event, is the
+     same mutation.
+
+   Storage that throws (private mode, quota, a blocked origin) falls back to
+   a module-level string for the life of the page, so the cart still works,
+   it just does not survive a reload there. */
+
+const listeners = new Set<() => void>();
+let memory = EMPTY;
+let useMemoryOnly = false;
+
+function read(): string {
+  if (useMemoryOnly) return memory;
+  try {
+    return window.localStorage.getItem(STORAGE_KEY) ?? EMPTY;
+  } catch {
+    useMemoryOnly = true;
+    return memory;
+  }
+}
+
+function write(lines: CartLine[]) {
+  const raw = JSON.stringify(lines);
+  memory = raw;
+  if (!useMemoryOnly) {
+    try {
+      window.localStorage.setItem(STORAGE_KEY, raw);
+    } catch {
+      useMemoryOnly = true;
+    }
+  }
+  listeners.forEach((l) => l());
+}
+
+function subscribe(cb: () => void) {
+  listeners.add(cb);
+  window.addEventListener("storage", cb);
+  return () => {
+    listeners.delete(cb);
+    window.removeEventListener("storage", cb);
+  };
+}
+
+function getServerSnapshot() {
+  return EMPTY;
+}
+
+/** Corrupt or stale storage is not worth breaking the page over: anything
+    that is not a well-formed line for a sku still in the catalog is dropped,
+    and quantities are clamped to what the checkout route accepts. */
+function parse(raw: string): CartLine[] {
+  try {
+    const parsed: unknown = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [];
+    return parsed
+      .filter(
+        (l): l is CartLine =>
+          !!l &&
+          typeof (l as CartLine).sku === "string" &&
+          Number.isFinite((l as CartLine).qty),
+      )
+      .filter((l) => findSku(l.sku))
+      .map((l) => ({ sku: l.sku, qty: Math.min(MAX_QTY, Math.max(1, Math.floor(l.qty))) }));
+  } catch {
+    return [];
+  }
+}
+
+function mutate(fn: (prev: CartLine[]) => CartLine[]) {
+  write(fn(parse(read())));
+}
+
+/* ───────────────────────────── the provider ───────────────────────────── */
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
-  const [lines, setLines] = useState<CartLine[]>([]);
+  const raw = useSyncExternalStore(subscribe, read, getServerSnapshot);
+  const lines = useMemo(() => parse(raw), [raw]);
   const [open, setOpen] = useState(false);
-  const [hydrated, setHydrated] = useState(false);
-
-  // Restore after mount so server and client render the same thing first.
-  useEffect(() => {
-    try {
-      const raw = window.localStorage.getItem(STORAGE_KEY);
-      if (raw) {
-        const parsed: unknown = JSON.parse(raw);
-        if (Array.isArray(parsed)) {
-          setLines(
-            parsed
-              .filter(
-                (l): l is CartLine =>
-                  !!l &&
-                  typeof (l as CartLine).sku === "string" &&
-                  Number.isFinite((l as CartLine).qty),
-              )
-              // Drop anything no longer in the catalog.
-              .filter((l) => findSku(l.sku))
-              .map((l) => ({ sku: l.sku, qty: Math.min(MAX_QTY, Math.max(1, l.qty)) })),
-          );
-        }
-      }
-    } catch {
-      // Corrupt or unavailable storage is not worth breaking the page over.
-    }
-    setHydrated(true);
-  }, []);
-
-  useEffect(() => {
-    if (!hydrated) return;
-    try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(lines));
-    } catch {
-      /* private mode, quota, etc. */
-    }
-  }, [lines, hydrated]);
 
   const add = useCallback((sku: string, qty = 1) => {
     if (!findSku(sku)) return;
-    setLines((prev) => {
+    mutate((prev) => {
       const existing = prev.find((l) => l.sku === sku);
       if (existing) {
         return prev.map((l) =>
@@ -91,7 +136,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const setQty = useCallback((sku: string, qty: number) => {
-    setLines((prev) =>
+    mutate((prev) =>
       qty <= 0
         ? prev.filter((l) => l.sku !== sku)
         : prev.map((l) => (l.sku === sku ? { ...l, qty: Math.min(MAX_QTY, qty) } : l)),
@@ -99,10 +144,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const remove = useCallback((sku: string) => {
-    setLines((prev) => prev.filter((l) => l.sku !== sku));
+    mutate((prev) => prev.filter((l) => l.sku !== sku));
   }, []);
 
-  const clear = useCallback(() => setLines([]), []);
+  const clear = useCallback(() => write([]), []);
 
   const { count, subtotal } = useMemo(() => {
     let count = 0;
@@ -120,20 +165,24 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const shippingCost =
     subtotal === 0 || subtotal >= shipping.freeThreshold ? 0 : shipping.flatRate;
 
-  const value: CartValue = {
-    lines,
-    count,
-    subtotal,
-    shippingCost,
-    total: subtotal + shippingCost,
-    add,
-    setQty,
-    remove,
-    clear,
-    open,
-    setOpen,
-    hydrated,
-  };
+  // Memoised so consumers that depend on the whole value (CartDrawer's key
+  // handler) do not re-subscribe on every render of the provider.
+  const value = useMemo<CartValue>(
+    () => ({
+      lines,
+      count,
+      subtotal,
+      shippingCost,
+      total: subtotal + shippingCost,
+      add,
+      setQty,
+      remove,
+      clear,
+      open,
+      setOpen,
+    }),
+    [lines, count, subtotal, shippingCost, add, setQty, remove, clear, open],
+  );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }

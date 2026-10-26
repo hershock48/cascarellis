@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Nunito_Sans } from "next/font/google";
+import { Barlow_Condensed, Inter } from "next/font/google";
 import "./globals.css";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -10,32 +10,32 @@ import { site } from "@/data/site";
 import { siteUrl } from "@/lib/siteUrl";
 
 /**
- * Fraunces for display: a warm, slightly wonky vintage serif whose optical
- * size axis thickens it at text sizes and sharpens it at poster sizes. It
- * reads like a 1930s soda-fountain menu, which is the badge's own era, and
- * it replaced Bodoni Moda, whose hairline didone contrast Kevin vetoed on
- * sight. Nunito Sans carries body copy: rounder and warmer than the Figtree
- * it replaced in the same decision.
+ * Fonts are downloaded at build time and served from this origin; there is
+ * no runtime request to Google.
+ *
+ * Barlow Condensed for display. The badge is lettered in a tall condensed
+ * gothic with softened corners, and this is the face that sits under it
+ * without arguing: tavern signage, not a wedding invitation. That was the
+ * third try. Bodoni Moda's hairlines went first; Fraunces, the soft wonky
+ * serif that replaced it, went the same way it went on Anchor, vetoed on
+ * sight. Inter carries the text, which is the house pattern across these
+ * builds (Oswald and Inter at Copper, Archivo and Inter at Anchor): one
+ * strong display face, one face that disappears into the reading.
+ *
+ * Condensed type cannot take the tight tracking the serif headings were set
+ * with; globals.css resets letter-spacing on the display utility so the 48
+ * headings did not each need touching.
  */
-const display = Fraunces({
+const display = Barlow_Condensed({
   subsets: ["latin"],
   variable: "--font-display",
-  weight: "variable",
-  /* Roman only. The slanted cut is deliberately NOT loaded: Fraunces draws a
-     wobbly, hand-lettered slant that Kevin rejected on sight, so no future
-     edit can bring the real thing back, and the payload halves.
-     (Do not name the Tailwind utility for it in this comment: the class
-     scanner reads comments too, and mentioning it emitted the rule.)
-     opsz only for the same reason SOFT and WONK are gone: nothing sets them. */
-  style: ["normal"],
-  axes: ["opsz"],
+  weight: ["500", "600", "700"],
   display: "swap",
 });
 
-const body = Nunito_Sans({
+const body = Inter({
   subsets: ["latin"],
   variable: "--font-body",
-  weight: "variable",
   display: "swap",
 });
 
@@ -156,7 +156,6 @@ export default function RootLayout({
           nothing ever flashes.
         */}
         <script
-          // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
             __html: `document.documentElement.classList.add('js')`,
           }}
@@ -165,7 +164,6 @@ export default function RootLayout({
       <body className="min-h-screen antialiased">
         <script
           type="application/ld+json"
-          // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <a

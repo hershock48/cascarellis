@@ -24,7 +24,15 @@ export default function SiteHeader() {
   const [stuck, setStuck] = useState(false);
   const ref = useRef<HTMLElement | null>(null);
 
-  useEffect(() => setOpen(false), [pathname]);
+  // Close the mobile menu when the route changes. Done the way React asks for
+  // "adjust state when a prop changes": compare against the last seen path
+  // during render, and React re-renders immediately with the menu shut,
+  // rather than an effect that paints the open menu once and then closes it.
+  const [seenPath, setSeenPath] = useState(pathname);
+  if (pathname !== seenPath) {
+    setSeenPath(pathname);
+    setOpen(false);
+  }
 
   // Shadow appears once the header is no longer at the top of the page.
   useEffect(() => {

@@ -16,12 +16,23 @@
   --color-basil: #1b3326;
   --color-gold: #c9973c;
 
-  --font-display: var(--font-display), Georgia, serif;
+  --font-display: var(--font-display), "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
   --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
 
   /* Generous, friendly radii. */
   --radius-card: 1.25rem;
   --radius-panel: 1.75rem;
+}
+
+/*
+  The display face is condensed (layout.tsx says why), and condensed type
+  closes up on its own; the tracking-tight the serif headings were set with
+  jams it. This rule is deliberately OUTSIDE every layer so it outranks the
+  layered tracking utilities on the same element: a hair of positive tracking
+  and the sentence-case headings read as signage rather than a crush.
+*/
+.font-display {
+  letter-spacing: 0.01em;
 }
 
 @layer base {

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { site, fullAddress, hoursSummary, mapsUrl } from "@/data/site";
+import { site, hoursSummary, mapsUrl } from "@/data/site";
 import GlazedPlate from "@/components/GlazedPlate";
 
 const nav = [

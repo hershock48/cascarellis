@@ -30,7 +30,11 @@ export default function Reveal({
     if (!el) return;
 
     if (typeof IntersectionObserver === "undefined") {
-      setShown(true);
+      // No observer, nothing to wait for: show it. Set on the element rather
+      // than through state, because this branch never changes again and a
+      // setState here is a render for nothing. React never writes this
+      // attribute while `shown` stays false, so the two do not fight.
+      el.setAttribute("data-shown", "");
       return;
     }
 
