@@ -84,12 +84,12 @@ function WineBadges({ organic, vegan }: { organic?: boolean; vegan?: boolean }) 
   return (
     <span className="flex shrink-0 gap-1.5">
       {organic && (
-        <span className="rounded-full border border-ink/15 px-2 py-0.5 text-[0.58rem] font-semibold uppercase tracking-wider text-ink/65">
+        <span className="rounded-sm border border-ink/15 px-2 py-0.5 text-[0.58rem] font-semibold uppercase tracking-wider text-ink/65">
           Organic
         </span>
       )}
       {vegan && (
-        <span className="rounded-full border border-ink/15 px-2 py-0.5 text-[0.58rem] font-semibold uppercase tracking-wider text-ink/65">
+        <span className="rounded-sm border border-ink/15 px-2 py-0.5 text-[0.58rem] font-semibold uppercase tracking-wider text-ink/65">
           Vegan
         </span>
       )}
@@ -120,7 +120,7 @@ export default async function DrinksPage() {
               <a
                 key={l.href}
                 href={l.href}
-                className="tap rounded-full border border-ink/20 bg-cream px-4 py-2 text-sm font-semibold transition-colors hover:border-red hover:text-red"
+                className="tap rounded-sm border border-ink/20 bg-cream px-4 py-2 text-sm font-semibold transition-colors hover:border-red hover:text-red"
               >
                 {l.label}
               </a>
@@ -163,12 +163,12 @@ export default async function DrinksPage() {
                   <span className="mt-0.5 block text-sm text-ink/65">
                     {tap.brewery}
                     {tap.local && (
-                      <span className="ml-2 rounded-full bg-red/10 px-2 py-0.5 text-[0.6rem] font-semibold uppercase tracking-wider text-red">
+                      <span className="ml-2 text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-red">
                         Made in Homer
                       </span>
                     )}
                     {tap.low && (
-                      <span className="ml-2 rounded-full bg-gold/15 px-2 py-0.5 text-[0.6rem] font-semibold uppercase tracking-wider text-red">
+                      <span className="ml-2 text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-red">
                         Last call
                       </span>
                     )}

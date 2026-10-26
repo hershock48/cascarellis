@@ -4,8 +4,9 @@
  * One command per shot: `node tools/ingest-photo.mjs <file> <slug>` rotates
  * it, drops the EXIF (phone photos carry a GPS fix), resizes to 1600px and
  * writes public/photos/<slug>.jpg. Then set `src` below. Entries with
- * src: null render a styled placeholder that names the shot, so the layout
- * never shifts and nothing looks broken while the rest are being collected.
+ * src: null render a styled placeholder naming the shot, which is for a slot
+ * that is wired into a page ahead of its file; nothing on the live pages
+ * waits on a photograph now, and the shot list lives in the README.
  *
  * `position` is the CSS object-position for the crop. Every plate shot so far
  * is a portrait phone photo taken on the sidewalk, storefront in the top half
@@ -69,38 +70,6 @@ export const photos = {
     alt: "A bacon cheeseburger on a brioche bun with seasoned fries",
     brief: "The burger and fries, three quarter angle",
     position: "50% 84%",
-  } satisfies Photo,
-
-  /* ── The room and the bar, still to shoot ──────────────────────────── */
-
-  room: {
-    src: null,
-    alt: "The dining room at Cascarelli's",
-    brief: "The dining room from the door, chandeliers in frame, people in it",
-  } satisfies Photo,
-
-  taps: {
-    src: null,
-    alt: "The twenty tap handles behind the bar",
-    brief: "All twenty handles in one frame, straight on",
-  } satisfies Photo,
-
-  nuts: {
-    src: null,
-    alt: "Cascarelli's specialty roasted nuts",
-    brief: "Bags or bowls of the different nut flavors together",
-  } satisfies Photo,
-
-  piano: {
-    src: null,
-    alt: "Live piano at Cascarelli's",
-    brief: "The piano, ideally mid performance on a Wednesday or Saturday",
-  } satisfies Photo,
-
-  banquet: {
-    src: null,
-    alt: "The banquet room at Cascarelli's set for a group",
-    brief: "The banquet room or the patio, set up for a party",
   } satisfies Photo,
 } as const;
 

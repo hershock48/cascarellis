@@ -71,7 +71,7 @@ export default function MenuSubnav({ sections }: { sections: MenuSection[] }) {
                 href={`#${section.id}`}
                 data-chip={section.id}
                 aria-current={current ? "true" : undefined}
-                className={`tap rounded-full px-4 text-sm font-semibold transition-colors ${
+                className={`tap rounded-sm px-4 text-sm font-semibold transition-colors ${
                   current
                     ? "bg-red text-cream"
                     : "text-ink/70 hover:bg-ink/5 hover:text-red"

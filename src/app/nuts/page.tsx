@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
-import Photo from "@/components/Photo";
 import Reveal from "@/components/Reveal";
 import ProductCard from "@/components/ProductCard";
 import { products, shipping, formatUSD } from "@/data/shop";
@@ -88,12 +87,10 @@ export default function NutsPage() {
         </div>
       </section>
       <section className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
-        <div className="grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:items-center lg:gap-16">
+        <div className="grid gap-12 border-t border-ink/10 pt-12 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
           <Reveal>
-            <Photo name="nuts" ratio="feature" sizes="(min-width: 1024px) 45vw, 100vw" />
-          </Reveal>
-          <Reveal delay={110}>
-            <h2 className="font-display text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
+            <p className="eyebrow text-red">Roasted here</p>
+            <h2 className="mt-4 font-display text-3xl font-semibold leading-tight sm:text-4xl">
               The cashews and the red skins are the ones people come back for
             </h2>
             <p className="mt-5 text-[1.05rem] leading-relaxed text-ink/70">
@@ -101,7 +98,9 @@ export default function NutsPage() {
               Nothing sits. Orders go out fresh, which is the entire reason
               these are worth shipping.
             </p>
-            <p className="mt-4 text-[1.05rem] leading-relaxed text-ink/70">
+          </Reveal>
+          <Reveal delay={110}>
+            <p className="mt-0 text-[1.05rem] leading-relaxed text-ink/70 lg:mt-14">
               Holiday tins and larger orders are easiest over the phone. Call
               in November rather than the third week of December.
             </p>

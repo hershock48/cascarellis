@@ -99,7 +99,7 @@ export default function SiteHeader() {
             width={48}
             height={48}
             priority
-            className="badge-tilt h-11 w-11 shrink-0 sm:h-12 sm:w-12"
+            className="h-11 w-11 shrink-0 sm:h-12 sm:w-12"
           />
           <span className="block min-w-0">
             <span className="block truncate font-display text-2xl font-semibold tracking-tight text-ink sm:text-[1.7rem]">
@@ -133,7 +133,7 @@ export default function SiteHeader() {
           <CartButton />
           <a
             href={site.phoneHref}
-            className="hidden rounded-full bg-red px-6 py-3 text-sm font-semibold text-cream shadow-md shadow-red/25 transition-colors hover:bg-red-bright md:inline-block"
+            className="hidden rounded-sm bg-red px-6 py-3 text-sm font-semibold text-cream shadow-md shadow-red/25 transition-colors hover:bg-red-bright md:inline-block"
           >
             Call to Order
           </a>
@@ -143,7 +143,7 @@ export default function SiteHeader() {
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="grid h-11 w-11 place-items-center rounded-full border border-ink/15 text-ink lg:hidden"
+            className="grid h-11 w-11 place-items-center rounded-sm border border-ink/15 text-ink lg:hidden"
           >
             <span className="relative block h-3.5 w-5">
               <span
@@ -188,7 +188,7 @@ export default function SiteHeader() {
               <OpenNow />
               <a
                 href={site.phoneHref}
-                className="rounded-full bg-red px-6 py-4 text-center font-semibold text-cream"
+                className="rounded-sm bg-red px-6 py-4 text-center font-semibold text-cream"
               >
                 Call to Order {site.phone}
               </a>

@@ -12,7 +12,7 @@ export default function ProductCard({ product }: { product: Product }) {
   return (
     <div className="lift flex h-full flex-col rounded-panel border border-ink/10 bg-cream p-6">
       {product.featured && (
-        <span className="mb-3 self-start rounded-full bg-red/10 px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-wider text-red">
+        <span className="mb-3 self-start text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-red">
           House favorite
         </span>
       )}
@@ -37,7 +37,7 @@ export default function ProductCard({ product }: { product: Product }) {
                   type="button"
                   aria-pressed={active}
                   onClick={() => setSku(v.sku)}
-                  className={`rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${
+                  className={`rounded-sm border px-4 py-2 text-sm font-semibold transition-colors ${
                     active
                       ? "border-red bg-red text-cream"
                       : "border-ink/20 text-ink/70 hover:border-red hover:text-red"
@@ -58,7 +58,7 @@ export default function ProductCard({ product }: { product: Product }) {
         <button
           type="button"
           onClick={() => cart.add(selected.sku)}
-          className="rounded-full bg-ink px-6 py-3 text-sm font-semibold text-cream transition-colors hover:bg-red"
+          className="rounded-sm bg-ink px-6 py-3 text-sm font-semibold text-cream transition-colors hover:bg-red"
         >
           Add to order
         </button>

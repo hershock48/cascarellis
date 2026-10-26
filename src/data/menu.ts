@@ -239,8 +239,3 @@ export const drinks = {
   },
   toGo: "Pick up draft beer or wine to go on your way out.",
 };
-
-export const merch = {
-  heading: "Take something home",
-  blurb: "Handcrafted beer mugs, coffee mugs, insulated tumblers, hats and shirts, at the counter.",
-};

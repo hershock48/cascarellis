@@ -112,7 +112,7 @@ export default function MenuPage() {
                       {item.name}
                     </h3>
                     {item.popular && (
-                      <span className="shrink-0 rounded-full bg-red/10 px-2.5 py-0.5 text-[0.6rem] font-semibold uppercase tracking-wider text-red">
+                      <span className="shrink-0 text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-red">
                         Popular
                       </span>
                     )}
@@ -138,7 +138,7 @@ export default function MenuPage() {
                       {item.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="rounded-full border border-ink/15 px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-wider text-ink/65"
+                          className="rounded-sm border border-ink/15 px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-wider text-ink/65"
                         >
                           {tag}
                         </span>

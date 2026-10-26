@@ -36,7 +36,7 @@ export default function Photo({
   // Widened on purpose: the `as const` table makes each slot its own literal
   // type, and `position` is optional, so the union would refuse the read.
   const photo: PhotoEntry = photos[name];
-  const shape = `${ratioClass[ratio]} overflow-hidden rounded-2xl`;
+  const shape = `${ratioClass[ratio]} overflow-hidden rounded-sm`;
 
   if (photo.src) {
     return (

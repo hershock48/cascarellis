@@ -40,7 +40,7 @@ export default function SiteFooter() {
                 href={site.social.facebook}
                 target="_blank"
                 rel="noreferrer"
-                className="tap rounded-full border border-cream/20 px-5 text-xs font-semibold uppercase tracking-wider text-cream/80 transition-colors hover:border-gold hover:text-gold"
+                className="tap rounded-sm border border-cream/20 px-5 text-xs font-semibold uppercase tracking-wider text-cream/80 transition-colors hover:border-gold hover:text-gold"
               >
                 Facebook
               </a>
@@ -48,7 +48,7 @@ export default function SiteFooter() {
                 href={site.social.instagram}
                 target="_blank"
                 rel="noreferrer"
-                className="tap rounded-full border border-cream/20 px-5 text-xs font-semibold uppercase tracking-wider text-cream/80 transition-colors hover:border-gold hover:text-gold"
+                className="tap rounded-sm border border-cream/20 px-5 text-xs font-semibold uppercase tracking-wider text-cream/80 transition-colors hover:border-gold hover:text-gold"
               >
                 Instagram
               </a>

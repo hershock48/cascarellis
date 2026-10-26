@@ -12,7 +12,7 @@ export default function CartButton({ tone = "dark" }: { tone?: "dark" | "light" 
       type="button"
       onClick={() => cart.setOpen(true)}
       aria-label={`View your order, ${cart.count} ${cart.count === 1 ? "item" : "items"}`}
-      className={`relative inline-flex items-center gap-2 rounded-full border px-3 py-2.5 text-sm font-semibold transition-colors sm:px-4 ${
+      className={`relative inline-flex items-center gap-2 rounded-sm border px-3 py-2.5 text-sm font-semibold transition-colors sm:px-4 ${
         tone === "light"
           ? "border-cream/25 text-cream hover:border-gold hover:text-gold"
           : "border-ink/20 text-ink hover:border-red hover:text-red"
@@ -29,7 +29,7 @@ export default function CartButton({ tone = "dark" }: { tone?: "dark" | "light" 
       </svg>
       {/* The word only fits once the lockup is not fighting for the same row. */}
       <span className="hidden sm:inline">Order</span>
-      <span className="grid h-5 min-w-5 place-items-center rounded-full bg-red px-1.5 text-[0.7rem] font-bold text-cream tabular-nums">
+      <span className="grid h-5 min-w-5 place-items-center rounded-sm bg-red px-1.5 text-[0.7rem] font-bold text-cream tabular-nums">
         {cart.count}
       </span>
     </button>

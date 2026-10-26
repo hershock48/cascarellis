@@ -103,7 +103,7 @@ export default function ContactPage() {
                       href={href}
                       target="_blank"
                       rel="noreferrer"
-                      className="rounded-full border border-ink/20 px-5 py-2.5 text-sm font-semibold transition-colors hover:border-red hover:text-red"
+                      className="rounded-sm border border-ink/20 px-5 py-2.5 text-sm font-semibold transition-colors hover:border-red hover:text-red"
                     >
                       {label}
                     </a>

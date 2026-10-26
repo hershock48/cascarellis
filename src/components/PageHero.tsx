@@ -18,7 +18,7 @@ export default function PageHero({
     <section className="grain grain-dark relative isolate overflow-hidden bg-ink text-cream">
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-32 -top-48 h-[28rem] w-[28rem] rounded-full bg-red/25 blur-3xl"
+        className="pointer-events-none absolute -right-32 -top-48 h-[28rem] w-[28rem] rounded-sm bg-red/25 blur-3xl"
       />
       {/* hero-in staggers the children on load, same entrance as the homepage
           hero. Gated on .js and disabled under reduced motion in globals.css. */}
@@ -35,7 +35,7 @@ export default function PageHero({
         {cta && (
           <a
             href={site.phoneHref}
-            className="mt-8 inline-flex rounded-full bg-red px-7 py-3.5 font-semibold text-cream shadow-lg shadow-red/25 transition-colors hover:bg-red-bright"
+            className="mt-8 inline-flex rounded-sm bg-red px-7 py-3.5 font-semibold text-cream shadow-lg shadow-red/25 transition-colors hover:bg-red-bright"
           >
             Call to Order {site.phone}
           </a>

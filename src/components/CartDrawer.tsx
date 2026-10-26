@@ -110,7 +110,7 @@ export default function CartDrawer() {
             type="button"
             onClick={() => cart.setOpen(false)}
             aria-label="Close"
-            className="grid h-11 w-11 place-items-center rounded-full border border-ink/15 text-ink"
+            className="grid h-11 w-11 place-items-center rounded-sm border border-ink/15 text-ink"
           >
             <span aria-hidden>&times;</span>
           </button>
@@ -134,12 +134,12 @@ export default function CartDrawer() {
                       </p>
                       <p className="mt-0.5 text-sm text-ink/65">{hit.variant.label}</p>
 
-                      <div className="mt-3 inline-flex items-center rounded-full border border-ink/20">
+                      <div className="mt-3 inline-flex items-center rounded-sm border border-ink/20">
                         <button
                           type="button"
                           onClick={() => cart.setQty(line.sku, line.qty - 1)}
                           aria-label={`Remove one ${hit.product.name}`}
-                          className="grid h-9 w-9 place-items-center rounded-l-full text-ink/70 hover:text-red"
+                          className="grid h-9 w-9 place-items-center rounded-l-sm text-ink/70 hover:text-red"
                         >
                           &minus;
                         </button>
@@ -153,7 +153,7 @@ export default function CartDrawer() {
                           type="button"
                           onClick={() => cart.setQty(line.sku, line.qty + 1)}
                           aria-label={`Add one ${hit.product.name}`}
-                          className="grid h-9 w-9 place-items-center rounded-r-full text-ink/70 hover:text-red"
+                          className="grid h-9 w-9 place-items-center rounded-r-sm text-ink/70 hover:text-red"
                         >
                           +
                         </button>

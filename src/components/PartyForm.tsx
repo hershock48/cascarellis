@@ -60,7 +60,7 @@ export default function PartyForm() {
     return (
       <div
         role="status"
-        className="rounded-panel border border-red/20 bg-red/5 p-8 text-center sm:p-10"
+        className="rounded-panel border border-gold/30 bg-cream-dim p-8 text-center text-ink sm:p-10"
       >
         <span aria-hidden className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-red/10 text-2xl text-red">
           &#10003;
@@ -80,7 +80,7 @@ export default function PartyForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="rounded-panel border border-ink/12 bg-cream-dim p-6 sm:p-8">
+    <form onSubmit={onSubmit} className="rounded-panel border border-ink/12 bg-cream-dim p-6 text-ink sm:p-8">
       <h3 className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">
         Ask about a party
       </h3>

@@ -1,11 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-  /* Moody tavern palette, second pass. The first cut was bright-trattoria
-     (fire-engine #c1272d, sunny #e0a526 gold, near-white cream) and read
-     nothing like the house style: louies runs #0b0705, copperac's whole body
-     is #0d0d0d. Deepened across the board, and --color-red is now EXACTLY
-     the badge's oxblood, so the palette is anchored to their actual mark. */
+  /* Moody tavern palette, third pass. The badge's oxblood is --color-red
+     exactly, so the palette is anchored to their actual mark. The basil green
+     and the cheese yellow of the second pass are gone: with the red and the
+     cream they added up to the Italian-flag pizzeria cliché, which is the
+     cartoon register this site is climbing out of. Three colours do the
+     page, and gold is a hairline and an eyebrow, never a ground. */
   --color-ink: #140e0a;
   --color-ink-soft: #221812;
   --color-cream: #f7eedd;
@@ -13,26 +14,28 @@
   --color-red: #8f1a20;
   --color-red-bright: #a82228;
   --color-red-deep: #6d1216;
-  --color-basil: #1b3326;
   --color-gold: #c9973c;
 
   --font-display: var(--font-display), "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
   --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
 
-  /* Generous, friendly radii. */
-  --radius-card: 1.25rem;
-  --radius-panel: 1.75rem;
+  /* Corners: three pixels. The second pass ran 20px cards, 28px panels and
+     pill buttons everywhere, and round reads as soft and soft reads as toy.
+     Copper runs rounded-sm; Devine's rule is hairlines instead of boxes. The
+     tokens stay so the class names did not need touching. */
+  --radius-card: 3px;
+  --radius-panel: 3px;
 }
 
 /*
-  The display face is condensed (layout.tsx says why), and condensed type
-  closes up on its own; the tracking-tight the serif headings were set with
-  jams it. This rule is deliberately OUTSIDE every layer so it outranks the
-  layered tracking utilities on the same element: a hair of positive tracking
-  and the sentence-case headings read as signage rather than a crush.
+  The display face is a condensed gothic (layout.tsx says why), set in caps
+  with a hair of tracking: signage, the register the badge is lettered in.
+  This rule is deliberately OUTSIDE every layer so it outranks the layered
+  tracking-tight utilities the earlier serif headings were set with.
 */
 .font-display {
-  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 @layer base {
@@ -55,7 +58,12 @@
   :focus-visible {
     outline: 2px solid var(--color-red);
     outline-offset: 3px;
-    border-radius: 4px;
+    border-radius: 2px;
+  }
+
+  /* Tailwind 4's preflight leaves <button> on the arrow cursor. */
+  button:not(:disabled) {
+    cursor: pointer;
   }
 
   /*
@@ -94,33 +102,32 @@
     opacity: 0.2;
   }
 
-  /* Primary action. Used for every Call to Order. */
+  /* Primary action. Used for every Call to Order. A rectangle, no lift. */
   .btn-primary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    border-radius: 9999px;
+    border-radius: var(--radius-card);
     background-color: var(--color-red);
     padding: 1rem 2rem;
     font-weight: 600;
     color: var(--color-cream);
-    box-shadow: 0 10px 24px -12px color-mix(in srgb, var(--color-red) 70%, transparent);
-    transition: transform 0.15s ease, background-color 0.15s ease;
+    transition: background-color 0.15s ease;
   }
 
   .btn-primary:hover {
     background-color: var(--color-red-bright);
-    transform: translateY(-1px);
   }
 
+  /* Secondary on a light ground. */
   .btn-secondary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    border-radius: 9999px;
-    border: 1.5px solid color-mix(in srgb, var(--color-ink) 20%, transparent);
+    border-radius: var(--radius-card);
+    border: 1px solid color-mix(in srgb, var(--color-ink) 30%, transparent);
     padding: 1rem 2rem;
     font-weight: 600;
     color: var(--color-ink);
@@ -130,6 +137,33 @@
   .btn-secondary:hover {
     border-color: var(--color-red);
     color: var(--color-red);
+  }
+
+  /* Secondary on a dark ground. */
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: var(--radius-card);
+    border: 1px solid color-mix(in srgb, var(--color-cream) 30%, transparent);
+    padding: 1rem 2rem;
+    font-weight: 600;
+    color: var(--color-cream);
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--color-gold);
+    color: var(--color-gold);
+  }
+
+  /* The small uppercase line above a heading. Gold on dark, red on cream. */
+  .eyebrow {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
   }
 
   /*
@@ -142,8 +176,7 @@
 
   /*
     Anchor targets have to clear the header AND the sub nav, or a jump link
-    parks the heading underneath both. Measured stack is 127px on mobile and
-    168px on desktop, plus breathing room.
+    parks the heading underneath both.
   */
   .anchor-offset {
     scroll-margin-top: calc(var(--header-h) + var(--subnav-h) + 1.5rem);
@@ -166,8 +199,10 @@
 
 /* ---------------------------------------------------------------------------
    Motion
-   Everything here is CSS. No animation library, so the JS bundle stays empty
-   and none of it blocks paint.
+   Everything here is CSS. What is left after the third pass: the scroll
+   reveal, the hero's entrance, the nav underline, and the header's hairline.
+   The cheese drip, the marquee, the pizza pull and the tilting badge are
+   gone, and so is the card bounce; see the README for why.
    --------------------------------------------------------------------------- */
 
 @layer components {
@@ -187,17 +222,10 @@
     transform: none;
   }
 
-  /* Cards lift, and any photo inside eases in slightly. */
+  /* A hover that says "this is a link" and nothing else: the border warms,
+     and a photo inside eases in by two percent. No translate, no shadow. */
   .lift {
-    transition:
-      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-      box-shadow 0.35s ease,
-      border-color 0.35s ease;
-  }
-
-  .lift:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 18px 40px -24px color-mix(in srgb, var(--color-ink) 55%, transparent);
+    transition: border-color 0.3s ease;
   }
 
   .lift img {
@@ -205,7 +233,7 @@
   }
 
   .lift:hover img {
-    transform: scale(1.04);
+    transform: scale(1.02);
   }
 
   /* Nav underline grows from the left on hover. */
@@ -216,7 +244,6 @@
     bottom: -0.35rem;
     height: 2px;
     width: 100%;
-    border-radius: 9999px;
     background-color: var(--color-red);
     transform: scaleX(0);
     transform-origin: left;
@@ -228,47 +255,7 @@
     transform: scaleX(1);
   }
 
-  /* Marquee.
-     The animated element is .marquee-inner, two copies of the track. Mobile
-     GPUs stop compositing a layer past ~4096px, at which point iOS Safari can
-     decline to animate at all, so the doubled track is a hard budget: keep it
-     under 4096px. The item list in Marquee.tsx is what spends it; the measured
-     width ships in a comment there. */
-  .marquee {
-    overflow: hidden;
-  }
-
-  .marquee-inner {
-    display: flex;
-    width: max-content;
-    animation: marquee-scroll 46s linear infinite;
-  }
-
-  .marquee:hover .marquee-inner {
-    animation-play-state: paused;
-  }
-
-  .marquee-track {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    padding-right: 2rem;
-    font-size: 0.82rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-  }
-
-  @keyframes marquee-scroll {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-50%);
-    }
-  }
-
-  /* Hero entrance, staggered by nth-child rather than per-element delays. */
+  /* Hero entrance: the children rise in sequence, once, on load. */
   .js .hero-in > * {
     animation: hero-rise 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
@@ -278,6 +265,7 @@
   .js .hero-in > *:nth-child(3) { animation-delay: 0.23s; }
   .js .hero-in > *:nth-child(4) { animation-delay: 0.32s; }
   .js .hero-in > *:nth-child(5) { animation-delay: 0.41s; }
+  .js .hero-in > *:nth-child(6) { animation-delay: 0.5s; }
 
   @keyframes hero-rise {
     from {
@@ -290,218 +278,13 @@
     }
   }
 
-  /* ---------------------------------------------------------------------
-     Cheese drip. The signature motion, and the pizzeria equivalent of the
-     Glazed Web glaze drip. Transforms only, so it never triggers layout.
-     --------------------------------------------------------------------- */
-
-  .cheese-drip {
-    /* Hangs below the section it belongs to without affecting layout. */
-    height: 0;
-    transform: translateY(-1px);
-  }
-
-  .cheese-edge {
-    height: 56px;
-    background-color: var(--cheese);
-    -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27240%27%20height%3D%2756%27%20viewBox%3D%270%200%20240%2056%27%3E%3Cpath%20d%3D%27M0%2C0%20H240%20V18%20C228%2C18%20226%2C44%20214%2C44%20C202%2C44%20200%2C18%20188%2C18%20C176%2C18%20174%2C32%20164%2C32%20C154%2C32%20152%2C18%20142%2C18%20C128%2C18%20126%2C52%20112%2C52%20C98%2C52%2096%2C18%2084%2C18%20C72%2C18%2070%2C30%2060%2C30%20C50%2C30%2048%2C18%2038%2C18%20C26%2C18%2024%2C42%2012%2C42%20C2%2C42%202%2C18%200%2C18%20Z%27%20fill%3D%27%23000%27%2F%3E%3C%2Fsvg%3E");
-    mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27240%27%20height%3D%2756%27%20viewBox%3D%270%200%20240%2056%27%3E%3Cpath%20d%3D%27M0%2C0%20H240%20V18%20C228%2C18%20226%2C44%20214%2C44%20C202%2C44%20200%2C18%20188%2C18%20C176%2C18%20174%2C32%20164%2C32%20C154%2C32%20152%2C18%20142%2C18%20C128%2C18%20126%2C52%20112%2C52%20C98%2C52%2096%2C18%2084%2C18%20C72%2C18%2070%2C30%2060%2C30%20C50%2C30%2048%2C18%2038%2C18%20C26%2C18%2024%2C42%2012%2C42%20C2%2C42%202%2C18%200%2C18%20Z%27%20fill%3D%27%23000%27%2F%3E%3C%2Fsvg%3E");
-    -webkit-mask-repeat: repeat-x;
-    mask-repeat: repeat-x;
-    -webkit-mask-size: 240px 56px;
-    mask-size: 240px 56px;
-    transform-origin: top center;
-    animation: cheese-ooze 9s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
-    will-change: transform;
-  }
-
-  @keyframes cheese-ooze {
-    from {
-      transform: scaleY(0.88);
-    }
-    to {
-      transform: scaleY(1.1);
-    }
-  }
-
-  /* A drop lets go, falls, fades. Long loops so it reads as incidental. */
-  .cheese-fall {
-    position: absolute;
-    top: 30px;
-    display: block;
-    width: 9px;
-    height: 12px;
-    border-radius: 9999px 9999px 55% 55%;
-    background-color: var(--cheese);
-    opacity: 0;
-    animation-name: cheese-drop-fall;
-    animation-timing-function: cubic-bezier(0.45, 0, 0.9, 1);
-    animation-iteration-count: infinite;
-  }
-
-  .cheese-fall-a {
-    left: calc(50% - 128px);
-    animation-duration: 12s;
-    animation-delay: 4s;
-  }
-
-  .cheese-fall-b {
-    left: calc(50% + 184px);
-    width: 7px;
-    height: 10px;
-    animation-duration: 16s;
-    animation-delay: 10s;
-  }
-
-  @keyframes cheese-drop-fall {
-    0%,
-    58% {
-      opacity: 0;
-      transform: translateY(0) scale(0.5);
-    }
-    64% {
-      opacity: 1;
-      transform: translateY(16px) scale(1);
-    }
-    90% {
-      opacity: 1;
-      transform: translateY(96px) scale(0.85);
-    }
-    100% {
-      opacity: 0;
-      transform: translateY(130px) scale(0.7);
-    }
-  }
-
-  /* Header compacts and gains a hairline once you scroll off the top. */
+  /* Header gains a hairline shadow once you scroll off the top. */
   .site-header {
     transition: box-shadow 0.3s ease, background-color 0.3s ease;
   }
 
   .site-header[data-stuck] {
     box-shadow: 0 6px 24px -18px color-mix(in srgb, var(--color-ink) 70%, transparent);
-  }
-
-  /* The badge gives a small twist when you hover the lockup. Brand doing
-     something, rather than a generic effect: the mark is a round pizza badge,
-     so it turns. 10deg on the 44px header mark travels about 4px at the rim,
-     present but quiet. */
-  .badge-tilt {
-    transition: transform 0.5s cubic-bezier(0.34, 1.32, 0.5, 1);
-  }
-
-  .group:hover .badge-tilt,
-  .group:focus-visible .badge-tilt {
-    transform: rotate(10deg);
-  }
-
-  /* ---------------------------------------------------------------------
-     Pizza reveal (PizzaReveal.tsx). One 3.4s timeline shared by four
-     elements, choreographed by percentage:
-       0-15%   the whole pie sits over the badge, a held beat
-       15-45%  the slice pulls out to the right, cheese strings stretching
-       45-48%  the strings snap and vanish
-       60-85%  the rest of the pie shrinks away, badge pops into place
-     The pie, strings and slice default to opacity 0: their animations are
-     what make them visible, and the animations are gated on .js, so no-JS
-     and reduced motion (which sets animation: none globally below) both get
-     the finished badge and nothing else. Transforms and opacity only.
-     --------------------------------------------------------------------- */
-  /* No will-change here: the animation promotes these layers while it runs,
-     and a permanent hint would hold three container-sized GPU layers for
-     elements that sit invisible after the one-shot reveal ends.
-
-     One duration for all four timelines, single-sourced as --pz-t: the
-     keyframes choreograph by percentage, so four equal literals would stay
-     in sync only by accident. Retune the tempo here and only here. */
-  .pz-stage {
-    --pz-t: 3.4s;
-  }
-
-  .pz-pie,
-  .pz-strings,
-  .pz-slice {
-    opacity: 0;
-  }
-
-  .js .pz-pie {
-    animation: pz-pie var(--pz-t) cubic-bezier(0.45, 0, 0.25, 1) both;
-  }
-
-  .js .pz-strings {
-    animation: pz-strings var(--pz-t) cubic-bezier(0.3, 0, 0.4, 1) both;
-  }
-
-  .js .pz-slice {
-    animation: pz-slice var(--pz-t) cubic-bezier(0.42, 0, 0.3, 1) both;
-  }
-
-  .js .pz-logo {
-    animation: pz-logo var(--pz-t) cubic-bezier(0.34, 1.3, 0.5, 1) both;
-  }
-
-  @keyframes pz-pie {
-    0%,
-    60% {
-      opacity: 1;
-      transform: none;
-    }
-    85%,
-    100% {
-      opacity: 0;
-      transform: scale(0.9) rotate(-5deg);
-    }
-  }
-
-  @keyframes pz-slice {
-    0%,
-    15% {
-      opacity: 1;
-      transform: none;
-    }
-    45% {
-      opacity: 1;
-      transform: translate(15%, -5%) rotate(9deg);
-    }
-    70%,
-    100% {
-      opacity: 0;
-      transform: translate(45%, -14%) rotate(14deg);
-    }
-  }
-
-  @keyframes pz-strings {
-    0%,
-    14% {
-      opacity: 0;
-      transform: scaleX(0.12);
-    }
-    18% {
-      opacity: 0.95;
-      transform: scaleX(0.3);
-    }
-    44% {
-      opacity: 0.95;
-      transform: scaleX(1.28);
-    }
-    48%,
-    100% {
-      opacity: 0;
-      transform: scaleX(1.38);
-    }
-  }
-
-  @keyframes pz-logo {
-    0%,
-    55% {
-      transform: scale(0.94);
-    }
-    82% {
-      transform: scale(1.015);
-    }
-    100% {
-      transform: none;
-    }
   }
 }
 
@@ -518,28 +301,17 @@
     transition: none !important;
   }
 
-  /* The cheese edge stays drawn at rest; the falling drops stay gone. */
-  .cheese-fall {
-    opacity: 0 !important;
-  }
-
-  .lift:hover,
-  .lift:hover img,
-  .group:hover .badge-tilt,
-  .group:focus-visible .badge-tilt {
+  .lift:hover img {
     transform: none;
   }
 
   /* animation: none rather than a near-zero duration, because a clamped
      duration still reports its animation-name and the motion audit asserts
-     none on every element. The universal rule also catches what an itemized
-     list forgets: an earlier version named .cheese-drop, a class that does
-     not exist, and missed .cheese-edge and Tailwind's animate-ping.
+     none on every element.
 
      THE CONTRACT THIS CREATES: any new element that is hidden by default and
-     made visible BY its animation (the hero-in / pz-* house pattern) must
-     add an explicit restore above, or reduced-motion visitors get a hole in
-     the page. Check this block whenever a new keyframe lands. */
+     made visible BY its animation (the hero-in pattern) must add an explicit
+     restore above, or reduced-motion visitors get a hole in the page. */
   *,
   *::before,
   *::after {

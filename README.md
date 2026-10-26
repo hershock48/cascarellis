@@ -45,6 +45,32 @@ Based on current restaurant web practice, where 70%+ of traffic is mobile:
 - Live open/closed status computed in America/Detroit
 - Restaurant JSON-LD with hours, rating, reservations and menu URL
 
+## The design, third pass
+
+The second pass read as a cartoon, and the owner said so. What made it one,
+and what replaced it:
+
+- **Devices.** A cheese drip with falling drops, a drawn pizza pulling a
+  slice off the badge, a scrolling ticker, bouncing cards and a tilting
+  logo. All gone. The badge is a seal in the story block, not a stage.
+- **Shapes.** Pill buttons and 28px panels everywhere. Corners are 3px now,
+  and the only circles are the badge and the open-now dot. Hairlines do the
+  work boxes did.
+- **Colour.** Oxblood, cream, basil green and cheese yellow together are the
+  Italian-flag pizzeria cliché. The page runs ink, cream and oxblood; gold
+  is a hairline and an eyebrow, never a ground. One ground per page: the
+  home, About and Events pages are ink, and the menu, drinks, nuts and
+  contact pages are cream because menus read better there.
+- **Type.** Barlow Condensed in caps for display, Inter for reading. The
+  badge is lettered in a condensed gothic and the headings now match it.
+- **Layout.** The homepage opens with the thing nobody else has, ninety
+  years on one corner, and tells it in words from the About page. Six
+  photographs are used large and sparingly; nothing on a live page waits on
+  a photograph that has not been taken.
+
+The site is still Cascarelli's: every claim and heading is theirs. What
+changed is the register.
+
 ## Stack
 
 Next.js 16 App Router, TypeScript, Tailwind v4. Every page is statically
@@ -93,9 +119,9 @@ nuts, the piano on a Wednesday, and the banquet room set for a party. The
 MacCarelli, Porky's and the Flat Iron Salad would earn their way back onto
 the homepage with a photo each.
 
-The hero stays the badge animation on purpose: on a phone a hero photo pushes
-Call to Order below the fold, which True North measured and reverted. The
-food starts one scroll down.
+The pizza owns the hero, beside the headline rather than behind it: on a
+phone the text comes first so Call to Order stays above the fold, which is
+the problem True North measured with a photo-above-text hero.
 
 Cascarelli's own photos, from their gallery, Facebook and Instagram
 (`@cascarellisofhomer`), are theirs to license. Yelp and Untappd photos belong
