@@ -18,7 +18,9 @@ export default function OpenNow({ tone = "dark" }: { tone?: "dark" | "light" }) 
         weekday: "short",
         hour: "numeric",
         minute: "numeric",
-        hour12: false,
+        // h23, not hour12:false: the latter is allowed to render midnight as
+        // "24", which put 00:30 a day ahead ("opens tomorrow at 11am").
+        hourCycle: "h23",
       }).formatToParts(new Date());
 
       const get = (t: string) => parts.find((p) => p.type === t)?.value ?? "";

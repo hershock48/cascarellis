@@ -24,6 +24,11 @@ type CartValue = {
   clear: () => void;
   open: boolean;
   setOpen: (v: boolean) => void;
+  /** True once the saved cart has been read back from storage. Anything that
+      wants to replace the cart on mount must wait for this: child effects run
+      before the provider's restore effect, so an unguarded clear() on mount is
+      overwritten by the restore a moment later. */
+  hydrated: boolean;
 };
 
 const CartContext = createContext<CartValue | null>(null);
@@ -127,6 +132,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     clear,
     open,
     setOpen,
+    hydrated,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

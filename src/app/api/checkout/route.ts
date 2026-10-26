@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import { findSku, shipping } from "@/data/shop";
-import { site } from "@/data/site";
+import { trustedOrigin } from "@/lib/siteUrl";
 
 export const runtime = "nodejs";
 
@@ -94,8 +94,9 @@ export async function POST(request: Request) {
   const freeShipping = subtotal >= shipping.freeThreshold;
 
   const stripe = new Stripe(secret);
-  const origin =
-    request.headers.get("origin") ?? process.env.NEXT_PUBLIC_SITE_URL ?? site.url;
+  // Only an Origin this deployment actually serves may choose where Stripe
+  // sends the customer back; see trustedOrigin for the forged-header case.
+  const origin = trustedOrigin(request.headers.get("origin"));
 
   try {
     const session = await stripe.checkout.sessions.create({

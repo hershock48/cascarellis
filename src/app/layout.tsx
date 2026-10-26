@@ -7,6 +7,7 @@ import OrderBar from "@/components/OrderBar";
 import CartDrawer from "@/components/CartDrawer";
 import { CartProvider } from "@/lib/cart";
 import { site } from "@/data/site";
+import { siteUrl } from "@/lib/siteUrl";
 
 /**
  * Fraunces for display: a warm, slightly wonky vintage serif whose optical
@@ -38,18 +39,9 @@ const body = Nunito_Sans({
   display: "swap",
 });
 
-/**
- * The URL absolute metadata resolves against. site.url is cascarellis.com,
- * which today still points at their OLD site (wrong TLS cert, 302s to HTML),
- * so share images built on it were unreachable for every scraper. Until the
- * domain cuts over, prefer the host actually serving this deployment; after
- * cutover, set NEXT_PUBLIC_SITE_URL=https://cascarellis.com in Vercel.
- */
-const baseUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : site.url);
+/** The URL absolute metadata resolves against. The reasoning, and the
+    checkout route's use of the same answer, live in src/lib/siteUrl.ts. */
+const baseUrl = siteUrl();
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
