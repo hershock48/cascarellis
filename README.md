@@ -47,8 +47,10 @@ Based on current restaurant web practice, where 70%+ of traffic is mobile:
 
 ## Stack
 
-Next.js 16 App Router, TypeScript, Tailwind v4. Every route statically
-prerendered. No external JS dependencies.
+Next.js 16 App Router, TypeScript, Tailwind v4. Every page is statically
+prerendered except `/drinks`, which revalidates every minute from the live
+bar feed. Two route handlers: Stripe Checkout for the nuts, Resend for the
+party form. `sharp` ships with Next and is what `tools/` uses for photos.
 
 ## Pages
 
@@ -57,7 +59,10 @@ prerendered. No external JS dependencies.
 ## Editing content
 
 - `src/data/site.ts` — hours, address, phone, socials, reservations, live music
-- `src/data/menu.ts` — menu sections and items, best sellers, nuts, drinks
+- `src/data/menu.ts` — menu sections and items, the homepage trio, nuts
+- `src/data/bar.ts` — the full bar program: taps, wine, cocktails, zero proof
+  (the snapshot; `src/data/liveBar.ts` overlays the Scooplist feed per section)
+- `src/data/shop.ts` — the nut shop catalog and shipping. Prices are placeholders.
 - `src/data/photos.ts` — photo slots
 
 Change the hours in one place and the header badge, footer, contact table and
@@ -65,9 +70,32 @@ JSON-LD all update together.
 
 ## Photos
 
-Nine slots are placed and sized. Empty ones render a styled placeholder naming
-the shot, so the layout never shifts. Drop a file in `public/photos/`, set
-`src` in `src/data/photos.ts`, done. `heroPizza` is the one to chase first.
+Six kitchen shots are in, all Cascarelli's own, taken out front in August
+2026: the pizza, a calzone, a flatbread, the steak alfredo, the cheese bread
+and the burger. They run on the homepage ("What's good here") and above
+their sections on `/menu`, and the pizza is the link card every share shows.
+
+One command per new shot, then one line:
+
+```bash
+node tools/ingest-photo.mjs ~/Downloads/IMG_1234.jpg burger
+# writes public/photos/burger.jpg: rotated, EXIF stripped, 1600px, JPEG q82
+```
+
+then set `src: "/photos/burger.jpg"` on that slot in `src/data/photos.ts`.
+Each slot carries a `position` for the crop, because every plate shot has
+the storefront in the top half and the food in the bottom. Empty slots render
+a styled placeholder naming the shot, so the layout never shifts. If the
+pizza is ever reshot, `node tools/og-card.mjs` re-cuts the link card.
+
+Still to shoot, in the order they matter: the dining room, the tap wall, the
+nuts, the piano on a Wednesday, and the banquet room set for a party. The
+MacCarelli, Porky's and the Flat Iron Salad would earn their way back onto
+the homepage with a photo each.
+
+The hero stays the badge animation on purpose: on a phone a hero photo pushes
+Call to Order below the fold, which True North measured and reverted. The
+food starts one scroll down.
 
 Cascarelli's own photos, from their gallery, Facebook and Instagram
 (`@cascarellisofhomer`), are theirs to license. Yelp and Untappd photos belong
@@ -75,12 +103,35 @@ to the customers who took them.
 
 ## Still needs the owner
 
-1. **Prices.** Not published anywhere public.
+1. **Prices.** Not published anywhere public. The nut shop prices in
+   `src/data/shop.ts` are placeholders too.
 2. **Menu accuracy.** MacCarelli, Baby's Chicken Pie and Annie's Bread came
-   from customer reviews, not from Cascarelli's. Confirm spellings.
+   from customer reviews, not from Cascarelli's. Confirm spellings. The
+   photographs show dishes the old site never listed: a calzone (now on the
+   menu page, unpriced), a steak alfredo, and a flatbread with lettuce and
+   tomato. Confirm what each is called.
 3. **The weekday and weekend menus.** Their site runs two and the split is
    scaffolded, but the actual differences need filling in.
-4. **Photos.**
+4. **Photos** of the room, the taps, the nuts, the piano and the banquet room.
+5. **Tax.** Stripe Tax is off until their accountant says which nuts are
+   taxable in Michigan. The drawer says tax is calculated at checkout; today
+   nothing is.
+
+## Before launch
+
+This is a spec build on a Glazed Web hostname, so it is deliberately
+invisible to search engines. The day it becomes their site:
+
+1. Remove the `X-Robots-Tag` header in `next.config.ts` and flip
+   `src/app/robots.ts` to allow. Both, same commit.
+2. Set `NEXT_PUBLIC_SITE_URL=https://cascarellis.com` in Vercel so the link
+   card and structured data resolve on their domain.
+3. Swap `STRIPE_SECRET_KEY` to the live key in their own Stripe account, and
+   set the real nut prices.
+4. Set `RESEND_API_KEY`, `INQUIRY_FROM` and `INQUIRY_TO`, and send one test
+   inquiry that a human confirms receiving. Or swap the route to SMTP through
+   a mailbox they already own (see `.env.example`).
+5. Decide Stripe Tax with their accountant and turn on `automatic_tax`.
 
 ## Running it
 

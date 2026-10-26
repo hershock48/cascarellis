@@ -9,6 +9,8 @@
  * renders in the right hand column automatically.
  */
 
+import type { PhotoKey } from "@/data/photos";
+
 export type MenuItem = {
   name: string;
   description?: string;
@@ -16,29 +18,49 @@ export type MenuItem = {
   tags?: string[];
   /** Shows a "Popular" marker. Trend research: answers "what's good here?" fast. */
   popular?: boolean;
+  /** Slot in src/data/photos.ts, for the homepage cards. */
+  photo?: PhotoKey;
 };
 
-export type MenuSection = { id: string; title: string; blurb?: string; items: MenuItem[] };
+export type MenuSection = {
+  id: string;
+  title: string;
+  blurb?: string;
+  items: MenuItem[];
+  /** Slots in src/data/photos.ts shown above the section on /menu. Slots
+      without a file yet are skipped there, not placeholdered. */
+  photos?: PhotoKey[];
+};
 
-/** The best sellers block on the homepage. */
+/**
+ * The "What's good here" block on the homepage: the dishes Cascarelli's
+ * chose to photograph, which is a better answer to that question than the
+ * review mining the block started from. The MacCarelli, Porky's and the Flat
+ * Iron Salad keep their Popular markers on the menu page; when they get
+ * shot, they can come back up here.
+ *
+ * Descriptions say what is in the photograph and nothing the photograph
+ * does not show. The burger joins the trio once its file lands (photos.ts).
+ */
 export const bestSellers: MenuItem[] = [
   {
-    name: "The MacCarelli",
+    name: "Pizza",
     description:
-      "Our take on a classic burger, on a pizza. Thousand Island, seasoned beef, onion, dill pickle relish, mozzarella and cheddar, finished with shredded lettuce.",
+      "Homemade crust and house sauce, built to order the way it has been since 1965. This one is chicken and mushroom under a heavy hand of mozzarella.",
     popular: true,
+    photo: "pizza",
   },
   {
-    name: "Porky's Meat Lovers Dream",
+    name: "Steak Alfredo",
     description:
-      "Pepperoni, sausage, bacon and ham. The one to order when nobody at the table wants to compromise.",
-    popular: true,
+      "Seared steak over fettuccine in cream sauce, finished with shaved Parmesan and fresh basil. Garlic toast on the side.",
+    photo: "steakAlfredo",
   },
   {
-    name: "Flat Iron Salad",
+    name: "Annie's Bread",
     description:
-      "Flat iron steak, mushrooms, grilled asparagus and blue cheese vinaigrette over fresh greens.",
-    popular: true,
+      "Pull-apart bread baked with mozzarella inside, brushed with garlic butter, with marinara for dipping.",
+    photo: "cheeseBread",
   },
 ];
 
@@ -61,6 +83,7 @@ export const menu: MenuSection[] = [
     title: "Pizza",
     blurb:
       "Homemade and built to order, the way we have made them since 1965. Gluten free crust available.",
+    photos: ["pizza", "calzone", "flatbread"],
     items: [
       {
         name: "The MacCarelli",
@@ -92,11 +115,18 @@ export const menu: MenuSection[] = [
         description: "Start with cheese and add whatever you like.",
         tags: ["Gluten free crust available"],
       },
+      {
+        /* Not on their old site's menu; it is in their own photographs. */
+        name: "Calzone",
+        description:
+          "Pizza dough folded over the fillings and baked until golden, with a side of marinara for dipping.",
+      },
     ],
   },
   {
     id: "starters",
     title: "Starters and Soups",
+    photos: ["cheeseBread"],
     items: [
       { name: "Annie's Bread", description: "Baked fresh, with cheese inside." },
       { name: "Artichoke Dip", description: "Baked hot and served with warm pita." },
@@ -134,6 +164,7 @@ export const menu: MenuSection[] = [
   {
     id: "sandwiches",
     title: "Sandwiches and Burgers",
+    photos: ["burger"],
     items: [
       { name: "Meatball Sandwich", description: "House meatballs, sauce and melted cheese." },
       { name: "Turkey Club", description: "Triple decker with bacon, lettuce and tomato." },
@@ -144,6 +175,7 @@ export const menu: MenuSection[] = [
   {
     id: "pasta",
     title: "Pasta",
+    photos: ["steakAlfredo"],
     items: [
       { name: "Spaghetti and Meatballs", description: "House sauce and meatballs, with bread." },
       { name: "Chicken Alfredo", description: "Cream sauce and grilled chicken." },

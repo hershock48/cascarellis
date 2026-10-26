@@ -72,15 +72,27 @@ export const metadata: Metadata = {
      root values were shipping identically on all 8 routes and drowning the
      per-page titles. With them absent, scrapers fall back to each page's own
      <title> and meta description; the image and site identity stay shared. */
+  /* The link card is the pizza, not the badge: a share of a restaurant site
+     should look like food. 1200x630 JPEG, JPEG on purpose because some
+     previewers still will not render WebP; cut by tools/og-card.mjs with the
+     pie centred so the 630px square iOS shows keeps the whole pie. Declared
+     once, here; pages set only title and description (see above). */
   openGraph: {
     type: "website",
     locale: "en_US",
     siteName: site.name,
-    images: [{ url: "/logo-color.png", width: 640, height: 640, alt: `${site.name} logo` }],
+    images: [
+      {
+        url: "/og/pizza.jpg",
+        width: 1200,
+        height: 630,
+        alt: `A whole pizza on a tray outside ${site.shortName} on Main Street in Homer`,
+      },
+    ],
   },
   twitter: {
-    card: "summary",
-    images: ["/logo-color.png"],
+    card: "summary_large_image",
+    images: ["/og/pizza.jpg"],
   },
   /* No `icons` entry: src/app/favicon.ico (5KB, cut from the color badge)
      serves the tab icon via the file convention. Pointing metadata at the
@@ -96,7 +108,7 @@ const jsonLd = {
   description: site.blurb,
   url: site.url,
   logo: `${baseUrl}/logo-color.png`,
-  image: `${baseUrl}/logo-color.png`,
+  image: [`${baseUrl}/og/pizza.jpg`, `${baseUrl}/photos/pizza.jpg`, `${baseUrl}/logo-color.png`],
   telephone: site.phone,
   servesCuisine: ["Pizza", "Italian American", "American"],
   priceRange: "$$",

@@ -27,12 +27,6 @@ const categories = [
   },
 ];
 
-const photoOf: Record<string, "macCarelli" | "porkys" | "flatIron"> = {
-  "The MacCarelli": "macCarelli",
-  "Porky's Meat Lovers Dream": "porkys",
-  "Flat Iron Salad": "flatIron",
-};
-
 export default function Home() {
   return (
     <>
@@ -139,7 +133,7 @@ export default function Home() {
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <p className="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-red">
-              Most ordered
+              House favorites
             </p>
             <h2 className="mt-3 font-display text-4xl font-semibold tracking-tight sm:text-5xl">
               What&rsquo;s good here
@@ -159,12 +153,14 @@ export default function Home() {
               delay={i * 90}
               className="lift group overflow-hidden rounded-panel border border-ink/10 bg-cream shadow-sm"
             >
-              <Photo
-                name={photoOf[item.name]}
-                ratio="wide"
-                sizes="(min-width: 768px) 33vw, 100vw"
-                className="!rounded-none border-0"
-              />
+              {item.photo && (
+                <Photo
+                  name={item.photo}
+                  ratio="wide"
+                  sizes="(min-width: 768px) 33vw, 100vw"
+                  className="!rounded-none border-0"
+                />
+              )}
               <div className="p-6">
                 <div className="flex items-start justify-between gap-3">
                   <h3 className="font-display text-2xl font-semibold leading-tight tracking-tight">

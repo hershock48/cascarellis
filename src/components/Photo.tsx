@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { photos, type PhotoKey } from "@/data/photos";
+import { photos, type Photo as PhotoEntry, type PhotoKey } from "@/data/photos";
 
 type Ratio = "wide" | "feature" | "square" | "tall";
 
@@ -33,7 +33,9 @@ export default function Photo({
   className?: string;
   tone?: "light" | "dark";
 }) {
-  const photo = photos[name];
+  // Widened on purpose: the `as const` table makes each slot its own literal
+  // type, and `position` is optional, so the union would refuse the read.
+  const photo: PhotoEntry = photos[name];
   const shape = `${ratioClass[ratio]} overflow-hidden rounded-2xl`;
 
   if (photo.src) {
@@ -46,6 +48,7 @@ export default function Photo({
           sizes={sizes}
           priority={priority}
           className="object-cover"
+          style={photo.position ? { objectPosition: photo.position } : undefined}
         />
       </div>
     );

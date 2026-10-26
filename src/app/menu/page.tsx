@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import MenuSubnav from "@/components/MenuSubnav";
+import Photo from "@/components/Photo";
 import Reveal from "@/components/Reveal";
 import { menu, menus } from "@/data/menu";
+import { photos, type PhotoKey } from "@/data/photos";
 import { site } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -11,6 +13,39 @@ export const metadata: Metadata = {
     "Homemade pizza, sandwiches, burgers, soups and salads at Cascarelli's in Homer, Michigan. Gluten free crust available. Call (517) 568-3502 to order.",
   alternates: { canonical: "/menu" },
 };
+
+/* A section's photographs sit between its blurb and its items. Only slots
+   with a real file render: a placeholder naming a missing shot belongs on the
+   homepage where the layout depends on it, not between menu items where it
+   would read as a dish that is out. One shot runs wide; two or three share a
+   row at sm and lg so the portrait phone photos crop to plates, not sills. */
+function SectionPhotos({ keys }: { keys?: PhotoKey[] }) {
+  const shots = (keys ?? []).filter((k) => photos[k].src);
+  if (shots.length === 0) return null;
+  const cols =
+    shots.length >= 3 ? "sm:grid-cols-2 lg:grid-cols-3" : shots.length === 2 ? "sm:grid-cols-2" : "";
+  const sizes =
+    shots.length >= 3
+      ? "(min-width: 1024px) 24rem, (min-width: 640px) 50vw, 100vw"
+      : shots.length === 2
+        ? "(min-width: 640px) 36rem, 100vw"
+        : "(min-width: 1024px) 56rem, 100vw";
+  return (
+    <Reveal>
+      <div className={`mt-8 grid gap-4 ${cols}`}>
+        {shots.map((k) => (
+          <Photo
+            key={k}
+            name={k}
+            ratio={shots.length === 1 ? "wide" : "feature"}
+            sizes={sizes}
+            className={shots.length === 1 ? "lg:max-w-4xl" : ""}
+          />
+        ))}
+      </div>
+    </Reveal>
+  );
+}
 
 export default function MenuPage() {
   return (
@@ -63,6 +98,8 @@ export default function MenuPage() {
                 {section.blurb}
               </p>
             )}
+
+            <SectionPhotos keys={section.photos} />
 
             {/* The heading stays static so anchor jumps land on settled text;
                 only the items rise. */}
