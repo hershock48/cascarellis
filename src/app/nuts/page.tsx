@@ -104,7 +104,7 @@ export default function NutsPage() {
               Holiday tins and larger orders are easiest over the phone. Call
               in November rather than the third week of December.
             </p>
-            <a href={site.phoneHref} className="btn-secondary mt-7 !px-7 !py-3.5">
+            <a href={site.phoneHref} className="btn-secondary mt-7">
               Call about a large order
             </a>
           </Reveal>

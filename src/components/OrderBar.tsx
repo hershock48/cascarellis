@@ -32,7 +32,7 @@ export default function OrderBar() {
           <button
             type="button"
             onClick={() => cart.setOpen(true)}
-            className="flex flex-1 items-center justify-center gap-2 rounded-sm bg-red py-3.5 font-semibold text-cream shadow-md shadow-red/25"
+            className="btn-primary flex-1 px-4"
           >
             <span className="grid h-5 min-w-5 place-items-center rounded-sm bg-cream/25 px-1.5 text-[0.7rem] font-bold tabular-nums">
               {cart.count}
@@ -64,7 +64,7 @@ export default function OrderBar() {
       <div className="flex items-center gap-3 px-4 py-3">
         <a
           href={site.phoneHref}
-          className="flex flex-1 items-center justify-center gap-2 rounded-sm bg-red py-3.5 font-semibold text-cream shadow-md shadow-red/25"
+          className="btn-primary flex-1 px-4"
         >
           <svg aria-hidden viewBox="0 0 24 24" fill="none" className="h-5 w-5">
             <path

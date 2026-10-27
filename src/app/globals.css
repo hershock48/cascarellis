@@ -102,36 +102,58 @@
     opacity: 0.2;
   }
 
-  /* Primary action. Used for every Call to Order. A rectangle, no lift. */
-  .btn-primary {
+  /*
+    ONE BUTTON RECIPE. Every button on the site is this block plus a tone:
+    the same box, padding, type size, weight and line height, so the primary
+    on the hero, the one in the header and the one at the bottom of the
+    phone are the same object at the same size. Tones change color only.
+    .btn-sm is the one size variant (header, map card, product card). The
+    1px border is on every tone, transparent where it is not drawn, so an
+    outline button and a filled one sit at the same height side by side.
+    Line height is fixed rather than inherited so the cap height lands in
+    the middle of the box in every face the browser might substitute.
+    No shadows and no lift: rectangles, third pass.
+  */
+  .btn-primary,
+  .btn-secondary,
+  .btn-outline,
+  .btn-ink {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+    border: 1px solid transparent;
     border-radius: var(--radius-card);
-    background-color: var(--color-red);
-    padding: 1rem 2rem;
+    padding: 0.9375rem 2rem;
+    font-size: 1rem;
+    line-height: 1.25;
     font-weight: 600;
+    text-align: center;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .btn-sm {
+    padding: 0.6875rem 1.5rem;
+    font-size: 0.875rem;
+    white-space: nowrap;
+  }
+
+  /* Primary action. Used for every Call to Order. */
+  .btn-primary {
+    background-color: var(--color-red);
+    border-color: var(--color-red);
     color: var(--color-cream);
-    transition: background-color 0.15s ease;
   }
 
   .btn-primary:hover {
     background-color: var(--color-red-bright);
+    border-color: var(--color-red-bright);
   }
 
   /* Secondary on a light ground. */
   .btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    border-radius: var(--radius-card);
-    border: 1px solid color-mix(in srgb, var(--color-ink) 30%, transparent);
-    padding: 1rem 2rem;
-    font-weight: 600;
+    border-color: color-mix(in srgb, var(--color-ink) 30%, transparent);
     color: var(--color-ink);
-    transition: border-color 0.15s ease, color 0.15s ease;
   }
 
   .btn-secondary:hover {
@@ -141,21 +163,25 @@
 
   /* Secondary on a dark ground. */
   .btn-outline {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    border-radius: var(--radius-card);
-    border: 1px solid color-mix(in srgb, var(--color-cream) 30%, transparent);
-    padding: 1rem 2rem;
-    font-weight: 600;
+    border-color: color-mix(in srgb, var(--color-cream) 30%, transparent);
     color: var(--color-cream);
-    transition: border-color 0.15s ease, color 0.15s ease;
   }
 
   .btn-outline:hover {
     border-color: var(--color-gold);
     color: var(--color-gold);
+  }
+
+  /* Ink fill: the add-to-order button inside a product card, red on hover. */
+  .btn-ink {
+    background-color: var(--color-ink);
+    border-color: var(--color-ink);
+    color: var(--color-cream);
+  }
+
+  .btn-ink:hover {
+    background-color: var(--color-red);
+    border-color: var(--color-red);
   }
 
   /* The small uppercase line above a heading. Gold on dark, red on cream. */

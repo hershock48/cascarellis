@@ -160,7 +160,7 @@ export default function Home() {
               What&rsquo;s good here
             </h2>
           </div>
-          <Link href="/menu" className="btn-outline !px-6 !py-3 text-sm">
+          <Link href="/menu" className="btn-outline btn-sm">
             Full menu
             <span aria-hidden>&rarr;</span>
           </Link>

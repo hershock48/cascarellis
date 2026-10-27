@@ -58,7 +58,7 @@ export default function ProductCard({ product }: { product: Product }) {
         <button
           type="button"
           onClick={() => cart.add(selected.sku)}
-          className="rounded-sm bg-ink px-6 py-3 text-sm font-semibold text-cream transition-colors hover:bg-red"
+          className="btn-ink btn-sm shrink-0"
         >
           Add to order
         </button>

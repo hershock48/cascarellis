@@ -133,7 +133,7 @@ export default function SiteHeader() {
           <CartButton />
           <a
             href={site.phoneHref}
-            className="hidden rounded-sm bg-red px-6 py-3 text-sm font-semibold text-cream shadow-md shadow-red/25 transition-colors hover:bg-red-bright md:inline-block"
+            className="btn-primary btn-sm hidden md:inline-flex"
           >
             Call to Order
           </a>
@@ -188,7 +188,7 @@ export default function SiteHeader() {
               <OpenNow />
               <a
                 href={site.phoneHref}
-                className="rounded-sm bg-red px-6 py-4 text-center font-semibold text-cream"
+                className="btn-primary w-full"
               >
                 Call to Order {site.phone}
               </a>

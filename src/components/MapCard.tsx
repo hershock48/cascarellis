@@ -66,7 +66,7 @@ export default function MapCard({ className = "" }: { className?: string }) {
             <button
               type="button"
               onClick={() => setLoaded(true)}
-              className="btn-primary !px-6 !py-3 text-sm"
+              className="btn-primary btn-sm"
             >
               Show the map
             </button>
@@ -74,7 +74,7 @@ export default function MapCard({ className = "" }: { className?: string }) {
               href={mapsUrl}
               target="_blank"
               rel="noreferrer"
-              className="btn-outline !px-6 !py-3 text-sm"
+              className="btn-outline btn-sm"
             >
               Get directions
             </a>

@@ -35,7 +35,7 @@ export default function PageHero({
         {cta && (
           <a
             href={site.phoneHref}
-            className="mt-8 inline-flex rounded-sm bg-red px-7 py-3.5 font-semibold text-cream shadow-lg shadow-red/25 transition-colors hover:bg-red-bright"
+            className="btn-primary mt-8"
           >
             Call to Order {site.phone}
           </a>
