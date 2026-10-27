@@ -90,7 +90,7 @@ export async function POST(request: Request) {
 
   try {
     const resend = new Resend(key);
-    const { error } = await resend.emails.send({
+    const { data, error } = await resend.emails.send({
       from,
       to: to.split(",").map((s) => s.trim()),
       replyTo: email || undefined,
@@ -115,8 +115,14 @@ export async function POST(request: Request) {
       `,
     });
 
-    if (error) {
-      console.error("Resend error:", error);
+    // Success is the provider's acceptance id, not merely the absence of an
+    // error. The SDK answers with a union: {data:{id}, error:null} when Resend
+    // took the message, {data:null, error} when it refused. A bare 2xx that
+    // carries neither, which is what an unexpected body or a change in the
+    // SDK's surface looks like, is not a sent email, and answering ok:true on
+    // one tells a customer Ryan has their party inquiry when nobody does.
+    if (error || !data?.id) {
+      console.error("Resend error:", error ?? "no acceptance id returned");
       return NextResponse.json(
         { error: `Could not send that. Please call us at ${site.phone}.` },
         { status: 502 },
