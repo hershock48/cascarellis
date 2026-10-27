@@ -1,6 +1,6 @@
 # Jelly: the register, and the platform around it
 
-A proposal and plan for Glazed Web's own restaurant platform. Written October 2026 from the Toast and Aloha study beside this file, the studio catalog, and the five client repos that already carry the pieces. Jelly is the name the ordering system already has in the code; whether it is the name on the box is Kevin's call.
+A proposal and plan for Glazed Web's own restaurant platform. Written October 2026 from the Toast and Aloha study beside this file, the studio catalog, and the five client repos that already carry the pieces. Sections 12 and 13 were added after the investor study and reorder a few things; where they disagree with sections 6 and 11, sections 12 and 13 win. Jelly is the name the ordering system already has in the code; whether it is the name on the box is Kevin's call.
 
 Same contract as every glaze file: if this disagrees with the code, the code is right. Prices in here are proposals for Kevin to rule on, never quotes.
 
@@ -192,6 +192,7 @@ The limit is honest: this scales to the number of restaurants one studio can kno
 6. Cascarelli's as the first, and whether Copper or Mike's is the second.
 7. The fee split and the floor below which the order fee is waived.
 8. Who reads RAB 2026-2 and the alcohol statute, and when the accountant meeting happens.
+9. The floor, taken at the counter's gate and not before: whether the studio funds tabs, offline and the hub, and with it which of the two businesses in section 12 this is.
 
 ---
 
@@ -199,10 +200,67 @@ The limit is honest: this scales to the number of restaurants one studio can kno
 
 1. Sit with Ryan. Prices, the pizza pricing rule, capacity, beer and wine to go, who runs the register and who closes, what Aloha does that he would miss. Write the answers into the client file the same day.
 2. Read the Michigan rules from Kevin's machine and put the findings in the client file with their sources.
-3. Port the workroom and the ordering system from Mike's into Cascarelli's as pins, with the pizza matrix as the first new component in the registry.
+3. Stand up Jelly as its own repo on the Scooplist org model and make Cascarelli's its first tenant, with the workroom and the ordering system from Mike's as pins and the pizza matrix as the first new component in the registry. Not a Cascarelli's fork that gets generalized later.
 4. Open the Stripe Connect account structure for the fee and walk one test order through it.
-5. Order one S700, one Star printer with a drawer, and one mini PC, and put them on the counter in Homer running the demo.
+5. Order one Star printer and put it at the pass in Homer running the demo. The S700 and the drawer wait for the counter phase, and the mini PC waits for the floor decision.
 6. Write the promise page and the agreement amendment for Kevin's read.
-7. Log every send, reply and meeting in the ledger as it happens.
+7. Open the separate books: five revenue lines and one row per restaurant, from the first dollar.
+8. Log every send, reply and meeting in the ledger as it happens.
 
 The study closed with the sentence this plan is built on. The half of a register the studio already owns is the half everyone has. The half it does not, tabs that open with a tap, cash that balances, Michigan's tax and tips done right, and a register that keeps ringing when the cable is out, is the half no incumbent does well for a small pizza tavern. That is the opening, and it is a product.
+
+---
+
+## 12. The shape of it, after the investor study
+
+The investor study beside this file asked a question this plan had not answered: is the register the move, or is it sites and online ordering with the register in mind? The answer is that it is a sequence, not a choice. Sites and ordering are the business for the next twelve months. The register is the destination, and it is what the platform is shaped for from the first commit. The POS is the move, and it is the third move.
+
+### What the platform is
+
+One product behind every site. The site stays custom per client, because that is the craft, the thing nobody else in these towns does, and the reason an owner picks up the phone. Everything behind the site becomes shared: the menu as the one price source, the workroom, online ordering, the kitchen screen and the printer, notifications, payments on Stripe, and last, the register. Jelly is that shared layer. The site is the front door, ordering is the control point, the register is the payments attach.
+
+That is the opposite of how Toast and Aloha are built. They start at the register and bolt a website on. We start at the website, where the customer and the owner already trust us, and grow inward toward the drawer. The study's record backs the order: Olo did ordering only and sold for the highest multiple in it; TouchBistro and Upserve built the register first and both sold distressed. The control point gets paid for. A register alone does not.
+
+### Is the register the move
+
+Yes, as the destination. No, as the next thing built.
+
+Phase 0 and the counter are no-regret. They are what the studio already knows how to build, they run beside Aloha without a middleware fight, they produce the retention and attach numbers every buyer prices, and if the studio stopped there it would have a profitable local software business with real recurring revenue. The counter is the first time payments margin shows up as a line, and Stripe Terminal makes it a feature of the ordering system rather than a new product.
+
+The floor is the one real bet. Tabs, offline, the hub on the shelf, a Friday night with the internet pulled. That is where capital, hardware, support risk and the Michigan alcohol rules land at once. It is also what makes this a POS company instead of an ordering company, and the only way Cascarelli's ever drops Aloha. That decision is not made now. It is made after the counter has run for a month with the accountant's signature on the tax and tip reports, with Ryan asking for it rather than us offering.
+
+So the program for the next year is sites plus ordering, built on a platform shaped for the register: one menu, one order model, one price editor, Stripe as the only rail so Terminal attaches without re-platforming. Build the register's foundation while selling ordering, and let the first restaurant pull the register out of us.
+
+### What changes from now, in plain terms
+
+**How we build.** Now: each client has a repo, and ordering lives in five of them, pinned to catalog versions but still five copies to run and fix. After: one Jelly repo on the Scooplist org model, and each restaurant is a tenant in it. The client repo keeps the site: the design, the photos, the words, the pages. It stops carrying the ordering code. Why: the study's finish line is a restaurant onboarded with no code written for it, and that is only possible if there is one copy. It also means a fix lands everywhere at once instead of five times.
+
+**What we build next.** Now: the backlog is whichever client called this week. After: the backlog is what the platform needs, ranked by which phase it unblocks, and a client's ask gets built once into the catalog and then pinned for them. Why: a feature built for one restaurant is a cost. The same feature built into Jelly is an asset that every later restaurant pays for again.
+
+**How we charge.** Now: the build fee is the revenue and the monthly is small. After: the build fee is the onboarding fee, and the subscription, the processing margin and the order fee are the business. The site price does not change. What changes is what it buys: a place on the platform, not a one-time job. Why: a buyer, a bank or a partner values recurring revenue and discounts project revenue to almost nothing. The investor study put the line at about a quarter: if services are more than a quarter of what comes in, the studio gets priced as an agency however good the software is.
+
+**How we keep the books.** Now: one bucket. After: five lines, subscription, processing margin, order fees, hardware at cost, and services, and one row per restaurant with its card volume, which pieces it uses, and the month it started or left. Why: this is the one habit the study says cannot be done later. Every number anyone will ever ask for, retention, attach, payback, comes off that sheet, and a reconstruction a year from now is not believed.
+
+**How we support.** Now: Kevin's phone, and it works because the count is small. After: the same phone, plus three things behind it before the first dollar rings on ours: a runbook for each thing that can go wrong at the pass, a screen that shows us what the restaurant sees without a visit, and one contractor who has deployed the system end to end. Why: a two-minute text reply is the real product against Toast's hold queue. It is also the thing that breaks first past a dozen restaurants, and the thing that breaks worst on a Saturday night with money on the line.
+
+**How we sell.** Now: a site, and ordering if they ask. After: every site pitch includes ordering, every ordering restaurant gets shown the kitchen screen, and the kitchen screen is what sells the counter. Aloha gets unplugged last, after the restaurant already runs on us for everything but the drawer. Why: each step is small enough to say yes to, each one makes the next one obvious, and nobody has to bet the restaurant on us in one conversation.
+
+**How we treat the register.** Now: the plan assumes the floor and buys the hub in the first month. After: the counter is in the plan and the floor is a decision taken at the counter's gate, with the hub bought then and not before. Why: the floor is the expensive, risky half, and the counter already proves whether a restaurant will ring money on our screen. There is no reason to carry the hardware and the offline engineering before that proof exists.
+
+**Which business this is.** Now: unstated. After: stated and chosen after the counter runs. A dozen or two restaurants on a thin take, kept close, is a good local company and the study says so. A take that rises with volume and a count in the hundreds is a different company with different money behind it. Both are fine. Drifting between them is not. Why: the pricing in section 7 is the first company's pricing, and it should be chosen on purpose, not by default.
+
+---
+
+## 13. What moves, and where
+
+The reordering the investor study forces on sections 6 and 11. Each item names what moved, from where to where, and why in one line.
+
+1. **Multi-tenancy moves from Phase 3 to Phase 0.** Cascarelli's is built as the first tenant of a Jelly repo on the Scooplist org model, not as a fork that is generalized two phases later. Generalizing after the fact is the work the studio has already done four times across the client repos, and the fifth time should be the last.
+2. **The separate books move from nowhere to day one.** They were not in the plan. They are now item 7 of the first thirty days.
+3. **Runbooks, remote screens and the contractor move from Phase 3 to before the counter's gate.** The Phase 1 gate is a month of real money rung on ours. That month cannot be the first time a Saturday failure meets no runbook and no second person who can deploy.
+4. **The hub moves from the first thirty days to the floor decision.** Phase 0 prints through the cloud the way Mike's already does, and the counter runs on a tablet and the S700 with Stripe's own offline mode for cards. The mini PC and the local replica are bought when the floor is funded, and the floor is funded only at the counter's gate.
+5. **The floor becomes a decision, not an assumption.** Section 6 reads as if Phase 2 follows Phase 1. It follows only if the counter's gate passes and Ryan asks. Add it to section 10 as decision 9, to be taken then and not now.
+6. **The second restaurant splits in two.** A second restaurant on ordering, workroom and kitchen can go up as soon as Phase 0 passes, since Copper and Mike's already run those pieces and the move is onto the shared repo. A second restaurant on the register waits for the floor. The Scooplist test, onboarding with no code, is run on the first of those, not the last, so the proof that this is a product arrives a year earlier.
+7. **The order of the first thirty days changes to match.** Item 3 stands up Jelly and makes Cascarelli's its tenant. Item 5 buys a printer and nothing else. Item 7 opens the books. The Ryan conversation stays first, because every gate in the plan is still blocked on prices and the fee.
+
+What does not move: the gate rule, the lanes, the one-rail rule, the promise page, the fee, and Aloha staying plugged in until the floor passes a pulled-cable weekend.
