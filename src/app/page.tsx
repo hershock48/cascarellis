@@ -6,7 +6,7 @@ import Photo from "@/components/Photo";
 import Reveal from "@/components/Reveal";
 import { site, fullAddress, hoursSummary, mapsUrl, phoneNoWrap } from "@/data/site";
 import { bestSellers, nuts, drinks } from "@/data/menu";
-import { shipping, formatUSD } from "@/data/shop";
+import { products, shipping, formatUSD, type Product } from "@/data/shop";
 import { chapters } from "@/data/story";
 
 /**
@@ -23,6 +23,12 @@ import { chapters } from "@/data/story";
  */
 
 const homeChapters = chapters.filter((c) => c.home);
+
+/** The lowest price a nut ships for, without the cents when there are none. */
+function fromPrice(product: Product) {
+  const least = Math.min(...product.variants.map((v) => v.amount));
+  return formatUSD(least).replace(/\.00$/, "");
+}
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return <p className="eyebrow text-gold">{children}</p>;
@@ -107,9 +113,41 @@ export default function Home() {
         </div>
       </section>
 
+      {/* The kitchen: three plates, no cards. Second on the page, ahead of
+          the history: someone who opens a restaurant's site is deciding
+          what to eat, and on a phone the four chapters of the story were
+          two full screens to scroll past before the first plate. */}
+      <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <Eyebrow>From the kitchen</Eyebrow>
+            <h2 className="mt-4 font-display text-4xl font-semibold leading-[0.98] sm:text-5xl">
+              What&rsquo;s good here
+            </h2>
+          </div>
+          <Link href="/menu" className="btn-outline btn-sm">
+            Full menu
+            <span aria-hidden>&rarr;</span>
+          </Link>
+        </div>
+
+        <ul className="mt-10 grid gap-x-8 gap-y-10 md:grid-cols-3">
+          {bestSellers.map((item, i) => (
+            <Reveal as="li" key={item.name} delay={i * 90}>
+              {item.photo && (
+                <Photo name={item.photo} ratio="feature" sizes="(min-width: 768px) 33vw, 100vw" />
+              )}
+              <h3 className="mt-5 font-display text-2xl font-semibold leading-tight">{item.name}</h3>
+              <p className="mt-2 text-[0.95rem] leading-relaxed text-cream/65">{item.description}</p>
+            </Reveal>
+          ))}
+        </ul>
+      </section>
+
       {/* The story. The badge is a seal here, not a hero. */}
-      <section className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
-        <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
+      <section className="mx-auto max-w-6xl px-5 pb-20 sm:px-8 sm:pb-28">
+        <Rule />
+        <div className="mt-10 grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
           <Reveal>
             <Image
               src="/brand/badge-cream.png"
@@ -151,35 +189,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* The kitchen: three plates, no cards. */}
-      <section className="mx-auto max-w-6xl px-5 pb-20 sm:px-8 sm:pb-28">
-        <Rule />
-        <div className="mt-10 flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <Eyebrow>From the kitchen</Eyebrow>
-            <h2 className="mt-4 font-display text-4xl font-semibold leading-[0.98] sm:text-5xl">
-              What&rsquo;s good here
-            </h2>
-          </div>
-          <Link href="/menu" className="btn-outline btn-sm">
-            Full menu
-            <span aria-hidden>&rarr;</span>
-          </Link>
-        </div>
-
-        <ul className="mt-10 grid gap-x-8 gap-y-10 md:grid-cols-3">
-          {bestSellers.map((item, i) => (
-            <Reveal as="li" key={item.name} delay={i * 90}>
-              {item.photo && (
-                <Photo name={item.photo} ratio="feature" sizes="(min-width: 768px) 33vw, 100vw" />
-              )}
-              <h3 className="mt-5 font-display text-2xl font-semibold leading-tight">{item.name}</h3>
-              <p className="mt-2 text-[0.95rem] leading-relaxed text-cream/65">{item.description}</p>
-            </Reveal>
-          ))}
-        </ul>
-      </section>
-
       {/* The nuts. Nobody else has these. */}
       <section className="mx-auto max-w-6xl px-5 pb-20 sm:px-8 sm:pb-28">
         <Rule />
@@ -199,10 +208,18 @@ export default function Home() {
           </Reveal>
           <Reveal delay={120}>
             <ul className="divide-y divide-cream/10 border-y border-cream/10">
-              {nuts.flavors.map((f) => (
-                <li key={f.name} className="flex items-baseline justify-between gap-6 py-4">
-                  <span className="font-display text-xl font-semibold">{f.name}</span>
-                  <span className="text-right text-sm text-cream/60">{f.note}</span>
+              {products.map((p) => (
+                <li key={p.id} className="flex items-baseline justify-between gap-6 py-4">
+                  <span>
+                    <span className="block font-display text-xl font-semibold">{p.name}</span>
+                    <span className="mt-0.5 block text-sm text-cream/60">{p.blurb}</span>
+                  </span>
+                  <span className="shrink-0 text-right text-sm text-cream/60">
+                    from{" "}
+                    <span className="font-display text-lg font-semibold text-gold">
+                      {fromPrice(p)}
+                    </span>
+                  </span>
                 </li>
               ))}
             </ul>

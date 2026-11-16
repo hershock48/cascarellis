@@ -1,18 +1,24 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import type { MenuSection } from "@/data/menu";
 import { realignHash } from "@/lib/realignHash";
 
 /**
- * Section jump links for the menu.
+ * Section jump links: the menu's fourteen sections, and the bar's four.
  *
  * Publishes its own height as --subnav-h so anchor targets can offset by the
  * full sticky stack, and highlights whichever section you are currently
  * looking at so the bar tells you where you are instead of just where you
  * could go.
  */
-export default function MenuSubnav({ sections }: { sections: MenuSection[] }) {
+export default function MenuSubnav({
+  sections,
+  label = "Menu sections",
+}: {
+  /** Anything with an id on the page and a name for the chip. */
+  sections: { id: string; title: string }[];
+  label?: string;
+}) {
   const ref = useRef<HTMLElement | null>(null);
   const listRef = useRef<HTMLUListElement | null>(null);
   const [active, setActive] = useState(sections[0]?.id ?? "");
@@ -75,12 +81,17 @@ export default function MenuSubnav({ sections }: { sections: MenuSection[] }) {
   return (
     <nav
       ref={ref}
-      aria-label="Menu sections"
+      aria-label={label}
       className="sticky-subnav sticky z-30 border-b border-ink/10 bg-cream/92 backdrop-blur-md"
     >
       <ul
         ref={listRef}
-        className="mx-auto flex max-w-6xl gap-2 overflow-x-auto px-5 py-2.5 sm:px-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        /* The strip scrolls sideways and has no scrollbar, so the edges
+           fade: a chip dissolving at the right is the cue that there are
+           more. The extra right padding lets the last chip clear the fade
+           once you reach the end. */
+        className="mx-auto flex max-w-6xl gap-2 overflow-x-auto py-2.5 pl-5 pr-12 sm:pl-8 [mask-image:linear-gradient(to_right,transparent,#000_1.25rem,#000_calc(100%-3rem),transparent)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
         {sections.map((section) => {
           const current = active === section.id;
           return (

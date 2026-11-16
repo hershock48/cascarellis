@@ -5,7 +5,7 @@ import MenuSubnav from "@/components/MenuSubnav";
 import NutMark from "@/components/NutMark";
 import Photo from "@/components/Photo";
 import Reveal from "@/components/Reveal";
-import { menu, menuNotes, type MenuGroup, type MenuItem } from "@/data/menu";
+import { menu, menuNotes, type MenuGroup, type MenuItem, type MenuSection } from "@/data/menu";
 import { photos, type PhotoKey } from "@/data/photos";
 import { site, phoneNoWrap } from "@/data/site";
 
@@ -47,6 +47,11 @@ function SectionPhotos({ keys }: { keys?: PhotoKey[] }) {
       </div>
     </Reveal>
   );
+}
+
+/* The photographs a section has files for. Empty slots are skipped. */
+function shotsFor(section: MenuSection): PhotoKey[] {
+  return (section.photos ?? []).filter((k) => photos[k].src);
 }
 
 /* One dish. The name carries the nut mark, a dotted leader runs to the
@@ -167,12 +172,27 @@ export default function MenuPage() {
               </p>
             )}
 
-            <SectionPhotos keys={section.photos} />
+            {/* Two or more photographs run as a row above the dishes. One
+                photograph, which is every section today, does not get a row
+                to itself: it used to fill the whole screen before the first
+                dish. It sits in the grid instead, top right, as tall as the
+                first three dishes beside it. On a phone it leads the list. */}
+            {shotsFor(section).length > 1 && <SectionPhotos keys={section.photos} />}
 
             {/* The heading stays static so anchor jumps land on settled text;
                 only the items rise. */}
             <Reveal>
               <ul className="mt-9 grid gap-x-14 gap-y-8 md:grid-cols-2">
+                {shotsFor(section).length === 1 && (
+                  <li className="md:col-start-2 md:row-span-3 md:row-start-1">
+                    <Photo
+                      name={shotsFor(section)[0]}
+                      ratio="wide"
+                      sizes="(min-width: 768px) 34rem, 100vw"
+                      className="md:aspect-auto md:h-full md:min-h-[18rem]"
+                    />
+                  </li>
+                )}
                 {section.items.map((item) => (
                   <Dish key={item.name} item={item} />
                 ))}

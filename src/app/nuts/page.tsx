@@ -13,8 +13,11 @@ export const metadata: Metadata = {
   alternates: { canonical: "/nuts" },
 };
 
-const featured = products.filter((p) => p.featured);
-const rest = products.filter((p) => !p.featured);
+/* House favorites first, then the rest, in one even grid. The shop used
+   to run two wide cards over four narrow ones, and at four across the price
+   and the button no longer fit on a line. Six products make two rows of
+   three with room for both. */
+const ordered = [...products.filter((p) => p.featured), ...products.filter((p) => !p.featured)];
 
 export default function NutsPage() {
   return (
@@ -78,17 +81,9 @@ export default function NutsPage() {
             />
           </div>
 
-          <ul className="mt-10 grid gap-6 md:grid-cols-2">
-            {featured.map((product, i) => (
-              <Reveal as="li" key={product.id} delay={i * 90}>
-                <ProductCard product={product} />
-              </Reveal>
-            ))}
-          </ul>
-
-          <ul className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {rest.map((product, i) => (
-              <Reveal as="li" key={product.id} delay={i * 70}>
+          <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {ordered.map((product, i) => (
+              <Reveal as="li" key={product.id} delay={(i % 3) * 80}>
                 <ProductCard product={product} />
               </Reveal>
             ))}

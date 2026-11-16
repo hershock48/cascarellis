@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import MenuSubnav from "@/components/MenuSubnav";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import { drinks } from "@/data/menu";
@@ -14,11 +15,11 @@ export const metadata: Metadata = {
   alternates: { canonical: "/drinks" },
 };
 
-const jumpLinks = [
-  { href: "#taps", label: "On Tap" },
-  { href: "#cocktails", label: "Cocktails" },
-  { href: "#wine", label: "Wine" },
-  { href: "#zero-proof", label: "Zero Proof" },
+const barSections = [
+  { id: "taps", title: "On Tap" },
+  { id: "cocktails", title: "Cocktails" },
+  { id: "wine", title: "Wine" },
+  { id: "zero-proof", title: "Zero Proof" },
 ];
 
 function SectionHeading({ title }: { title: string }) {
@@ -104,27 +105,20 @@ export default async function DrinksPage() {
         cta={false}
       />
 
-      {/* Jump nav plus the to-go line, worth repeating everywhere */}
+      {/* The to-go line, worth repeating everywhere, then the same sticky
+          section bar the menu has: this page is four long lists, and the
+          jump links used to scroll away with the first one. */}
       <section className="border-b border-ink/10 bg-cream-dim">
-        <div className="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-5 sm:flex-row sm:items-center sm:gap-8 sm:px-8">
-          <nav aria-label="Drinks sections" className="flex flex-wrap gap-2.5">
-            {jumpLinks.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                className="tap rounded-sm border border-ink/20 bg-cream px-4 py-2 text-sm font-semibold transition-colors hover:border-red hover:text-red"
-              >
-                {l.label}
-              </a>
-            ))}
-          </nav>
-          <p className="text-[0.95rem] font-semibold text-red sm:ml-auto">{drinks.toGo}</p>
-        </div>
+        <p className="mx-auto max-w-6xl px-5 py-4 text-[0.95rem] font-semibold text-red sm:px-8">
+          {drinks.toGo}
+        </p>
       </section>
+
+      <MenuSubnav sections={barSections} label="Drinks sections" />
 
       <div className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
         {/* Tap list */}
-        <section id="taps" className="anchor-offset-plain">
+        <section id="taps" className="anchor-offset">
           <SectionHeading title="On tap right now" />
           <p className="mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-ink/65">
             {tapNotes.rotation} Recent pours are logged on{" "}
@@ -200,7 +194,7 @@ export default async function DrinksPage() {
         </section>
 
         {/* Cocktails */}
-        <section id="cocktails" className="anchor-offset-plain mt-16">
+        <section id="cocktails" className="anchor-offset mt-16">
           <SectionHeading title="Cocktails" />
           <p className="mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-ink/65">
             {cocktailNotes}
@@ -209,7 +203,7 @@ export default async function DrinksPage() {
         </section>
 
         {/* Wine */}
-        <section id="wine" className="anchor-offset-plain mt-16">
+        <section id="wine" className="anchor-offset mt-16">
           <SectionHeading title="Wine list" />
           <p className="mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-ink/65">
             Priced by the glass and the bottle. Bottles travel, so take one home
@@ -236,7 +230,7 @@ export default async function DrinksPage() {
                         className="min-w-6 flex-1 translate-y-[-0.2rem] border-b border-dotted border-ink/25"
                       />
                       <span className="shrink-0 text-sm font-semibold text-ink/70">
-                        {wine.glass ? `${wine.glass} / ${wine.bottle}` : `Bottle ${wine.bottle}`}
+                        {wine.glass ? `$${wine.glass} / $${wine.bottle}` : `Bottle $${wine.bottle}`}
                       </span>
                     </div>
                     <div className="flex flex-wrap items-center gap-2 text-sm text-ink/65">
@@ -262,7 +256,7 @@ export default async function DrinksPage() {
         </section>
 
         {/* Zero proof */}
-        <section id="zero-proof" className="anchor-offset-plain mt-16">
+        <section id="zero-proof" className="anchor-offset mt-16">
           <SectionHeading title="Zero proof" />
           <p className="mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-ink/65">
             Mocktails for the table, craft root beer on tap, and everything the

@@ -27,7 +27,10 @@ export default function OrderBar() {
 
   if (cart.count > 0 && shopping) {
     return (
-      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-ink/10 bg-cream/95 backdrop-blur-md md:hidden">
+      <nav
+      aria-label="Quick actions"
+      className="fixed inset-x-0 bottom-0 z-50 border-t border-ink/10 bg-cream/95 backdrop-blur-md md:hidden"
+    >
         <div className="flex items-center gap-3 px-4 py-3">
           <button
             type="button"
@@ -55,12 +58,15 @@ export default function OrderBar() {
             </svg>
           </a>
         </div>
-      </div>
+      </nav>
     );
   }
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 border-t border-ink/10 bg-cream/95 backdrop-blur-md md:hidden">
+    <nav
+      aria-label="Quick actions"
+      className="fixed inset-x-0 bottom-0 z-50 border-t border-ink/10 bg-cream/95 backdrop-blur-md md:hidden"
+    >
       <div className="flex items-center gap-3 px-4 py-3">
         <a
           href={site.phoneHref}
@@ -106,6 +112,6 @@ export default function OrderBar() {
           </Link>
         )}
       </div>
-    </div>
+    </nav>
   );
 }

@@ -123,8 +123,9 @@ retired.
 
 Six kitchen shots are in, all Cascarelli's own, taken out front in August
 2026: the pizza, a calzone, a flatbread, the steak alfredo, the cheese bread
-and the burger. They run on the homepage ("What's good here") and above
-their sections on `/menu`, and the pizza is the link card every share shows.
+and the burger. They run on the homepage ("What's good here") and beside the
+first dishes of their sections on `/menu`, and the pizza is the link card
+every share shows.
 
 One command per new shot, then one line:
 

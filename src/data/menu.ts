@@ -817,21 +817,13 @@ export const menuNotes = {
     "Ask your server about menu items that are cooked to order or served raw. Consuming raw or undercooked meats, poultry, seafood, shellfish or eggs may increase your risk of foodborne illness.",
 };
 
-/** The homepage summary of the nuts. Names are the shop's; the notes are
-    ours. In-house prices by the quarter, half and pound are in the menu
-    above; what ships, and for how much, is src/data/shop.ts. */
+/** The homepage's words about the nuts. The list beside them is read from
+    the shop (src/data/shop.ts), so a name or a price is never typed twice.
+    In-house prices by the quarter, half and pound are in the menu above. */
 export const nuts = {
   heading: "World famous specialty nuts",
   blurb:
     "Fresh roasted daily using a method unchanged by the Cascarelli family for over 90 years. Sold at the counter since the 1960s, and they travel well.",
-  flavors: [
-    { name: "Red Skin Peanuts", note: "The original." },
-    { name: "Brazilian Cashews", note: "Roasted in small batches." },
-    { name: "Macadamia Nuts", note: "Rich and buttery." },
-    { name: "Sriracha and Honey Cashews", note: "Sweet first, heat after." },
-    { name: "Cinnamon and Sugar Cashews", note: "A holiday favorite." },
-    { name: "Maple Glazed Pecans", note: "Michigan maple." },
-  ],
 };
 
 /** The full bar menus live in bar.ts; this is the homepage summary.
