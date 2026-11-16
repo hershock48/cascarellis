@@ -270,8 +270,8 @@ export default async function DrinksPage() {
             Something to go with it
           </h2>
           <p className="mx-auto mt-3 max-w-md text-[0.98rem] leading-relaxed text-ink/65">
-            The kitchen runs until close, and live piano is on Wednesday and
-            Saturday.
+            The kitchen runs until close, and the nuts are roasted right
+            here.
           </p>
           <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
             <Link href="/menu" className="btn-primary">

@@ -16,7 +16,6 @@ Their words, used as written or lightly tightened:
   among them (Ryan, November 2026; their old site said "19 of them")
 - "World famous specialty nuts"
 - "Pick up draft beer or wine to go"
-- Live piano every Wednesday and Saturday
 - Reservations for groups of 8 to 45, banquet room and patio
 
 ## What the current site is losing them
@@ -30,8 +29,8 @@ Their words, used as written or lightly tightened:
   drives to it.
 - **Menu not on their own domain**, so Sirved, MenuPix, Zmenu and Restaurantji
   rank for their food instead of them.
-- **Live piano, the banquet room and the patio are buried.** These are booking
-  drivers and they are barely mentioned.
+- **The banquet room and the patio are buried.** These are booking drivers
+  and they are barely mentioned.
 
 ## Conversion patterns applied
 
@@ -90,7 +89,7 @@ book by phone, and the page says so.
 
 ## Editing content
 
-- `src/data/site.ts` — hours, address, phone, socials, reservations, live music
+- `src/data/site.ts` — hours, address, phone, socials, reservations
 - `src/data/menu.ts` — the whole menu with prices, transcribed from their 2026
   printed menu; the homepage trio; the nut and tap summaries
 - `src/data/bar.ts` — the full bar program: taps, wine, cocktails, zero proof
@@ -106,18 +105,26 @@ JSON-LD all update together.
 
 Three marks, all Cascarelli's own, in `public/brand/`:
 
-- `wordmark.svg` and `wordmark-cream.svg` — the script over the tomato, from
-  their vector PDF. The header uses it. The cream one is for dark grounds.
 - `badge-ink.png` and `badge-cream.png` — the round Homer, Michigan badge that
-  heads the printed menu. Supplied as a raster; the footer and the homepage
-  seal use the cream one. `public/logo.png` is the ink badge on cream for
-  structured data.
+  heads the printed menu, with the tomato in red. This is the logo: the ink
+  one is in the header, the cream one in the footer and as the homepage
+  seal, and `public/logo.png` is the ink one on cream for structured data.
+  It was supplied as a flat black raster. The red was added by labeling the
+  connected shapes in the image and painting the five that make up the
+  tomato (`#cc1a33`, the red in their own wordmark file); the stem and the
+  lettering are untouched. A vector original from their designer would be
+  better, if one exists.
+- `wordmark.svg` and `wordmark-cream.svg` — the script over the tomato, from
+  their vector PDF. Not on the site at the moment; kept because it is theirs.
 - `chef.png` — the peanut chef. He marks dishes that contain nuts, exactly as
   he does on the printed menu, and stands beside the nut shop. He is not used
   anywhere else, on purpose.
 
 The tab icon is the tomato from the wordmark. The old pizza-slice badge is
 retired.
+
+Sweet Treats and the live piano came off the site in November 2026 at the
+owners' request. Neither is on the 2026 printed menu.
 
 ## Photos
 
@@ -163,16 +170,10 @@ to the customers who took them.
    on The Wild Fire is missing a comma, The Honey Pie ends "hot honey
    drizzled", "jalapenos" on the Dill-icious Pig has no tilde, and the
    Protein price line reads `10" 2.00` without its dash.
-2. **Sweet Treats.** The printed menu has no dessert. The float and the
-   truffles are still on `/menu` at their old prices until Ryan says whether
-   they are still served.
-3. **Shipped nut prices.** The shop charges the menu's counter prices for the
+2. **Shipped nut prices.** The shop charges the menu's counter prices for the
    half pound and the pound. Confirm that a shipped pound costs the same.
-4. **Live piano.** Still stated as Wednesday and Saturday in the homepage
-   facts row and on `/drinks`. The Events page is gone; if the piano is too,
-   it is `site.music` in `src/data/site.ts` and two lines of copy.
-5. **Photos** of the room, the taps, the nuts and the banquet room.
-6. **Tax.** Stripe Tax is off until their accountant says which nuts are
+3. **Photos** of the room, the taps, the nuts and the banquet room.
+4. **Tax.** Stripe Tax is off until their accountant says which nuts are
    taxable in Michigan. The drawer says tax is calculated at checkout; today
    nothing is.
 

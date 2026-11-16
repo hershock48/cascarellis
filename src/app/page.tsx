@@ -86,7 +86,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* The three facts, in one hairline row. */}
+      {/* The three facts, in one hairline row. The third was the live
+          piano until the owners retired it from the site. */}
       <section className="border-y border-cream/10">
         <div className="mx-auto grid max-w-6xl gap-6 px-5 py-6 text-[0.95rem] sm:px-8 md:grid-cols-3">
           <div>
@@ -107,8 +108,13 @@ export default function Home() {
             </a>
           </div>
           <div>
-            <Eyebrow>{site.music.what}</Eyebrow>
-            <p className="mt-1.5 text-cream/75">{site.music.when}</p>
+            <Eyebrow>Reservations</Eyebrow>
+            <Link
+              href="/reservations"
+              className="mt-1.5 inline-block text-cream/75 underline decoration-cream/25 underline-offset-4 hover:text-gold"
+            >
+              Holiday parties and groups of {site.reservations.min} to {site.reservations.max}
+            </Link>
           </div>
         </div>
       </section>
@@ -152,8 +158,8 @@ export default function Home() {
             <Image
               src="/brand/badge-cream.png"
               alt={`${site.name} badge: Homer, Michigan, since 1935`}
-              width={640}
-              height={587}
+              width={720}
+              height={661}
               sizes="(min-width: 640px) 11rem, 9rem"
               className="mb-8 h-auto w-36 sm:w-44"
             />

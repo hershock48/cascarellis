@@ -22,8 +22,8 @@ export default function SiteFooter() {
             <Image
               src="/brand/badge-cream.png"
               alt=""
-              width={640}
-              height={587}
+              width={720}
+              height={661}
               sizes="7rem"
               className="h-auto w-28"
             />
@@ -79,9 +79,6 @@ export default function SiteFooter() {
                 {site.phone}
               </a>
             </address>
-            <p className="mt-4 text-sm text-cream/60">
-              {site.music.what}, {site.music.when.charAt(0).toLowerCase() + site.music.when.slice(1)}.
-            </p>
           </div>
 
           <div>

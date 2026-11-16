@@ -28,11 +28,6 @@ export const site = {
     max: 45,
     note: "We accept reservations for groups of eight to forty-five. Banquet room and patio available.",
   },
-  /** Live music, from their current site. */
-  music: {
-    what: "Live piano",
-    when: "Every Wednesday and Saturday",
-  },
 } as const;
 
 /**

@@ -754,34 +754,6 @@ export const menu: MenuSection[] = [
     ],
   },
   {
-    /* Not on the 2026 printed menu, which carries no dessert at all. Kept
-       from the earlier site, prices as they were published there, until
-       Ryan says whether the float and the truffles are still on. */
-    id: "sweets",
-    title: "Sweet Treats",
-    blurb: "Homemade truffles and a proper float to finish.",
-    items: [
-      {
-        name: "Root Beer Float",
-        description:
-          "Two scoops of rich vanilla ice cream in a chilled mug of delicious Michigan made craft root beer.",
-        price: "$7",
-      },
-      {
-        name: "Truffle Plate",
-        description:
-          "Your choice of any four homemade truffles, topped with Ghirardelli chocolate and Ghirardelli white chocolate syrups.",
-        price: "$8.50",
-      },
-      {
-        name: "Individual Truffle",
-        description:
-          "Eight rich and decadent homemade varieties: Oreo, Chocolate Marshmallow, Mint Chocolate, Lemon, Toffee Crunch, Birthday Cake, Java Chip and Peanut Butter.",
-        price: "$2.25",
-      },
-    ],
-  },
-  {
     /* No chef on these rows: he marks dishes where nuts are a surprise. */
     id: "nuts",
     title: "The Nuts",

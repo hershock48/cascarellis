@@ -95,24 +95,27 @@ export default function SiteHeader() {
             width pressure (320px with a full cart) the tagline clips with an
             ellipsis instead of the row overflowing the page. */}
         <Link href="/" className="group flex min-w-0 items-center gap-3 leading-none">
-          {/* Their own wordmark: the script over the tomato. It is the
-              name, so the lettered "Cascarelli's" that used to sit beside
-              the old badge is gone; the place and the year stay as the
-              line beside it from sm up. SVG, so unoptimized: the image
-              optimizer has nothing to do with vector art. */}
+          {/* Their round badge, the one that heads the printed menu, with
+              the tomato in red (November 2026, the owners' pick over the
+              script wordmark that sat here for a week). At this size the
+              badge is a seal, not something to read, so the name is
+              lettered beside it and the place and year sit under that. */}
           <Image
-            src="/brand/wordmark.svg"
-            alt="Cascarelli&rsquo;s"
-            width={367}
-            height={130}
+            src="/brand/badge-ink.png"
+            alt=""
+            width={720}
+            height={661}
+            sizes="4rem"
             priority
-            unoptimized
-            className="h-11 w-auto shrink-0 sm:h-[3.25rem]"
+            className="h-[3.25rem] w-auto shrink-0 sm:h-16"
           />
-          <span className="hidden min-w-0 truncate border-l border-ink/15 pl-3 text-[0.58rem] font-semibold uppercase leading-relaxed tracking-[0.26em] text-red sm:block">
-            Homer, Michigan
-            <br />
-            Est. 1935
+          <span className="block min-w-0">
+            <span className="block truncate font-display text-2xl font-semibold tracking-tight text-ink sm:text-[1.7rem]">
+              Cascarelli&rsquo;s
+            </span>
+            <span className="mt-1 block truncate text-[0.58rem] font-semibold uppercase tracking-[0.26em] text-red">
+              Homer, Michigan &middot; Est. 1935
+            </span>
           </span>
         </Link>
 
