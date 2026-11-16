@@ -13,7 +13,7 @@ export default function NotFound() {
   const links = [
     { href: "/menu", label: "See the menu", note: "Pizza, sandwiches, salads" },
     { href: "/nuts", label: "Order nuts", label2: true, note: "Shipped anywhere in the US" },
-    { href: "/events", label: "Book a party", note: `Groups of ${site.reservations.min} to ${site.reservations.max}` },
+    { href: "/reservations", label: "Book a party", note: `Groups of ${site.reservations.min} to ${site.reservations.max}` },
     { href: "/contact", label: "Hours and directions", note: site.address.street },
   ];
 

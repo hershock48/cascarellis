@@ -13,7 +13,7 @@ const nav = [
   { href: "/menu", label: "Menu" },
   { href: "/drinks", label: "Drinks" },
   { href: "/nuts", label: "Nuts" },
-  { href: "/events", label: "Events" },
+  { href: "/reservations", label: "Reservations" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
@@ -93,21 +93,24 @@ export default function SiteHeader() {
             width pressure (320px with a full cart) the tagline clips with an
             ellipsis instead of the row overflowing the page. */}
         <Link href="/" className="group flex min-w-0 items-center gap-3 leading-none">
+          {/* Their own wordmark: the script over the tomato. It is the
+              name, so the lettered "Cascarelli's" that used to sit beside
+              the old badge is gone; the place and the year stay as the
+              line beside it from sm up. SVG, so unoptimized: the image
+              optimizer has nothing to do with vector art. */}
           <Image
-            src="/logo-color.png"
-            alt=""
-            width={48}
-            height={48}
+            src="/brand/wordmark.svg"
+            alt="Cascarelli&rsquo;s"
+            width={367}
+            height={130}
             priority
-            className="h-11 w-11 shrink-0 sm:h-12 sm:w-12"
+            unoptimized
+            className="h-11 w-auto shrink-0 sm:h-[3.25rem]"
           />
-          <span className="block min-w-0">
-            <span className="block truncate font-display text-2xl font-semibold tracking-tight text-ink sm:text-[1.7rem]">
-              Cascarelli&rsquo;s
-            </span>
-            <span className="mt-1 block truncate text-[0.58rem] font-semibold uppercase tracking-[0.26em] text-red">
-              Homer, Michigan &middot; Est. 1935
-            </span>
+          <span className="hidden min-w-0 truncate border-l border-ink/15 pl-3 text-[0.58rem] font-semibold uppercase leading-relaxed tracking-[0.26em] text-red sm:block">
+            Homer, Michigan
+            <br />
+            Est. 1935
           </span>
         </Link>
 

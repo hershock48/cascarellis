@@ -7,7 +7,7 @@ const nav = [
   { href: "/menu", label: "Menu" },
   { href: "/drinks", label: "Drinks" },
   { href: "/nuts", label: "Nuts" },
-  { href: "/events", label: "Events" },
+  { href: "/reservations", label: "Reservations" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
   { href: "/employment", label: "Employment" },
@@ -20,11 +20,12 @@ export default function SiteFooter() {
         <div className="grid gap-12 md:grid-cols-[1.3fr_1fr_1fr]">
           <div>
             <Image
-              src="/logo-color.png"
+              src="/brand/badge-cream.png"
               alt=""
-              width={72}
-              height={72}
-              className="h-[72px] w-[72px] rounded-full ring-1 ring-gold/40"
+              width={640}
+              height={587}
+              sizes="7rem"
+              className="h-auto w-28"
             />
             <p className="mt-4 font-display text-3xl font-semibold tracking-tight">
               Cascarelli&rsquo;s
@@ -79,7 +80,7 @@ export default function SiteFooter() {
               </a>
             </address>
             <p className="mt-4 text-sm text-cream/60">
-              {site.music.what}, {site.music.when.toLowerCase()}.
+              {site.music.what}, {site.music.when.charAt(0).toLowerCase() + site.music.when.slice(1)}.
             </p>
           </div>
 

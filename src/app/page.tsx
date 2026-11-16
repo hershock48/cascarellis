@@ -49,9 +49,9 @@ export default function Home() {
             </h1>
             <p className="mt-6 max-w-lg text-lg leading-relaxed text-cream/75">
               Homemade pizzas, sandwiches, burgers, soups and salads, made with
-              fresh, locally sourced ingredients. Twenty beers on draft, most of
-              them from Michigan. And the world famous specialty nuts, roasted
-              here since the 1960s.
+              fresh, locally sourced ingredients. Twenty taps, all of them Michigan
+              but the PBR. And the world famous specialty nuts, roasted here
+              since the 1960s.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <a href={site.phoneHref} className="btn-primary">
@@ -112,11 +112,12 @@ export default function Home() {
         <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
           <Reveal>
             <Image
-              src="/logo-color.png"
-              alt={`${site.name} badge`}
-              width={144}
-              height={144}
-              className="h-28 w-28 rounded-full ring-1 ring-gold/40 sm:h-36 sm:w-36"
+              src="/brand/badge-cream.png"
+              alt={`${site.name} badge: Homer, Michigan, since 1935`}
+              width={640}
+              height={587}
+              sizes="(min-width: 640px) 11rem, 9rem"
+              className="mb-8 h-auto w-36 sm:w-44"
             />
             <Eyebrow>Since 1935</Eyebrow>
             <h2 className="mt-4 font-display text-4xl font-semibold leading-[0.98] sm:text-5xl">
@@ -226,38 +227,31 @@ export default function Home() {
         </Reveal>
       </section>
 
-      {/* Piano and parties, as two columns of words. */}
+      {/* Reservations. The phone is the whole call to action: the owners
+          want holiday parties and large groups to call, not fill in a form. */}
       <section className="mx-auto max-w-6xl px-5 pb-20 sm:px-8 sm:pb-28">
         <Rule />
-        <div className="mt-10 grid gap-12 md:grid-cols-2 md:gap-16">
+        <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
           <Reveal>
-            <Eyebrow>{site.music.when}</Eyebrow>
-            <h2 className="mt-4 font-display text-3xl font-semibold leading-[0.98] sm:text-4xl">
-              {site.music.what}
-            </h2>
-            <p className="mt-4 text-[1.02rem] leading-relaxed text-cream/70">
-              Come for dinner, stay for the music. No cover, no reservation
-              needed, though the room does fill up on a Saturday.
-            </p>
-          </Reveal>
-          <Reveal delay={110}>
             <Eyebrow>
               Groups of {site.reservations.min} to {site.reservations.max}
             </Eyebrow>
-            <h2 className="mt-4 font-display text-3xl font-semibold leading-[0.98] sm:text-4xl">
-              Banquet room and patio
+            <h2 className="mt-4 font-display text-4xl font-semibold leading-[0.98] sm:text-5xl">
+              Reservations
             </h2>
-            <p className="mt-4 text-[1.02rem] leading-relaxed text-cream/70">
-              Birthdays, rehearsal dinners, team parties and wakes. Send the
-              details and we will walk you through the options, or call.
+          </Reveal>
+          <Reveal delay={110}>
+            <p className="max-w-xl text-lg leading-relaxed text-cream/75">
+              Booking a holiday party or bringing a large group? The banquet
+              room and the patio are yours for the asking. Call here.
             </p>
-            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold">
-              <Link href="/events#inquire" className="tap text-gold hover:underline">
-                Ask about a party
-              </Link>
-              <a href={site.phoneHref} className="tap text-cream/80 hover:text-gold">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a href={site.phoneHref} className="btn-primary">
                 Call {site.phone}
               </a>
+              <Link href="/reservations" className="btn-outline">
+                How it works
+              </Link>
             </div>
           </Reveal>
         </div>

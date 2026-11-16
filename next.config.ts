@@ -17,6 +17,12 @@ const nextConfig: NextConfig = {
   //
   // Remove BOTH on the day it becomes their site, and not before. It is on the before-launch
   // checklist in the README.
+  // /events became /reservations in November 2026. The old URL is on their
+  // Google profile, in a few Facebook posts and in whatever was shared while
+  // the site was being reviewed, so it forwards for good rather than 404s.
+  async redirects() {
+    return [{ source: "/events", destination: "/reservations", permanent: true }];
+  },
   async headers() {
     return [
       { source: "/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] },

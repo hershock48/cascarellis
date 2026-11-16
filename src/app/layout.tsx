@@ -86,9 +86,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     images: ["/og/pizza.jpg"],
   },
-  /* No `icons` entry: src/app/favicon.ico (5KB, cut from the color badge)
-     serves the tab icon via the file convention. Pointing metadata at the
-     640px logo-color.png made browsers pull 69KB for a 16px icon. */
+  /* No `icons` entry: src/app/favicon.ico (1KB, the tomato from their
+     wordmark) and apple-icon.png serve the tab and home-screen icons via
+     the file convention. A full logo file here makes browsers pull tens of
+     kilobytes for a 16px icon. */
   alternates: { canonical: "/" },
   robots: { index: true, follow: true },
 };
@@ -99,8 +100,8 @@ const jsonLd = {
   name: site.name,
   description: site.blurb,
   url: site.url,
-  logo: `${baseUrl}/logo-color.png`,
-  image: [`${baseUrl}/og/pizza.jpg`, `${baseUrl}/photos/pizza.jpg`, `${baseUrl}/logo-color.png`],
+  logo: `${baseUrl}/logo.png`,
+  image: [`${baseUrl}/og/pizza.jpg`, `${baseUrl}/photos/pizza.jpg`, `${baseUrl}/logo.png`],
   telephone: site.phone,
   servesCuisine: ["Pizza", "Italian American", "American"],
   priceRange: "$$",

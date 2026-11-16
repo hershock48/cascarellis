@@ -7,7 +7,12 @@
  * devtools and check out for a dollar. The client only ever sends a sku and
  * a quantity.
  *
- * PRICES BELOW ARE PLACEHOLDERS. Ryan needs to set real ones before launch.
+ * PRICES are the half pound and pound prices on Cascarelli's 2026 printed
+ * menu (src/data/menu.ts, "The Nuts"), which replaced the placeholders this
+ * file launched with. They are counter prices. Whether a shipped pound
+ * should cost what a pound costs at the bar is Ryan's call; until he says
+ * otherwise the site charges what the menu says. The quarter pound is on
+ * the menu and not here: it is a bar snack, not a parcel.
  * Amounts are in cents.
  */
 
@@ -41,8 +46,8 @@ export const products: Product[] = [
       "The nut the family has been roasting the longest. Skins on, salted, and the bag most people walk out with.",
     featured: true,
     variants: [
+      { sku: "peanut-half", label: "½ lb", amount: 700 },
       { sku: "peanut-1lb", label: "1 lb", amount: 900 },
-      { sku: "peanut-2lb", label: "2 lb", amount: 1600 },
     ],
   },
   {
@@ -53,8 +58,8 @@ export const products: Product[] = [
       "Large whole cashews, roasted here and salted while they are still warm. These are the ones people get particular about.",
     featured: true,
     variants: [
-      { sku: "cashew-1lb", label: "1 lb", amount: 1800 },
-      { sku: "cashew-2lb", label: "2 lb", amount: 3300 },
+      { sku: "cashew-half", label: "½ lb", amount: 900 },
+      { sku: "cashew-1lb", label: "1 lb", amount: 1600 },
     ],
   },
   {
@@ -64,8 +69,8 @@ export const products: Product[] = [
     description:
       "A glazed cashew with enough heat to notice on the back end. The one that surprises people.",
     variants: [
-      { sku: "sriracha-1lb", label: "1 lb", amount: 1950 },
-      { sku: "sriracha-2lb", label: "2 lb", amount: 3600 },
+      { sku: "sriracha-half", label: "½ lb", amount: 1000 },
+      { sku: "sriracha-1lb", label: "1 lb", amount: 1700 },
     ],
   },
   {
@@ -73,10 +78,10 @@ export const products: Product[] = [
     name: "Cinnamon and Sugar Cashews",
     blurb: "A holiday favorite.",
     description:
-      "Warm spice and a candied shell. These move fastest between Thanksgiving and New Year, so order early.",
+      "Warm spice and a candied shell. These move fastest between Thanksgiving and New Year, so order early. Contains egg whites.",
     variants: [
-      { sku: "cinnamon-1lb", label: "1 lb", amount: 1950 },
-      { sku: "cinnamon-2lb", label: "2 lb", amount: 3600 },
+      { sku: "cinnamon-half", label: "½ lb", amount: 1000 },
+      { sku: "cinnamon-1lb", label: "1 lb", amount: 1700 },
     ],
   },
   {
@@ -85,8 +90,8 @@ export const products: Product[] = [
     blurb: "Rich and buttery.",
     description: "The expensive ones, and worth it. Usually gone by the weekend.",
     variants: [
-      { sku: "macadamia-8oz", label: "8 oz", amount: 1700 },
-      { sku: "macadamia-1lb", label: "1 lb", amount: 3100 },
+      { sku: "macadamia-half", label: "½ lb", amount: 1000 },
+      { sku: "macadamia-1lb", label: "1 lb", amount: 2000 },
     ],
   },
   {
@@ -96,8 +101,8 @@ export const products: Product[] = [
     description:
       "Pecans glazed in real maple. Good on a salad, better straight out of the bag.",
     variants: [
-      { sku: "pecan-1lb", label: "1 lb", amount: 2100 },
-      { sku: "pecan-2lb", label: "2 lb", amount: 3900 },
+      { sku: "pecan-half", label: "½ lb", amount: 1000 },
+      { sku: "pecan-1lb", label: "1 lb", amount: 1800 },
     ],
   },
 ];

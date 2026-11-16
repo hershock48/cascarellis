@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import ProductCard from "@/components/ProductCard";
@@ -54,12 +55,28 @@ export default function NutsPage() {
       {/* Shop */}
       <section id="shop" className="grain anchor-offset-plain relative overflow-hidden bg-cream-dim">
         <div className="relative mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
-          <h2 className="font-display text-4xl font-semibold tracking-tight sm:text-5xl">
-            Order nuts
-          </h2>
-          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink/70">
-            Six of them. Pick a size, add it to your order, and check out.
-          </p>
+          {/* The peanut chef stands beside The Nuts on their printed menu,
+              and he stands beside the shop here. Decorative, so no alt. */}
+          <div className="flex items-end justify-between gap-8">
+            <div>
+              <h2 className="font-display text-4xl font-semibold tracking-tight sm:text-5xl">
+                Order nuts
+              </h2>
+              <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink/70">
+                Fresh roasted daily using a method unchanged by the Cascarelli
+                family for over 90 years. Pick a size, add it to your order,
+                and check out.
+              </p>
+            </div>
+            <Image
+              src="/brand/chef.png"
+              alt=""
+              width={647}
+              height={900}
+              sizes="9rem"
+              className="hidden h-44 w-auto shrink-0 sm:block"
+            />
+          </div>
 
           <ul className="mt-10 grid gap-6 md:grid-cols-2">
             {featured.map((product, i) => (

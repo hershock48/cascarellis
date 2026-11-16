@@ -12,7 +12,8 @@ Their words, used as written or lightly tightened:
 
 - "A one-of-a-kind pizza restaurant"
 - "A far reaching reputation for terrific food and superb service"
-- "20 beers on draft, and 19 of them are from Michigan"
+- Twenty taps, every handle Michigan but the PBR, one craft soda and one cider
+  among them (Ryan, November 2026; their old site said "19 of them")
 - "World famous specialty nuts"
 - "Pick up draft beer or wine to go"
 - Live piano every Wednesday and Saturday
@@ -59,10 +60,11 @@ and what replaced it:
 - **Colour.** Oxblood, cream, basil green and cheese yellow together are the
   Italian-flag pizzeria cliché. The page runs ink, cream and oxblood; gold
   is a hairline and an eyebrow, never a ground. One ground per page: the
-  home, About and Events pages are ink, and the menu, drinks, nuts and
+  home, About and Reservations pages are ink, and the menu, drinks, nuts and
   contact pages are cream because menus read better there.
 - **Type.** Barlow Condensed in caps for display, Inter for reading. The
-  badge is lettered in a condensed gothic and the headings now match it.
+  badge is lettered in a condensed gothic and the headings match it; their
+  printed menu sets its section signs the same way.
 - **Layout.** The homepage opens with the thing nobody else has, ninety
   years on one corner, and tells it in words from the About page. Six
   photographs are used large and sparingly; nothing on a live page waits on
@@ -75,24 +77,47 @@ changed is the register.
 
 Next.js 16 App Router, TypeScript, Tailwind v4. Every page is statically
 prerendered except `/drinks`, which revalidates every minute from the live
-bar feed. Two route handlers: Stripe Checkout for the nuts, Resend for the
-party form. `sharp` ships with Next and is what `tools/` uses for photos.
+bar feed. One route handler, Stripe Checkout for the nuts. `sharp` ships with
+Next and is what `tools/` uses for photos.
 
 ## Pages
 
-`/` `/menu` `/drinks` `/nuts` `/events` `/about` `/contact` `/employment`
+`/` `/menu` `/drinks` `/nuts` `/reservations` `/about` `/contact` `/employment`
+
+`/events` forwards to `/reservations`. The owners asked for the Events page
+and its inquiry form to go (November 2026): holiday parties and large groups
+book by phone, and the page says so.
 
 ## Editing content
 
 - `src/data/site.ts` — hours, address, phone, socials, reservations, live music
-- `src/data/menu.ts` — menu sections and items, the homepage trio, nuts
+- `src/data/menu.ts` — the whole menu with prices, transcribed from their 2026
+  printed menu; the homepage trio; the nut and tap summaries
 - `src/data/bar.ts` — the full bar program: taps, wine, cocktails, zero proof
   (the snapshot; `src/data/liveBar.ts` overlays the Scooplist feed per section)
-- `src/data/shop.ts` — the nut shop catalog and shipping. Prices are placeholders.
+- `src/data/shop.ts` — the nut shop catalog and shipping, at the menu's half
+  pound and pound prices
 - `src/data/photos.ts` — photo slots
 
 Change the hours in one place and the header badge, footer, contact table and
 JSON-LD all update together.
+
+## Brand files
+
+Three marks, all Cascarelli's own, in `public/brand/`:
+
+- `wordmark.svg` and `wordmark-cream.svg` — the script over the tomato, from
+  their vector PDF. The header uses it. The cream one is for dark grounds.
+- `badge-ink.png` and `badge-cream.png` — the round Homer, Michigan badge that
+  heads the printed menu. Supplied as a raster; the footer and the homepage
+  seal use the cream one. `public/logo.png` is the ink badge on cream for
+  structured data.
+- `chef.png` — the peanut chef. He marks dishes that contain nuts, exactly as
+  he does on the printed menu, and stands beside the nut shop. He is not used
+  anywhere else, on purpose.
+
+The tab icon is the tomato from the wordmark. The old pizza-slice badge is
+retired.
 
 ## Photos
 
@@ -115,9 +140,9 @@ a styled placeholder naming the shot, so the layout never shifts. If the
 pizza is ever reshot, `node tools/og-card.mjs` re-cuts the link card.
 
 Still to shoot, in the order they matter: the dining room, the tap wall, the
-nuts, the piano on a Wednesday, and the banquet room set for a party. The
-MacCarelli, Porky's and the Flat Iron Salad would earn their way back onto
-the homepage with a photo each.
+nuts, and the banquet room set for a party. Frankie's Pie, the Flat Iron
+Steak Salad and the Big T Burger would earn a place on the homepage with a
+photo each.
 
 The pizza owns the hero, beside the headline rather than behind it: on a
 phone the text comes first so Call to Order stays above the fold, which is
@@ -129,17 +154,24 @@ to the customers who took them.
 
 ## Still needs the owner
 
-1. **Prices.** Not published anywhere public. The nut shop prices in
-   `src/data/shop.ts` are placeholders too.
-2. **Menu accuracy.** MacCarelli, Baby's Chicken Pie and Annie's Bread came
-   from customer reviews, not from Cascarelli's. Confirm spellings. The
-   photographs show dishes the old site never listed: a calzone (now on the
-   menu page, unpriced), a steak alfredo, and a flatbread with lettuce and
-   tomato. Confirm what each is called.
-3. **The weekday and weekend menus.** Their site runs two and the split is
-   scaffolded, but the actual differences need filling in.
-4. **Photos** of the room, the taps, the nuts, the piano and the banquet room.
-5. **Tax.** Stripe Tax is off until their accountant says which nuts are
+1. **The menu is from a proof.** Every item and price on `/menu` was
+   transcribed from the two-page 2026 menu proof (watermarked PROOF, printed
+   by Gordon Food Service). If anything changes before it goes to print, it
+   changes in `src/data/menu.ts`. A few slips in the proof were fixed on the
+   way in and are worth fixing in print too: "crushed red pepper mozzarella"
+   on The Wild Fire is missing a comma, The Honey Pie ends "hot honey
+   drizzled", "jalapenos" on the Dill-icious Pig has no tilde, and the
+   Protein price line reads `10" 2.00` without its dash.
+2. **Sweet Treats.** The printed menu has no dessert. The float and the
+   truffles are still on `/menu` at their old prices until Ryan says whether
+   they are still served.
+3. **Shipped nut prices.** The shop charges the menu's counter prices for the
+   half pound and the pound. Confirm that a shipped pound costs the same.
+4. **Live piano.** Still stated as Wednesday and Saturday in the homepage
+   facts row and on `/drinks`. The Events page is gone; if the piano is too,
+   it is `site.music` in `src/data/site.ts` and two lines of copy.
+5. **Photos** of the room, the taps, the nuts and the banquet room.
+6. **Tax.** Stripe Tax is off until their accountant says which nuts are
    taxable in Michigan. The drawer says tax is calculated at checkout; today
    nothing is.
 
@@ -152,12 +184,8 @@ invisible to search engines. The day it becomes their site:
    `src/app/robots.ts` to allow. Both, same commit.
 2. Set `NEXT_PUBLIC_SITE_URL=https://cascarellis.com` in Vercel so the link
    card and structured data resolve on their domain.
-3. Swap `STRIPE_SECRET_KEY` to the live key in their own Stripe account, and
-   set the real nut prices.
-4. Set `RESEND_API_KEY`, `INQUIRY_FROM` and `INQUIRY_TO`, and send one test
-   inquiry that a human confirms receiving. Or swap the route to SMTP through
-   a mailbox they already own (see `.env.example`).
-5. Decide Stripe Tax with their accountant and turn on `automatic_tax`.
+3. Swap `STRIPE_SECRET_KEY` to the live key in their own Stripe account.
+4. Decide Stripe Tax with their accountant and turn on `automatic_tax`.
 
 ## Running it
 

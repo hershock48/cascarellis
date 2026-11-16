@@ -10,7 +10,7 @@ import { site } from "@/data/site";
 export const metadata: Metadata = {
   title: "Drinks",
   description:
-    "Twenty beers on draft at Cascarelli's in Homer, Michigan, most of them Michigan pours. Full wine list, Moscow mules, martinis, mocktails, and draft beer and wine to go.",
+    "Twenty taps at Cascarelli's in Homer, Michigan: Michigan beer on every handle but the PBR, plus a craft soda and a cider. Full wine list, Moscow mules, martinis, mocktails, and draft beer and wine to go.",
   alternates: { canonical: "/drinks" },
 };
 
@@ -283,8 +283,8 @@ export default async function DrinksPage() {
             <Link href="/menu" className="btn-primary">
               See the menu
             </Link>
-            <Link href="/events" className="btn-secondary">
-              Live music and parties
+            <Link href="/reservations" className="btn-secondary">
+              Book a party
             </Link>
           </div>
         </div>
