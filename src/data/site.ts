@@ -35,6 +35,16 @@ export const site = {
   },
 } as const;
 
+/**
+ * The phone number for display inside a button or a sentence: the space is a
+ * non-breaking space and the hyphen a non-breaking hyphen, so a narrow phone
+ * wraps "Call to Order" onto one line and the whole number onto the next
+ * instead of splitting it at 568-. Plain text on purpose. A wrapping <span>
+ * would become its own flex item inside the button and pick up the gap.
+ * Links still dial site.phoneHref.
+ */
+export const phoneNoWrap = site.phone.replace(/ /g, "\u00a0").replace(/-/g, "\u2011");
+
 export const fullAddress = `${site.address.street}, ${site.address.city}, ${site.address.state} ${site.address.zip}`;
 
 export const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(

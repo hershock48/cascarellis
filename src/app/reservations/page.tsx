@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
-import { site, hoursSummary } from "@/data/site";
+import { site, hoursSummary, phoneNoWrap } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Reservations",
@@ -36,7 +36,7 @@ export default function ReservationsPage() {
         cta={false}
       >
         <a href={site.phoneHref} className="btn-primary mt-8">
-          Call {site.phone}
+          Call {phoneNoWrap}
         </a>
       </PageHero>
 

@@ -7,7 +7,7 @@ import Photo from "@/components/Photo";
 import Reveal from "@/components/Reveal";
 import { menu, menuNotes, type MenuGroup, type MenuItem } from "@/data/menu";
 import { photos, type PhotoKey } from "@/data/photos";
-import { site } from "@/data/site";
+import { site, phoneNoWrap } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Menu",
@@ -209,7 +209,7 @@ export default function MenuPage() {
             {site.reservations.max} can reserve the banquet room or the patio.
           </p>
           <a href={site.phoneHref} className="btn-primary mt-6">
-            Call {site.phone}
+            Call {phoneNoWrap}
           </a>
         </div>
       </div>

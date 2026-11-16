@@ -4,7 +4,7 @@ import OpenNow from "@/components/OpenNow";
 import MapCard from "@/components/MapCard";
 import Photo from "@/components/Photo";
 import Reveal from "@/components/Reveal";
-import { site, fullAddress, hoursSummary, mapsUrl } from "@/data/site";
+import { site, fullAddress, hoursSummary, mapsUrl, phoneNoWrap } from "@/data/site";
 import { bestSellers, nuts, drinks } from "@/data/menu";
 import { shipping, formatUSD } from "@/data/shop";
 import { chapters } from "@/data/story";
@@ -55,7 +55,7 @@ export default function Home() {
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <a href={site.phoneHref} className="btn-primary">
-                Call to Order {site.phone}
+                Call to Order {phoneNoWrap}
               </a>
               <Link href="/menu" className="btn-outline">
                 See the Menu
@@ -247,7 +247,7 @@ export default function Home() {
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a href={site.phoneHref} className="btn-primary">
-                Call {site.phone}
+                Call {phoneNoWrap}
               </a>
               <Link href="/reservations" className="btn-outline">
                 How it works

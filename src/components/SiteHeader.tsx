@@ -1,12 +1,13 @@
 "use client";
 
 import Image from "next/image";
+import { realignHash } from "@/lib/realignHash";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import OpenNow from "./OpenNow";
 import CartButton from "./CartButton";
-import { site } from "@/data/site";
+import { site, phoneNoWrap } from "@/data/site";
 
 /** Mirrors the nav on their current site, consolidated where it was redundant. */
 const nav = [
@@ -57,6 +58,7 @@ export default function SiteHeader() {
         `${Math.round(el.getBoundingClientRect().height)}px`,
       );
     apply();
+    realignHash();
     const ro = new ResizeObserver(apply);
     ro.observe(el);
     return () => ro.disconnect();
@@ -193,7 +195,7 @@ export default function SiteHeader() {
                 href={site.phoneHref}
                 className="btn-primary w-full"
               >
-                Call to Order {site.phone}
+                Call to Order {phoneNoWrap}
               </a>
             </div>
           </nav>

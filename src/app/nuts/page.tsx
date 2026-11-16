@@ -4,7 +4,7 @@ import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import ProductCard from "@/components/ProductCard";
 import { products, shipping, formatUSD } from "@/data/shop";
-import { site } from "@/data/site";
+import { site, phoneNoWrap } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "World Famous Specialty Nuts, Shipped",
@@ -98,7 +98,7 @@ export default function NutsPage() {
             Payments handled by Stripe. We never see your card number. Questions
             about an order?{" "}
             <a href={site.phoneHref} className="font-semibold text-red underline">
-              Call {site.phone}
+              Call {phoneNoWrap}
             </a>
           </p>
         </div>

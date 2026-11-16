@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { site } from "@/data/site";
+import { site, phoneNoWrap } from "@/data/site";
 
 export const metadata: Metadata = { title: "Page Not Found" };
 
@@ -45,7 +45,7 @@ export default function NotFound() {
 
       <div className="mt-10 flex flex-col gap-3 sm:flex-row">
         <a href={site.phoneHref} className="btn-primary">
-          Call {site.phone}
+          Call {phoneNoWrap}
         </a>
         <Link href="/" className="btn-secondary">
           Back home

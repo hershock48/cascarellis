@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { MenuSection } from "@/data/menu";
+import { realignHash } from "@/lib/realignHash";
 
 /**
  * Section jump links for the menu.
@@ -13,6 +14,7 @@ import type { MenuSection } from "@/data/menu";
  */
 export default function MenuSubnav({ sections }: { sections: MenuSection[] }) {
   const ref = useRef<HTMLElement | null>(null);
+  const listRef = useRef<HTMLUListElement | null>(null);
   const [active, setActive] = useState(sections[0]?.id ?? "");
 
   useEffect(() => {
@@ -24,6 +26,8 @@ export default function MenuSubnav({ sections }: { sections: MenuSection[] }) {
         `${Math.round(el.getBoundingClientRect().height)}px`,
       );
     apply();
+    // A direct load of /menu#burgers jumped before this height was known.
+    realignHash();
     const ro = new ResizeObserver(apply);
     ro.observe(el);
     return () => ro.disconnect();
@@ -50,10 +54,22 @@ export default function MenuSubnav({ sections }: { sections: MenuSection[] }) {
     return () => observer.disconnect();
   }, [sections]);
 
-  // Keep the active chip in view as you scroll a long menu on a phone.
+  /* Keep the active chip in view as you scroll a long menu on a phone.
+
+     This scrolls the STRIP, sideways, and nothing else. It used to call
+     scrollIntoView on the chip, which also scrolls the page whenever the
+     strip itself is off screen. On a short phone the strip starts below
+     the fold, so the menu page slid down by itself on load, and because a
+     new scroll cancels the one in flight, a deep link to a section far
+     down the page (#nuts, #greens) was cut off at the top. */
   useEffect(() => {
-    const el = ref.current?.querySelector(`[data-chip="${active}"]`);
-    el?.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+    const list = listRef.current;
+    const chip = list?.querySelector<HTMLElement>(`[data-chip="${active}"]`);
+    if (!list || !chip) return;
+    const listBox = list.getBoundingClientRect();
+    const chipBox = chip.getBoundingClientRect();
+    const left = list.scrollLeft + chipBox.left - listBox.left - (listBox.width - chipBox.width) / 2;
+    list.scrollTo({ left, behavior: "smooth" });
   }, [active]);
 
   return (
@@ -62,7 +78,9 @@ export default function MenuSubnav({ sections }: { sections: MenuSection[] }) {
       aria-label="Menu sections"
       className="sticky-subnav sticky z-30 border-b border-ink/10 bg-cream/92 backdrop-blur-md"
     >
-      <ul className="mx-auto flex max-w-6xl gap-2 overflow-x-auto px-5 py-2.5 sm:px-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <ul
+        ref={listRef}
+        className="mx-auto flex max-w-6xl gap-2 overflow-x-auto px-5 py-2.5 sm:px-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {sections.map((section) => {
           const current = active === section.id;
           return (

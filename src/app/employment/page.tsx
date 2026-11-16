@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
-import { site } from "@/data/site";
+import { site, phoneNoWrap } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Employment",
@@ -52,7 +52,7 @@ export default function EmploymentPage() {
             lunch and dinner are the easiest time to talk.
           </p>
           <a href={site.phoneHref} className="btn-primary mt-6">
-            Call {site.phone}
+            Call {phoneNoWrap}
           </a>
         </Reveal>
       </section>

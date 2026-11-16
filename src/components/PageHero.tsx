@@ -1,4 +1,4 @@
-import { site } from "@/data/site";
+import { site, phoneNoWrap } from "@/data/site";
 
 export default function PageHero({
   kicker,
@@ -37,7 +37,7 @@ export default function PageHero({
             href={site.phoneHref}
             className="btn-primary mt-8"
           >
-            Call to Order {site.phone}
+            Call to Order {phoneNoWrap}
           </a>
         )}
         {children}
